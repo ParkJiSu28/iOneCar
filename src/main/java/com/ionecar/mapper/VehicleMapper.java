@@ -3,10 +3,6 @@ package com.ionecar.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import com.ionecar.domain.Vehicle;
-import com.ionecar.domain.VehicleOption;
-import com.ionecar.domain.TaxPayment;
-import com.ionecar.domain.Insurance;
-import com.ionecar.domain.VehicleDto;
 
 @Mapper
 public interface VehicleMapper {

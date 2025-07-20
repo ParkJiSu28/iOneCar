@@ -13,7 +13,7 @@ public class CustomerServiceImpl implements CustomerService {
     private final CustomerMapper customerMapper;
 
     @Override
-    public boolean loginByEdpsCsn(String edpsCsn) {
+    public boolean loginByEdpsCsn(long edpsCsn) {
         Customer customer = customerMapper.findCustomerByEdpsCsn(edpsCsn);
         return customer != null; // edps_csn 존재 시 true
     }

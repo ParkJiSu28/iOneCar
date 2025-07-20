@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Map;
 import com.ionecar.domain.Vehicle;
-import com.ionecar.domain.VehicleDto;
 import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
 
@@ -33,7 +32,7 @@ public class CustomerController {
 
 
     @PostMapping
-    public String loginByEdpsCsn(@RequestParam("edps_csn") String edpsCsn, Model model) {
+    public String loginByEdpsCsn(@RequestParam("edps_csn") long edpsCsn, Model model) {
     
         boolean exists = customerService.loginByEdpsCsn(edpsCsn);
 

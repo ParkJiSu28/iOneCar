@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
 import com.ionecar.domain.Vehicle;
-import com.ionecar.domain.VehicleDto;
 import com.ionecar.service.VehicleService;
 
 @Controller
