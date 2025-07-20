@@ -7,7 +7,8 @@ import com.ionecar.domain.Customer;
 @Mapper
 public interface CustomerMapper {
   
-    Customer findCustomerByEdpsCsn(String edpsCsn);
+    Customer findCustomerByEdpsCsn(long edpsCsn);
+
 }
 
 

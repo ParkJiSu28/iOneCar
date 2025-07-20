@@ -5,8 +5,6 @@ import lombok.Data;
 
 @Data
 public class Customer {
-    private String edpsCsn;
-    private String name;
-    private String phone;
-    private String address;
+    private long edpsCsn; // 전산고객번호
+    private String qntYn; // 견적여부
 }
