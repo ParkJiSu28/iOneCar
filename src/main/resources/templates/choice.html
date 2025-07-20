@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" th:href="@{/css/choice.css}" />
+  <title>i-One Car - Choice</title>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="logo">i-One Car</span>
+      <div class="user-type">
+        <button class="type-btn selected">소비자</button>
+        <button class="type-btn">딜러</button>
+      </div>
+      <div class="icon-bell">🔔</div>
+    </header>
+
+    <section class="quote-card">
+      <p class="quote-title">신차 구매 예정이신가요?</p>
+      <p class="quote-subtitle">최저가 견적을 무료로 받아보세요</p>
+      <a th:href="@{/quote/brand}" class="quote-btn">비교견적 신청하기</a>
+    </section>
+
+    <section class="menu-list">
+      <div class="menu-item">
+        <p class="menu-title">이전 비교견적 내역 조회</p>
+        <p class="menu-desc">설명란</p>
+      </div>
+      <div class="menu-item">
+        <p class="menu-title">번호판 등록</p>
+        <p class="menu-desc">설명란</p>
+      </div>
+      <div class="menu-item">
+        <p class="menu-title">취등록세 납부</p>
+        <p class="menu-desc">설명란</p>
+      </div>
+      <div class="menu-item">
+        <p class="menu-title">보험 비교</p>
+        <p class="menu-desc">설명란</p>
+      </div>
+    </section>
+
+    <footer class="bottom-nav">
+      <div class="nav-item">마이</div>
+      <div class="nav-item">포인트</div>
+      <div class="nav-item">혜택</div>
+      <div class="nav-item">전체메뉴</div>
+    </footer>
+  </div>
+</body>
+</html>
