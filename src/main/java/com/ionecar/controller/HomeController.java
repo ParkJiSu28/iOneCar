@@ -15,7 +15,6 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Map;
 import com.ionecar.domain.Vehicle;
-import com.ionecar.domain.VehicleDto;
 import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
 
