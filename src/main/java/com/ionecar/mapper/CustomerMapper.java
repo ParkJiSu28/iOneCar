@@ -8,7 +8,8 @@ import com.ionecar.domain.Customer;
 public interface CustomerMapper {
   
     Customer findCustomerByEdpsCsn(long edpsCsn);
-
+    void deleteCustomerByEdpsCsn(long edpsCsn);
+    void updateQntYn(long edpsCsn, String qntYn);
 }
 
 
