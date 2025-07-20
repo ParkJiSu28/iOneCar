@@ -1,0 +1,37 @@
+<!-- quote.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>i-One Car | 내 견적함</title>
+  <link rel="stylesheet" th:href="@{/css/myquote.css}">
+</head>
+<body>
+  <div class="estimate-container">
+    <div class="section-title">i-One Car | 내 견적함</div>
+    
+    <div class="estimate-card">
+      <div class="estimate-head">
+        <div class="estimate-info">
+          <div class="estimate-model" th:text="${quote.model}">벤츠 A-Class</div>
+          <div class="estimate-detail" th:text="|${quote.year}형 ${quote.fuel} ${quote.trim}|">
+            2025형 하이퍼 가솔린 2.0 A 220
+          </div>
+          <div class="estimate-meta">
+            <span th:text="|할부 ${quote.installmentMonth}개월|">할부 48개월</span>
+          </div>
+        </div>
+        <img class="estimate-image" th:src="@{${quote.imageUrl}}" alt="차량이미지"
+          src="https://cdn.motor1.com/images/mgl/JWZnJ/s1/2023-mercedes-benz-a-class.jpg">
+      </div>
+      
+      <button class="compare-btn" th:onclick="|location.href='@{/compare}'|">비교견적</button>
+      
+      <div class="estimate-time-box"
+           th:text="|${quote.timeLeft} 견적만료까지 남은시간 입니다|">
+        31:35:27 견적만료까지 남은시간 입니다
+      </div>
+    </div>
+  </div>
+</body>
+</html>
