@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOne Car - 차량 상세</title>
+    <link rel="stylesheet" th:href="@{/css/app-style.css}">
+</head>
+<body class="app-body">
+    <div class="app-container">
+        <div class="app-header">
+            <a th:href="@{/app/dashboard}" class="back-btn">←</a>
+            <h1>차량 상세</h1>
+        </div>
+        
+        <div class="car-detail">
+            <div class="car-image-large">
+                <img th:src="@{/images/car-default.png}" alt="차량 이미지">
+            </div>
+            
+            <div class="car-detail-info">
+                <h2 th:text="${car.modelName}">Model Name</h2>
+                <div class="info-row">
+                    <span class="label">제조사:</span>
+                    <span class="value" th:text="${car.manufacturer}">Manufacturer</span>
+                </div>
+                <div class="info-row">
+                    <span class="label">등록일:</span>
+                    <span class="value" th:text="${#temporals.format(car.registeredAt, 'yyyy-MM-dd')}">2023-05-01</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

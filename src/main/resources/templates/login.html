@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>IBK 자동차 견적 서비스 - 로그인</title>
+    <meta name="viewport" content="width=393, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+<body>
+    <div class="app-header">
+        <div class="bank-logo">
+            <i class="bi bi-car-front-fill"></i> IBK 자동차 견적
+        </div>
+        <div class="desc">고객 전용 로그인</div>
+    </div>
+    <div class="login-card">
+        <div class="login-icon">
+            <i class="bi bi-person-circle"></i>
+        </div>
+        <div class="login-title">로그인</div>
+        <div class="login-desc">고객 번호(EDPS CSN)만 입력하면<br>간편하게 로그인할 수 있습니다.</div>
+        <!-- 에러 메시지 표시 (타임리프 th:if 활용) -->
+        <div th:if="${error}" class="error-message" th:text="${error}"></div>
+        <form th:action="@{/login}" method="post" autocomplete="off">
+            <div class="mb-3">
+                <label for="edps_csn" class="form-label">고객 번호 (EDPS CSN)</label>
+                <input type="text" class="form-control" id="edps_csn" name="edps_csn"
+                       placeholder="예 CSN123456789" maxlength="30" required autofocus>
+            </div>
+            <button type="submit" class="btn login-btn w-100">로그인</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+body {
+    background: linear-gradient(180deg, #f3f6fb 0%, #e9eef6 100%);
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', Arial, sans-serif;
+    color: #222;
+    min-height: 100vh;
+}
+.app-header {
+    background: #0053a6;
+    color: #fff;
+    padding: 22px 0 18px 0;
+    border-radius: 0 0 28px 28px;
+    box-shadow: 0 4px 16px rgba(0,83,166,0.07);
+    text-align: center;
+    margin-bottom: 20px;
+}
+.app-header .bank-logo {
+    font-size: 2.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+}
+.app-header .desc {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    font-weight: 400;
+}
+.login-card {
+    max-width: 370px;
+    margin: 60px auto 0 auto;
+    border-radius: 22px;
+    box-shadow: 0 4px 18px rgba(0, 83, 166, 0.09), 0 1.5px 3px rgba(0,0,0,0.03);
+    background: #fff;
+    padding: 2.2rem 2rem 2rem 2rem;
+}
+.login-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #0053a6;
+    margin-bottom: 12px;
+    text-align: center;
+}
+.login-desc {
+    font-size: 1.01rem;
+    color: #7c8ba0;
+    margin-bottom: 26px;
+    text-align: center;
+}
+.form-label {
+    color: #0053a6;
+    font-weight: 500;
+}
+.form-control:focus {
+    border-color: #2b7de9;
+    box-shadow: 0 0 0 0.15rem rgba(43,125,233,.15);
+}
+.login-btn {
+    background: linear-gradient(90deg, #0053a6 0%, #2b7de9 100%);
+    border: none;
+    border-radius: 13px;
+    font-size: 1.08rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 0.7rem 0;
+    margin-top: 10px;
+    box-shadow: 0 2px 8px rgba(0,83,166,0.09);
+    transition: background .18s;
+}
+.login-btn:hover, .login-btn:focus {
+    background: #003e7e;
+}
+.login-icon {
+    font-size: 2.7rem;
+    color: #0053a6;
+    display: block;
+    text-align: center;
+    margin-bottom: 18px;
+}
+.error-message {
+    color: #e74c3c;
+    background: #fbeeee;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.98rem;
+    margin-bottom: 18px;
+    text-align: center;
+}
+@media (max-width: 393px) {
+    .login-card {
+        margin-top: 30px;
+        padding: 1.3rem 0.7rem 1.7rem 0.7rem;
+    }
+}

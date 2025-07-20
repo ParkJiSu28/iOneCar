@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOne Car - 대시보드</title>
+    <link rel="stylesheet" th:href="@{/css/app-style.css}">
+</head>
+<body class="app-body">
+    <div class="app-container">
+       <!-- 로그인/로그아웃 관련 코드 제거 -->
+        <div class="app-header">
+            <div class="user-info">
+                <span th:text="${username}">사용자</span>
+                <!-- 로그아웃 버튼 제거 -->
+            </div>
+            <h1>iOne Car</h1>
+        </div>
+        
+        <div class="car-list-container">
+            <h2>차량 목록</h2>
+            
+            <div class="car-cards">
+                <div class="car-card" th:each="car : ${cars}" th:onclick="'window.location.href=\'' + @{/app/car/{id}(id=${car.id})} + '\''">
+                    <div class="car-image">
+                        <img th:src="@{/images/car-default.png}" alt="차량 이미지">
+                    </div>
+                    <div class="car-info">
+                        <h3 th:text="${car.modelName}">Model Name</h3>
+                        <p th:text="${car.manufacturer}">Manufacturer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
