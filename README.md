@@ -1,31 +1,32 @@
-# 개발 방법 및  Thymeleaf Post, get Method 
+==# 개발 방법 및  Thymeleaf Post, get Method ==
 
 ## 1. 기초 정리 
 
 - **컨트롤러(Controller)** : 웹 요청을 받아 처리하는 Java 클래스  
 - **템플릿(Thymeleaf)** : `src/main/resources/templates/app` 아래 HTML 파일에서 `${변수}` 형태로 데이터 출력  
 - **DTO, Service, DB Mapper**
- - DTO + Service + Mapper(Repository) 구조로 MVC 분리
+- DTO + Service + Mapper(Repository) 구조로 MVC 분리
 - @ModelAttribute를 활용해 DTO 바인딩
 
----
-Thymeleaf에서 th:object/th:field로 폼 데이터 자동 매핑
+----
 
- DB 접근은 Mapper(MyBatis/JPA 등)에서 담당
+- Thymeleaf에서 th:object/th:field로 폼 데이터 자동 매핑
 
-GET : @GetMapping · 템플릿에서 th:each, th:text 써서 데이터 출력
+- DB 접근은 Mapper(MyBatis/JPA 등)에서 담당
 
-POST : <form method="post"> · 컨트롤러에서 데이터 저장, 끝나면 redirect
+- GET : @GetMapping · 템플릿에서 th:each, th:text 써서 데이터 출력
 
-UPDATE : 기존 데이터 양식(th:value, th:text) · 제출은 POST
+- POST : <form method="post"> · 컨트롤러에서 데이터 저장, 끝나면 redirect
+
+- UPDATE : 기존 데이터 양식(th:value, th:text) · 제출은 POST
 
 |기능       |예시 코드|
-|----------|---------------------------------------------------|
-|값 출력	|<span th:text="${변수}"></span>|
-|값 입력	|<input th:value="${변수}">|
-|링크|	<a th:href="@{/경로}">텍스트</a>|
-|URL 조립|	`<a th:href="@{|
-|반복 출력|	<tr th:each="item : ${리스트}">...</tr>|
+|:----------|:---------------------------------------------------|
+|값 출력	| <span th:text="${변수}"></span>                    |
+|값 입력	| <input th:value="${변수}">                         |
+|링크       | <a th:href="@{/경로}">텍스트</a>                     |
+|URL 조립   |	<a th:href="@{"                                  |
+|반복 출력   |	<tr th:each="item : ${리스트}">...</tr>          |
 ---
 
 ## 2. BoardDto  
@@ -160,6 +161,8 @@ public class BoardController {
 ## 6.Thymeleaf 예시 템플릿
 
 ###목록 (templates/board/list.html)
+---
+
 ```html
 
 <table>
@@ -174,8 +177,11 @@ public class BoardController {
 <a href="/boards/new">글쓰기</a>
 ```
 
+---
 
 ###등록/수정 폼 (templates/board/new.html, edit.html)
+---
+
 
 ```html
 <form th:action="@{/boards}" method="post" th:object="${boardDto}">
