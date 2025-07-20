@@ -19,28 +19,28 @@ import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/login")
 @RequiredArgsConstructor
-public class HomeController {
+public class LoginController {
     private final CustomerService customerService;
 
     // 로그인 폼을 반환하는 GET 매핑 추가
     @GetMapping
-    public String home() {
-        return "home"; // login.html 타임리프 템플릿 반환
+    public String loginPage() {
+        return "login"; // login.html 타임리프 템플릿 반환
     }
 
 
-    // @PostMapping
-    // public String loginByEdpsCsn(@RequestParam("edps_csn") String edpsCsn, Model model) {
+    @PostMapping
+    public String loginByEdpsCsn(@RequestParam("edps_csn") long edpsCsn, Model model) {
     
-    //     boolean exists = customerService.loginByEdpsCsn(edpsCsn);
+        boolean exists = customerService.loginByEdpsCsn(edpsCsn);
 
-    //     if (exists) {
-    //         return "redirect:/api/vehicles/vehicles";
-    //     } else {
-    //         model.addAttribute("error", "존재하지 않는 고객 번호");
-    //         return "login";
-    //     }
-    // }
+        if (exists) {
+            return "redirect:/api/vehicles/vehicles";
+        } else {
+            model.addAttribute("error", "존재하지 않는 고객 번호");
+            return "login";
+        }
+    }
 }

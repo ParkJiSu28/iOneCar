@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #3b6ce1;
+  color: white;
+  text-align: center;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding-bottom: 60px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-top: auto;
+}
+
+.dot {
+  color: orange;
+  margin-right: 6px;
+}
+
+.subtitle {
+  font-size: 16px;
+  margin-bottom: 40px;
+}
+
+.award {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  width: 85%;
+  max-width: 320px;
+  text-align: left;
+  gap: 12px;
+}
+
+.award img {
+  width: 40px;
+  height: auto;
+  border-radius: 4px;
+  background: white;
+}
+
+.award p {
+  margin: 0;
+  font-size: 14px;
+}

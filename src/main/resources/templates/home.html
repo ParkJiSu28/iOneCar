@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IBK 카드</title>
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+  <div class="container">
+    <header class="top-bar">
+      <div class="logo">IBK 카드</div>
+      <div class="notification-icon">🔔</div>
+    </header>
+
+    <section class="banner" onclick="location.href='/type'">
+        <p><span>자동차 구매의 모든 과정을 하나로!</span></p>
+        <h2>i-One Car 서비스 출시!</h2>
+        <div class="car-icon">🚗</div>
+    </section>
+
+    <section class="payment-box">
+      <div class="payment-header">
+        <div class="payment-title">다음 결제예정금액</div>
+        <div class="payment-date">2025.07.24 기준</div>
+      </div>
+      <div class="payment-amount">642,000<span>원</span></div>
+      <div class="payment-buttons">
+        <button class="pay-now">즉시결제</button>
+        <button class="change-installment">할부변경</button>
+      </div>
+      <div class="total-bill">06월 15일 명세서 <span>1,401,600원 ></span></div>
+    </section>
+
+    <section class="transaction-history">
+      <div class="item">
+        <div class="item-left">
+          <div class="merchant">오뚜기</div>
+          <div class="date">25.07.11 | 14:00 | 국내일시불</div>
+        </div>
+        <div class="amount">1,800원</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="merchant">네이버페이</div>
+          <div class="date">25.07.09 | 15:20 | 국내일시불</div>
+        </div>
+        <div class="amount">23,000원</div>
+      </div>
+      <div class="item">
+        <div class="item-left">
+          <div class="merchant">쿠팡</div>
+          <div class="date">25.07.08 | 19:17 | 국내일시불</div>
+        </div>
+        <div class="amount">53,200원</div>
+      </div>
+    </section>
+
+    <nav class="bottom-nav">
+      <div class="nav-item">마이</div>
+      <div class="nav-item">포인트</div>
+      <div class="nav-item">혜택</div>
+      <div class="nav-item">전체메뉴</div>
+    </nav>
+  </div>
+</body>
+</html>

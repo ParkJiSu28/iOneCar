@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #f3f6fb;
+  }
+  
+  .header {
+    background-color: #f3f6fb;
+    padding: 20px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .back {
+    margin-left: 16px;
+    font-size: 20px;
+  }
+  
+  .subtitle {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 20px 0 30px;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .type-btn {
+    width: 280px;
+    padding: 20px;
+    font-size: 16px;
+    background: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    transition: all 0.3s;
+  }
+  
+  .type-btn.selected {
+    border: 2px solid #007aff;
+    box-shadow: 0 0 10px rgba(0,122,255,0.2);
+  }
+  
+  .start-btn {
+    display: block;
+    width: 280px;
+    margin: 30px auto;
+    padding: 15px;
+    text-align: center;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    background: #007aff;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  
+  .start-btn.disabled {
+    background: #d2d2d2;
+    pointer-events: none;
+  }
+  
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #f3f6fb;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 13px;
+  }
+  

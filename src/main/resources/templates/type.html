@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>i-One Car 유형 선택</title>
+  <link rel="stylesheet" th:href="@{/css/type.css}">
+</head>
+<body>
+  <header class="header">
+    <h1>i-One Car</h1>
+  </header>
+
+  <main>
+    <div class="back">&lt;</div>
+    <p class="subtitle">유형을 선택해주세요</p>
+
+    <div class="button-container">
+      <button class="type-btn" id="consumer">소비자</button>
+      <button class="type-btn" id="dealer">딜러</button>
+    </div>
+
+    <a href="/choice" id="startBtn" class="start-btn disabled">시작하기</a>
+  </main>
+
+  <nav class="bottom-nav">
+    <div>마이</div>
+    <div>포인트</div>
+    <div>혜택</div>
+    <div>전체메뉴</div>
+  </nav>
+
+  <script>
+    const buttons = document.querySelectorAll('.type-btn');
+    const startBtn = document.getElementById('startBtn');
+
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        startBtn.classList.remove('disabled');
+      });
+    });
+  </script>
+</body>
+</html>
