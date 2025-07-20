@@ -1,4 +1,4 @@
-==# 개발 방법 및  Thymeleaf Post, get Method ==
+# 개발 방법 및  Thymeleaf Post, get Method 
 
 ## 1. 기초 정리 
 
@@ -20,13 +20,13 @@
 
 - UPDATE : 기존 데이터 양식(th:value, th:text) · 제출은 POST
 
-|기능       |예시 코드|
+|기능       |예시 코드                                                  |
 |:----------|:---------------------------------------------------|
-|값 출력	| <span th:text="${변수}"></span>                    |
-|값 입력	| <input th:value="${변수}">                         |
-|링크       | <a th:href="@{/경로}">텍스트</a>                     |
-|URL 조립   |	<a th:href="@{"                                  |
-|반복 출력   |	<tr th:each="item : ${리스트}">...</tr>          |
+|값 출력	|  ```<span th:text="${변수}"></span> ```            |
+|값 입력	| ```<input th:value="${변수}">```                         |
+|링크       |``` <a th:href="@{/경로}">텍스트</a>```                     |
+|URL 조립   |	```<a th:href="@{" ```                                 |
+|반복 출력   |```	<tr th:each="item : ${리스트}">...</tr>  ```        |
 ---
 
 ## 2. BoardDto  
@@ -160,7 +160,7 @@ public class BoardController {
 
 ## 6.Thymeleaf 예시 템플릿
 
-###목록 (templates/board/list.html)
+### 목록 (templates/board/list.html)
 ---
 
 ```html
@@ -179,7 +179,7 @@ public class BoardController {
 
 ---
 
-###등록/수정 폼 (templates/board/new.html, edit.html)
+### 등록/수정 폼 (templates/board/new.html, edit.html)
 ---
 
 
