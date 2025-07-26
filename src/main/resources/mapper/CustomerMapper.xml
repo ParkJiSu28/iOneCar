@@ -5,7 +5,7 @@
 <mapper namespace="com.ionecar.mapper.CustomerMapper">
 
     <select id="findCustomerByEdpsCsn" resultType="com.ionecar.domain.Customer">
-        SELECT * FROM Customers WHERE edps_csn = #{edpsCsn}
+        SELECT edps_csn, qnt_yn FROM Customers WHERE edps_csn = #{edpsCsn}
     </select>
 
     <update id="updateQntYn" parameterType="com.ionecar.domain.Customer">

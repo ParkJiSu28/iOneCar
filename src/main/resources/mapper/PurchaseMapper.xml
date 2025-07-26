@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ionecar.mapper.PurchaseMapper">
+    
+<insert id="insertPurchase" parameterType="com.ionecar.domain.Purchase">
+    INSERT INTO Purchase (
+        car_srn,
+        purchase_method,
+        purchase_period,
+        purchase_advance,
+        purchase_location,
+        purchase_dutyFree,
+        finance_name,
+        finance_rate
+    ) VALUES (
+        #{carSrn},
+        #{purchaseMethod},
+        #{purchasePeriod},
+        #{purchaseAdvance},
+        #{purchaseLocation},
+        #{purchaseDutyFree},
+        #{financeName},
+        #{financeRate}
+    )
+</insert>
+
+
+</mapper>
