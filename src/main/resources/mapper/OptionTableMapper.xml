@@ -4,6 +4,9 @@
 
 <mapper namespace="com.ionecar.mapper.OptionTableMapper">
 
-
+    <insert id="insertOption" parameterType="com.ionecar.domain.Option">
+        INSERT INTO Option_table (car_srn, opt_name, opt_price, opt_def)
+        VALUES (#{carSrn}, #{optName}, #{optPrice}, #{optDef})
+    </insert>
 
 </mapper>
