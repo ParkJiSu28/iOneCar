@@ -1,37 +1,52 @@
-<!-- quote.html -->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>i-One Car | 내 견적함</title>
-  <link rel="stylesheet" th:href="@{/css/myquote.css}">
+    <meta charset="UTF-8"/>
+    <title>i-One Car | 내 견적함</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/css/myquote.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
 </head>
 <body>
-  <div class="estimate-container">
-    <div class="section-title">i-One Car | 내 견적함</div>
-    
-    <div class="estimate-card">
-      <div class="estimate-head">
-        <div class="estimate-info">
-          <div class="estimate-model" th:text="${quote.model}">벤츠 A-Class</div>
-          <div class="estimate-detail" th:text="|${quote.year}형 ${quote.fuel} ${quote.trim}|">
-            2025형 하이퍼 가솔린 2.0 A 220
-          </div>
-          <div class="estimate-meta">
-            <span th:text="|할부 ${quote.installmentMonth}개월|">할부 48개월</span>
-          </div>
-        </div>
-        <img class="estimate-image" th:src="@{${quote.imageUrl}}" alt="차량이미지"
-          src="https://cdn.motor1.com/images/mgl/JWZnJ/s1/2023-mercedes-benz-a-class.jpg">
-      </div>
-      
-      <button class="compare-btn" th:onclick="|location.href='@{/compare}'|">비교견적</button>
-      
-      <div class="estimate-time-box"
-           th:text="|${quote.timeLeft} 견적만료까지 남은시간 입니다|">
-        31:35:27 견적만료까지 남은시간 입니다
-      </div>
+<div class="container">
+    <!-- 최상단 고정 헤더 (카드스크롤 되어도 상단 고정) -->
+    <div class="main-header">
+        <span class="header-title">i-One Car ㅣ 내 견적함</span>
+        <button class="close-btn">
+            <img th:src="@{/css/images/X.png}" alt="닫기" class="close-icon" />
+        </button>
     </div>
-  </div>
+    <!-- 카드뷰 본문 -->
+    <div class="estimate-card">
+        <div class="card-label-row">
+            <span class="status-label">상담전</span>
+            <div class="compare-area">
+                <span class="compare-label">비교견적</span>
+                <span class="compare-badge">2</span>
+                <a th:href="@{/compare(myquoteId=${someId})}" class="compare-link">
+                    <img th:src="@{/css/images/right.png}" alt="비교견적 아이콘" class="compare-icon" />
+                </a>
+            </div>
+        </div>
+        <div class="label-separator"></div>
+        <div class="car-info-row">
+            <div class="car-info-text">
+                <div class="car-name" th:text="${carClass}">벤츠 A-Class</div>
+                <div class="car-desc" >
+                    <span th:text="${carSubClass}">2025형 해치백 가솔린 2.0 A220</span><br/>
+                    <span th:text="${purchaseMethod}">할부</span>
+                    <span th:text="${purchasePeriod} + '개월'">48개월</span>
+                </div>
+            </div>
+            <div class="car-img-block">
+                <img th:src="@{/css/images/a-class.png}" alt="차 이미지" class="car-img" />
+            </div>
+        </div>
+        <div class="expire-box">
+            <span class="expire-time" th:text="${leftTime}">31:35:27</span>
+            <span class="expire-label">견적만료까지 남은시간 입니다</span>
+        </div>
+    </div>
+</div>
 </body>
 </html>
