@@ -42,7 +42,8 @@ public class MyquoteController {
                model.addAttribute("carSubClass", myQuote.getCarSubClass());
                model.addAttribute("purchaseMethod", purchaseMethodLabel);
                model.addAttribute("purchasePeriod", myQuote.getPurchasePeriod());
-               model.addAttribute("myquoteId", myQuote.getCarSrn());
+               model.addAttribute("carSrn", myQuote.getCarSrn());
+               model.addAttribute("edpsCsn", edpsCsn);
                return "myquote"; // myquote.html 타임리프 템플릿 반환
             }
            }  

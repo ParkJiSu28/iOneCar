@@ -23,7 +23,7 @@
             <div class="compare-area">
                 <span class="compare-label">비교견적</span>
                 <span class="compare-badge">2</span>
-                <a th:href="@{/compare(myquoteId=${someId})}" class="compare-link">
+                <a th:href="@{/compair(edpsCsn=${edpsCsn}, carSrn=${carSrn})}" class="compare-link">
                     <img th:src="@{/css/images/right.png}" alt="비교견적 아이콘" class="compare-icon" />
                 </a>
             </div>
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="expire-box">
-            <span class="expire-time" th:text="${leftTime}">31:35:27</span>
+            <span class="expire-time">31:35:27</span>
             <span class="expire-label">견적만료까지 남은시간 입니다</span>
         </div>
     </div>
