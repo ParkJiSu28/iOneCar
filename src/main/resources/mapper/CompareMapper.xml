@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.ionecar.mapper.CompairMapper">
+<mapper namespace="com.ionecar.mapper.CompareMapper">
 
-    <select id="selectCompairByEdpsCsnAndCarSrn" parameterType="java.lang.Long" resultType="com.ionecar.domain.Compair">
+    <select id="selectCompareByEdpsCsnAndCarSrn" parameterType="java.lang.Long" resultType="com.ionecar.domain.Compare">
          
     SELECT 
         a.edps_csn      AS edpsCsn,

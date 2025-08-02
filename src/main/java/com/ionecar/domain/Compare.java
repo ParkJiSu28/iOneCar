@@ -2,7 +2,7 @@ package com.ionecar.domain;
 import lombok.Data;
 
 @Data
-public class Compair {
+public class Compare {
     private Long edpsCsn; // 카멜케이스수정
     private Long carSrn;
     private String carClass;        // ex)  A-Class
