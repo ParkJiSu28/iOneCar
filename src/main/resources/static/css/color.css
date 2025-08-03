@@ -1,0 +1,312 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    min-height: 100vh;
+    background: #fff;
+    font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+    color: #000;
+  }
+  
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 375px;
+    min-width: 320px;
+    min-height: 100vh;
+    background: #fff;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-bottom: 80px;
+  }
+  
+  .status-bar {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #000;
+    margin-top: 4px;
+    padding: 0 12px;
+    box-sizing: border-box;
+  }
+  
+  .status-bar .time {
+    font-weight: 500;
+  }
+  
+  .status-bar .status-icons {
+    display: flex;
+    gap: 4px;
+  }
+  
+  .status-bar .icon {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+  .status-bar .signal { background-image: url('/css/images/signal.svg'); }
+  .status-bar .wifi { background-image: url('/css/images/wifi.svg'); }
+  .status-bar .battery { background-image: url('/css/images/battery.svg'); }
+  
+  .header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .app-name {
+    color: #000;
+  }
+  
+  .separator {
+    color: #ccc;
+  }
+  
+  .page-title {
+    color: #000;
+    font-weight: normal;
+  }
+  
+  .close-btn {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+  }
+  
+  .progress-bar {
+    width: 100%;
+    height: 2px;
+    background: #e0e0e0;
+  }
+  
+  .progress-fill {
+    width: 25%;
+    height: 100%;
+    background: #0C5BEF;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 20px 16px;
+    box-sizing: border-box;
+  }
+  
+  .section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    margin: 0 0 20px 0;
+    text-align: left;
+  }
+  
+  .car-image-container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .car-image-container img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    object-fit: contain;
+  }
+  
+  .color-section {
+    margin-bottom: 24px;
+  }
+  
+  .color-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #000;
+    margin: 0 0 8px 0;
+  }
+  
+  .selected-color {
+    font-size: 14px;
+    color: #666;
+    margin: 0 0 12px 0;
+  }
+  
+  .color-swatches {
+    display: flex;
+    gap: 12px;
+  }
+  
+  .color-swatch {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .color-swatch:hover {
+    transform: scale(1.05);
+  }
+  
+  .color-swatch.selected {
+    border-color: #0C5BEF;
+    animation: selectPop 0.3s ease;
+  }
+  
+  @keyframes selectPop {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .swatch-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  .bottom-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 16px;
+    box-sizing: border-box;
+    border-top: 1px solid #eee;
+  }
+  
+  .btn {
+    flex: 1;
+    height: 44px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn-prev {
+    background: #e6f0ff;
+    color: #0C5BEF;
+  }
+  
+  .btn-next {
+    background: #f0f0f0;
+    color: #999;
+    cursor: not-allowed;
+    transition: all 0.3s ease;
+    font-weight: bold;
+  }
+  
+  .btn-next.active {
+    background: #0C5BEF;
+    color: #fff;
+    cursor: pointer;
+    animation: buttonActivate 0.3s ease;
+  }
+  
+  @keyframes buttonActivate {
+    0% {
+      background: #f0f0f0;
+      transform: scale(1);
+    }
+    50% {
+      background: #0C5BEF;
+      transform: scale(1.05);
+    }
+    100% {
+      background: #0C5BEF;
+      transform: scale(1);
+    }
+  }
+  
+  .bottom-nav {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 375px;
+    background: #fff;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    z-index: 100;
+  }
+  
+  .nav-item {
+    flex: 1;
+    text-align: center;
+    color: #000;
+    font-size: 12px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 6px;
+    transition: color 0.2s;
+  }
+  
+  .nav-icon {
+    width: 24px;
+    height: 24px;
+    background: #000;
+    margin-bottom: 2px;
+    border-radius: 2px;
+  }
+  
+  .nav-item.active,
+  .nav-item:active {
+    color: #0C5BEF;
+  }
+  
+  .nav-item.active .nav-icon,
+  .nav-item:active .nav-icon {
+    background: #0C5BEF;
+  }
