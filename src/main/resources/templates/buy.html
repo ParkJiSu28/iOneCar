@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>구매방식</title>
+  <link rel="stylesheet" th:href="@{/css/choice.css}" />
+</head>
+<body>
+  <div class="overlay" id="overlay"></div>
+
+  <header>
+    <span class="title">i-One Car</span>
+    <span class="subtitle">견적신청</span>
+    <button class="close">✕</button>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+
+  <section class="content">
+    <div class="section-title">구매방식</div>
+
+    <div class="model-info">
+      <div>
+        <div class="model-name">A-Class</div>
+        <div class="model-sub">2025년형 해치백 가솔린 2.0</div>
+        <div class="model-trim">A220</div>
+      </div>
+      <img src="/images/a-class.png" alt="차량 이미지" />
+    </div>
+
+    <div class="question-box">
+      <span>구매 방식별 차이점은?</span>
+      <button class="tooltip-btn">?</button>
+    </div>
+
+    <div class="method-select">
+      <button class="method-btn active" id="installmentBtn">할부</button>
+      <button class="method-btn" id="lumpBtn">일시불</button>
+    </div>
+
+    <div class="installment-fields" id="installmentFields">
+      <div class="form-group">
+        <label>할부기간</label>
+        <select>
+          <option>12개월</option>
+          <option>24개월</option>
+          <option selected>48개월</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>선수금</label>
+        <input type="text" placeholder="선수금 입력" />
+        <label class="checkbox">
+          <input type="checkbox" checked />
+          취득세 포함
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>인수지역</label>
+      <select>
+        <option>지역 선택</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>면세조건</label>
+      <select>
+        <option>일반인(해당없음)</option>
+      </select>
+    </div>
+
+    <div class="price-summary">
+      <span class="label">총 예상금액</span>
+      <span class="price">48,620,000원</span>
+      <button id="detailBtn">🔍</button>
+    </div>
+  </section>
+
+  <div class="button-group">
+    <button class="prev-button">이전</button>
+    <button class="next-button">다음</button>
+  </div>
+
+  <div class="price-popup" id="pricePopup">
+    <div class="popup-content">
+      <div class="popup-header">
+        <span>상세 금액 안내</span>
+        <button id="closePopup">✕</button>
+      </div>
+      <div class="popup-body">
+        <p>차량 가격: 47,800,000원</p>
+        <p>옵션 가격: 820,000원</p>
+        <p>할인: -0원</p>
+        <p>세금 및 기타: 0원</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const installmentBtn = document.getElementById('installmentBtn');
+    const lumpBtn = document.getElementById('lumpBtn');
+    const installmentFields = document.getElementById('installmentFields');
+    const detailBtn = document.getElementById('detailBtn');
+    const popup = document.getElementById('pricePopup');
+    const overlay = document.getElementById('overlay');
+    const closePopup = document.getElementById('closePopup');
+
+    installmentBtn.addEventListener('click', () => {
+      installmentBtn.classList.add('active');
+      lumpBtn.classList.remove('active');
+      installmentFields.style.display = 'block';
+    });
+
+    lumpBtn.addEventListener('click', () => {
+      lumpBtn.classList.add('active');
+      installmentBtn.classList.remove('active');
+      installmentFields.style.display = 'none';
+    });
+
+    detailBtn.addEventListener('click', () => {
+      popup.classList.add('show');
+      overlay.classList.add('show');
+    });
+
+    closePopup.addEventListener('click', () => {
+      popup.classList.remove('show');
+      overlay.classList.remove('show');
+    });
+
+    overlay.addEventListener('click', () => {
+      popup.classList.remove('show');
+      overlay.classList.remove('show');
+    });
+  </script>
+</body>
+</html>

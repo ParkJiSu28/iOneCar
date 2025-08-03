@@ -1,0 +1,167 @@
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #f2f5fc;
+  }
+  
+  header {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    font-weight: bold;
+    font-size: 20px;
+    background: #eef1f8;
+  }
+  
+  .progress-bar {
+    height: 4px;
+    background: #e0e0e0;
+  }
+  
+  .progress-bar .progress {
+    height: 100%;
+    width: 20%;
+    background: #3977f5;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  
+  .model-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .model-summary .text .name {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .model-summary .text .desc {
+    font-size: 14px;
+    color: gray;
+  }
+  
+  .model-summary .image img {
+    height: 70px;
+  }
+  
+  .option-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .option-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fc;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border: 2px solid transparent;
+    transition: border-color 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .option-card .option-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .option-card .check {
+    font-size: 16px;
+    color: #ccc;
+  }
+  
+  .option-card .label {
+    font-size: 16px;
+  }
+  
+  .option-card .price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #888;
+  }
+  
+  .option-card .tooltip {
+    margin-left: 8px;
+    background: #e0e0e0;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 18px;
+  }
+  
+  .option-card.selected {
+    border-color: #3977f5;
+  }
+  
+  .option-card.selected .check {
+    color: #3977f5;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 8px;
+    margin: 24px 20px;
+  }
+  
+  .prev-button,
+  .next-button {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+  }
+  
+  .prev-button {
+    background: #e9f0ff;
+    color: #3977f5;
+  }
+  
+  .next-button {
+    background: #d0d0d0;
+    color: white;
+  }
+  
+  .next-button.active {
+    background: #3977f5;
+  }
+  
+  footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    background: white;
+    border-top: 1px solid #ccc;
+  }
+  
+  footer .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #333;
+  }
+  
+  footer .nav-item img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
+  }
+  

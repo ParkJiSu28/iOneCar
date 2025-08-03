@@ -1,57 +1,127 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #3b6ce1;
+  padding: 0;
+  background: #fff; /* 바깥 배경 흰색 */
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
   color: white;
-  text-align: center;
-  height: 100vh;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: auto;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
 .container {
+  width: 100%;
+  max-width: 375px;
+  min-width: 320px;
+  min-height: 95vh;
+  background: linear-gradient(180deg, #0C5BEF 0%, #3386F5 100%);
+  margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100%;
-  padding-bottom: 60px;
+  justify-content: flex-start;
+  box-shadow: 0 0 24px 0 rgba(0,0,0,0.08);
+  border-radius: 16px;
+  overflow: hidden;
 }
 
-h1 {
-  font-size: 28px;
-  margin-top: auto;
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+  margin-bottom: 40px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.logo-i {
+  position: relative;
+  display: inline-block;
+  width: 28px;
+  height: 36px;
 }
 
 .dot {
-  color: orange;
-  margin-right: 6px;
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #FF7A00;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
 }
 
-.subtitle {
-  font-size: 16px;
-  margin-bottom: 40px;
+.i-char {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 1;
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+
+.logo-text-rest {
+  color: white;
+  margin-left: 6px;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.slogan {
+  font-size: 18px;
+  margin: 0;
+  margin-bottom: 0;
+  font-weight: 400;
+}
+
+.award-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 220px;
+  width: 100%;
+  align-items: center; /* 가운데 정렬 */
 }
 
 .award {
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 12px 20px;
-  margin: 8px 0;
-  width: 85%;
-  max-width: 320px;
-  text-align: left;
   gap: 12px;
+  justify-content: center; /* 가운데 정렬 */
 }
 
 .award img {
-  width: 40px;
-  height: auto;
-  border-radius: 4px;
-  background: white;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
 }
 
-.award p {
-  margin: 0;
-  font-size: 14px;
+.award-text {
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.4;
+  color: white;
 }

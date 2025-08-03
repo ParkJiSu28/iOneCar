@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>세부모델 선택</title>
+  <link rel="stylesheet" th:href="@{/css/model_sub.css}">
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const trims = document.querySelectorAll('.trim-card');
+      const nextButton = document.querySelector('.next-button');
+      const dropdown = document.querySelector('.dropdown');
+      const trimList = document.querySelector('.trim-list');
+
+      trims.forEach(card => {
+        card.addEventListener('click', function () {
+          trims.forEach(c => c.classList.remove('selected'));
+          this.classList.add('selected');
+          nextButton.classList.add('active');
+          nextButton.disabled = false;
+        });
+      });
+
+      dropdown.addEventListener('click', function () {
+        if (trimList.style.maxHeight) {
+          trimList.style.maxHeight = null;
+          trimList.style.opacity = 0;
+        } else {
+          trimList.style.maxHeight = trimList.scrollHeight + "px";
+          trimList.style.opacity = 1;
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <span>i-One Car</span>
+    <span style="margin-left: 8px; font-size: 16px; font-weight: normal;">견적신청</span>
+    <span style="margin-left: auto; cursor: pointer;">✕</span>
+  </header>
+
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+
+  <div class="container">
+    <div class="title">세부모델 선택</div>
+    <div class="model-summary">
+      <div class="text">
+        <span class="brand">벤츠</span>
+        <span class="name">A-Class</span>
+        <span class="price">4,810 ~ 8,770 만원</span>
+      </div>
+      <div class="image">
+        <img src="/images/a-class.png" alt="A-Class">
+      </div>
+    </div>
+
+    <div class="dropdown-container">
+      <div class="dropdown">2025년형 해치백 가솔린 2.0 <span>▾</span></div>
+    </div>
+
+    <div class="trim-list">
+      <div class="trim-card">
+        <span class="trim-name">A220</span>
+        <span class="trim-price">48,100,000원</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="prev-button">이전</button>
+    <form th:action="@{/quote/color}" method="get">
+      <button type="submit" class="next-button" disabled>다음</button>
+    </form>
+  </div>
+
+  <footer>
+    <div class="nav-item">
+      <img src="/icons/my.svg" alt="마이">
+      <span>마이</span>
+    </div>
+    <div class="nav-item">
+      <img src="/icons/point.svg" alt="포인트">
+      <span>포인트</span>
+    </div>
+    <div class="nav-item">
+      <img src="/icons/benefit.svg" alt="혜택">
+      <span>혜택</span>
+    </div>
+    <div class="nav-item">
+      <img src="/icons/menu.svg" alt="전체메뉴">
+      <span>전체메뉴</span>
+    </div>
+  </footer>
+</body>
+</html>

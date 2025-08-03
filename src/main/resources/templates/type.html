@@ -1,44 +1,47 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>i-One Car 유형 선택</title>
-  <link rel="stylesheet" th:href="@{/css/type.css}">
+  <title>유형 선택</title>
+  <link rel="stylesheet" th:href="@{/css/type.css}" />
 </head>
 <body>
   <header class="header">
-    <h1>i-One Car</h1>
+    <div class="back">&lt;</div>
+    <div class="title">유형을 선택해주세요</div>
   </header>
 
-  <main>
-    <div class="back">&lt;</div>
-    <p class="subtitle">유형을 선택해주세요</p>
-
-    <div class="button-container">
-      <button class="type-btn" id="consumer">소비자</button>
-      <button class="type-btn" id="dealer">딜러</button>
+  <main class="main-container">
+    <div class="type-buttons">
+      <div class="type-btn" data-type="consumer">소비자</div>
+      <div class="type-btn" data-type="dealer">딜러</div>
     </div>
 
-    <a href="/choice" id="startBtn" class="start-btn disabled">시작하기</a>
+    <form th:action="@{/quote/brand}" method="get">
+      <button type="submit" class="start-btn" disabled>시작하기</button>
+    </form>
   </main>
 
-  <nav class="bottom-nav">
-    <div>마이</div>
-    <div>포인트</div>
-    <div>혜택</div>
-    <div>전체메뉴</div>
-  </nav>
+  <footer class="footer">
+    <div class="nav-item"><img src="/icons/my.svg" alt="마이" /><span>마이</span></div>
+    <div class="nav-item"><img src="/icons/point.svg" alt="포인트" /><span>포인트</span></div>
+    <div class="nav-item"><img src="/icons/benefit.svg" alt="혜택" /><span>혜택</span></div>
+    <div class="nav-item"><img src="/icons/menu.svg" alt="전체메뉴" /><span>전체메뉴</span></div>
+  </footer>
 
   <script>
-    const buttons = document.querySelectorAll('.type-btn');
-    const startBtn = document.getElementById('startBtn');
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('.type-btn');
+      const startBtn = document.querySelector('.start-btn');
 
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        startBtn.classList.remove('disabled');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          startBtn.classList.add('active');
+          startBtn.disabled = false;
+        });
       });
     });
   </script>

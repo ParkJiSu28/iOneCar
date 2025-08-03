@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    font-family: 'Apple SD Gothic Neo', sans-serif;
+    background-color: #fff;
+    color: #000;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  .title-wrap {
+    display: flex;
+    align-items: baseline;
+    font-size: 18px;
+  }
+  
+  .title-bold {
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  
+  .title-regular {
+    font-weight: 400;
+    font-size: 16px;
+  }
+  
+  .close {
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .progress-bar {
+    height: 4px;
+    background-color: #eee;
+    position: relative;
+    margin: 0 16px;
+    border-radius: 4px;
+  }
+  
+  .progress-bar .progress {
+    height: 4px;
+    width: 25%;
+    background-color: #2962F6;
+    border-radius: 4px;
+  }
+  
+  .container {
+    padding: 20px 16px;
+  }
+  
+  .step-title {
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .model-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F7F8FA;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .model-info .text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .model-info .brand {
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .model-info .model {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .model-info .price {
+    font-size: 13px;
+    color: #888;
+  }
+  
+  .image img {
+    width: 96px;
+  }
+  
+  .dropdown-wrapper {
+    margin-bottom: 16px;
+  }
+  
+  .dropdown-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 14px;
+    background-color: #F7F8FA;
+    border: 1px solid #D9D9D9;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .trim-list {
+    transition: all 0.3s ease;
+  }
+  
+  .trim-card {
+    border: 1px solid #D9D9D9;
+    background-color: #F7F8FA;
+    border-radius: 10px;
+    padding: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    transition: 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .trim-card.selected {
+    border-color: #2962F6;
+    background-color: #fff;
+  }
+  
+  .trim-card .trim-name {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .trim-card .trim-price {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .button-group {
+    display: flex;
+    gap: 12px;
+    padding: 24px 16px;
+    background-color: #fff;
+  }
+  
+  .btn {
+    flex: 1;
+    padding: 14px 0;
+    font-size: 15px;
+    border-radius: 12px;
+    border: none;
+  }
+  
+  .btn.prev {
+    background-color: #EAF2FF;
+    color: #2962F6;
+  }
+  
+  .btn.next {
+    background-color: #D9D9D9;
+    color: #888;
+  }
+  
+  .btn.next.active,
+  .btn.next:not(.disabled) {
+    background-color: #2962F6;
+    color: #fff;
+  }
+  
+  .btn.disabled {
+    pointer-events: none;
+  }
+  
+  footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    border-top: 1px solid #eee;
+  }
+  
+  footer .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 12px;
+    color: #444;
+  }
+  
+  footer .nav-item img {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 4px;
+  }
+  
