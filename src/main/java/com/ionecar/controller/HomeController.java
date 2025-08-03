@@ -15,10 +15,10 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Map;
 import com.ionecar.domain.Vehicle;
-
 import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 
 @Controller
 @RequestMapping("/home")
@@ -30,9 +30,8 @@ public class HomeController {
     @GetMapping
     public String home(@ModelAttribute("edpsCsn") String edpsCsn, Model model) {
         model.addAttribute("edpsCsn", edpsCsn); // 필요하다면
-        return "home"; // Return the view name
+        return "home";
     }
-
 
     // @PostMapping
     // public String loginByEdpsCsn(@RequestParam("edps_csn") String edpsCsn, Model model) {

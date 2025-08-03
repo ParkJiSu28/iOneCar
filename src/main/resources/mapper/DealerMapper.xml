@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ionecar.mapper.DealerMapper">
+    
+    <!-- 모든 딜러 조회 -->
+    <select id="selectAllDealers" resultType="com.ionecar.domain.Dealer">
+        SELECT 
+            dealer_no as dealerNo,
+            dealer_name as dealerName,
+            dealer_phone as dealerPhone,
+            car_srn as carSrn,
+            review_cnt as reviewCnt,
+            rating,
+            quotation_cnt as quotationCnt,
+            cert_yn as certYn
+        FROM Dealer
+        ORDER BY dealer_no
+    </select>
+    
+    <!-- 딜러 번호로 딜러 조회 -->
+    <select id="selectDealerByDealerNo" resultType="com.ionecar.domain.Dealer">
+        SELECT 
+            dealer_no as dealerNo,
+            dealer_name as dealerName,
+            dealer_phone as dealerPhone,
+            car_srn as carSrn,
+            review_cnt as reviewCnt,
+            rating,
+            quotation_cnt as quotationCnt,
+            cert_yn as certYn
+        FROM Dealer
+        WHERE dealer_no = #{dealerNo}
+    </select>
+    
+    <!-- 차량 번호로 딜러 조회 -->
+    <select id="selectDealersByCarSrn" resultType="com.ionecar.domain.Dealer">
+        SELECT 
+            dealer_no as dealerNo,
+            dealer_name as dealerName,
+            dealer_phone as dealerPhone,
+            car_srn as carSrn,
+            review_cnt as reviewCnt,
+            rating,
+            quotation_cnt as quotationCnt,
+            cert_yn as certYn
+        FROM Dealer
+        WHERE car_srn = #{carSrn}
+        ORDER BY rating DESC, quotation_cnt DESC
+    </select>
+    
+    <!-- 차량 번호로 딜러 정보와 거래 정보 함께 조회 -->
+    <select id="selectDealerInfoByCarSrn" resultType="com.ionecar.domain.DealerInfo">
+        SELECT 
+            d.dealer_no as dealerNo,
+            d.dealer_name as dealerName,
+            d.dealer_phone as dealerPhone,
+            d.car_srn as carSrn,
+            d.review_cnt as reviewCnt,
+            d.rating,
+            d.quotation_cnt as quotationCnt,
+            d.cert_yn as certYn,
+            dl.progress,
+            dl.rate,
+            dl.discount
+        FROM Dealer d
+        LEFT JOIN Deal dl ON d.dealer_no = dl.dealer_no AND d.car_srn = dl.car_srn
+        WHERE d.car_srn = #{carSrn}
+        ORDER BY d.rating DESC, d.quotation_cnt DESC
+    </select>
+    
+    <!-- 딜러 등록 -->
+    <insert id="insertDealer" parameterType="com.ionecar.domain.Dealer">
+        INSERT INTO Dealer (
+            dealer_name,
+            dealer_phone,
+            car_srn,
+            review_cnt,
+            rating,
+            quotation_cnt,
+            cert_yn
+        ) VALUES (
+            #{dealerName},
+            #{dealerPhone},
+            #{carSrn},
+            #{reviewCnt},
+            #{rating},
+            #{quotationCnt},
+            #{certYn}
+        )
+    </insert>
+    
+    <!-- 딜러 수정 -->
+    <update id="updateDealer" parameterType="com.ionecar.domain.Dealer">
+        UPDATE Dealer SET
+            dealer_name = #{dealerName},
+            dealer_phone = #{dealerPhone},
+            car_srn = #{carSrn},
+            review_cnt = #{reviewCnt},
+            rating = #{rating},
+            quotation_cnt = #{quotationCnt},
+            cert_yn = #{certYn}
+        WHERE dealer_no = #{dealerNo}
+    </update>
+    
+    <!-- 딜러 삭제 -->
+    <delete id="deleteDealer">
+        DELETE FROM Dealer WHERE dealer_no = #{dealerNo}
+    </delete>
+    
+</mapper> 

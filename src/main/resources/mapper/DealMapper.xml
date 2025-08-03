@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ionecar.mapper.DealMapper">
+    
+    <!-- 모든 거래 조회 -->
+    <select id="selectAllDeals" resultType="com.ionecar.domain.Deal">
+        SELECT 
+            dealer_no as dealerNo,
+            car_srn as carSrn,
+            progress,
+            rate,
+            discount
+        FROM Deal
+        ORDER BY dealer_no, car_srn
+    </select>
+    
+    <!-- 딜러 번호와 차량 번호로 거래 조회 -->
+    <select id="selectDealByDealerNoAndCarSrn" resultType="com.ionecar.domain.Deal">
+        SELECT 
+            dealer_no as dealerNo,
+            car_srn as carSrn,
+            progress,
+            rate,
+            discount
+        FROM Deal
+        WHERE dealer_no = #{dealerNo} AND car_srn = #{carSrn}
+    </select>
+    
+    <!-- 차량 번호로 거래 조회 -->
+    <select id="selectDealsByCarSrn" resultType="com.ionecar.domain.Deal">
+        SELECT 
+            dealer_no as dealerNo,
+            car_srn as carSrn,
+            progress,
+            rate,
+            discount
+        FROM Deal
+        WHERE car_srn = #{carSrn}
+        ORDER BY dealer_no
+    </select>
+    
+    <!-- 딜러 번호로 거래 조회 -->
+    <select id="selectDealsByDealerNo" resultType="com.ionecar.domain.Deal">
+        SELECT 
+            dealer_no as dealerNo,
+            car_srn as carSrn,
+            progress,
+            rate,
+            discount
+        FROM Deal
+        WHERE dealer_no = #{dealerNo}
+        ORDER BY car_srn
+    </select>
+    
+    <!-- 거래 등록 -->
+    <insert id="insertDeal" parameterType="com.ionecar.domain.Deal">
+        INSERT INTO Deal (
+            dealer_no,
+            car_srn,
+            progress,
+            rate,
+            discount
+        ) VALUES (
+            #{dealerNo},
+            #{carSrn},
+            #{progress},
+            #{rate},
+            #{discount}
+        )
+    </insert>
+    
+    <!-- 거래 수정 -->
+    <update id="updateDeal" parameterType="com.ionecar.domain.Deal">
+        UPDATE Deal SET
+            progress = #{progress},
+            rate = #{rate},
+            discount = #{discount}
+        WHERE dealer_no = #{dealerNo} AND car_srn = #{carSrn}
+    </update>
+    
+    <!-- 거래 삭제 -->
+    <delete id="deleteDeal">
+        DELETE FROM Deal WHERE dealer_no = #{dealerNo} AND car_srn = #{carSrn}
+    </delete>
+    
+</mapper> 
