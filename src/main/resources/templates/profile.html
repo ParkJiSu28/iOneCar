@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 내 견적함</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 내 견적함</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 딜러 프로필 섹션 -->
+            <section class="dealer-profile">
+                <!-- 프로필 이미지와 인증 마크 -->
+                <div class="profile-image-container">
+                    <img th:src="@{/css/images/dealer1.png}" alt="딜러 프로필" class="profile-image">
+                    <!-- 인증 마크 (조건부 표시) -->
+                    <div class="verification-badge" th:if="${isVerified == 'Y'}">
+                        <div class="verification-icon">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" fill="#235FD2"/>
+                                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 인증 텍스트 (조건부 표시) -->
+                <div class="verification-text" th:if="${isVerified == 'Y'}">
+                    i-ONE Car 인증 딜러
+                </div>
+                
+                <!-- 딜러 이름 -->
+                <h2 class="dealer-name" th:text="${dealerName}">벤츠박사</h2>
+                
+                <!-- 딜러 통계 -->
+                <div class="dealer-stats">
+                    <div class="stat-item">
+                        <span class="stat-value" th:text="${quoteCount}">1,416건</span>
+                        <span class="stat-label">매칭견적</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" th:text="${reviewCount} + '건'">67건</span>
+                        <span class="stat-label">고객후기</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" th:text="${rating}">5.0</span>
+                        <span class="stat-label">총 평점</span>
+                    </div>
+                </div>
+                
+                <!-- 채팅 버튼 -->
+                <button class="chat-button">
+                    딜러와 채팅하기
+                </button>
+            </section>
+
+            <!-- 고객 후기 섹션 -->
+            <section class="reviews-section">
+                <h3 class="reviews-title">고객후기</h3>
+                
+                <!-- 첫 번째 후기 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <h4 class="reviewer-title">벤츠 GLE-Class 구매자</h4>
+                        <div class="review-rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <span class="rating-score">5.0</span>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p class="review-text">
+                            정말 친절하고 추천해주신 차량이 마음에 들어서 구매하게 되었습니다. 
+                            딜러님이 정말 열심히 도와주셨는데 물 한 잔도 못 대접해서 죄송하네요.
+                        </p>
+                        <img th:src="@{/css/images/a-class.png}" alt="GLE-Class" class="review-car-image">
+                    </div>
+                </div>
+                
+                <!-- 두 번째 후기 -->
+                <div class="review-card">
+                    <div class="review-header">
+                        <h4 class="reviewer-title">벤츠 S-Class 구매자</h4>
+                        <div class="review-rating">
+                            <div class="stars">
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                                <span class="star">★</span>
+                            </div>
+                            <span class="rating-score">5.0</span>
+                        </div>
+                    </div>
+                    <div class="review-content">
+                        <p class="review-text">
+                            처음 차를 구매하는데 친절하게 설명해주시고 차량 상태도 정말 좋았습니다. 
+                            믿고 구매할 수 있는 딜러라고 생각합니다.
+                        </p>
+                        <img th:src="@{/css/images/a-class.png}" alt="S-Class" class="review-car-image">
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html> 

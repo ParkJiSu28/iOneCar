@@ -1,0 +1,288 @@
+/* 기본 스타일 */
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+    color: #101116;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+/* 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 72px;
+    padding: 20px 0;
+}
+
+/* 딜러 프로필 섹션 */
+.dealer-profile {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 프로필 이미지 컨테이너 */
+.profile-image-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 인증 마크 */
+.verification-badge {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    background: #235FD2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 4px rgba(35, 95, 210, 0.3);
+}
+
+.verification-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 인증 텍스트 */
+.verification-text {
+    font-size: 12px;
+    color: #235FD2;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* 딜러 이름 */
+.dealer-name {
+    font-size: 24px;
+    font-weight: 700;
+    color: #101116;
+    margin: 0 0 20px 0;
+}
+
+/* 딜러 통계 */
+.dealer-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 24px;
+    padding: 16px 0;
+    border-top: 1px solid #E3E6EB;
+    border-bottom: 1px solid #E3E6EB;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #101116;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666999;
+    font-weight: 500;
+}
+
+/* 채팅 버튼 */
+.chat-button {
+    width: 100%;
+    height: 48px;
+    background: #235FD2;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: 0 2px 8px rgba(35, 95, 210, 0.2);
+}
+
+.chat-button:hover {
+    background: #1a4ba8;
+}
+
+/* 고객 후기 섹션 */
+.reviews-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.reviews-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #101116;
+    margin: 0 0 16px 0;
+}
+
+/* 후기 카드 */
+.review-card {
+    border: 1px solid #E3E6EB;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.review-card:last-child {
+    margin-bottom: 0;
+}
+
+/* 후기 헤더 */
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.reviewer-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #101116;
+    margin: 0;
+}
+
+.review-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stars {
+    display: flex;
+    gap: 1px;
+}
+
+.star {
+    color: #FF6B6B;
+    font-size: 14px;
+}
+
+.rating-score {
+    font-size: 12px;
+    font-weight: 600;
+    color: #101116;
+}
+
+/* 후기 내용 */
+.review-content {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.review-text {
+    flex: 1;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666999;
+    margin: 0;
+}
+
+.review-car-image {
+    width: 60px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    .dealer-profile {
+        padding: 20px 16px;
+    }
+    
+    .reviews-section {
+        padding: 16px;
+    }
+    
+    .review-card {
+        padding: 12px;
+    }
+} 
