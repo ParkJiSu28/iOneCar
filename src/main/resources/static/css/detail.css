@@ -1,0 +1,665 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 48px;
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 섹션 공통 스타일 */
+.detail-section,
+.registration-section,
+.purchase-section,
+.requests-section {
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: #fff;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.toggle-icon {
+    width: 16px;
+    height: 16px;
+    color: #666;
+    transition: transform 0.3s ease;
+}
+
+.section-content {
+    padding: 20px;
+    background: #FAFAFA;
+}
+
+/* 상세견적 섹션 */
+.car-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.car-details {
+    flex: 1;
+}
+
+.car-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 4px 0;
+}
+
+.car-spec {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.car-image {
+    width: 80px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.car-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 가격 정보 */
+.price-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.price-label {
+    font-size: 16px;
+    color: #666;
+}
+
+.price-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+}
+
+.price-value.discount {
+    color: #E53E3E;
+}
+
+.price-value.total {
+    font-size: 18px;
+    font-weight: 700;
+    color: #235FD2;
+}
+
+.option-detail {
+    padding-left: 20px;
+}
+
+.option-text {
+    font-size: 14px;
+    color: #666;
+}
+
+.price-note {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #E5E7EB;
+}
+
+/* 등록비용 섹션 */
+.registration-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #F5F5F5;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.total-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.total-amount {
+    font-size: 18px;
+    font-weight: 700;
+    color: #235FD2;
+}
+
+.registration-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 구매정보 섹션 */
+.purchase-method {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #F5F5F5;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.method-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.method-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #235FD2;
+}
+
+.purchase-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 차량 상세 정보 */
+.car-details-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+/* 공통 detail-row 스타일 */
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-size: 16px;
+    color: #666;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+}
+
+.detail-value.highlight {
+    color: #235FD2;
+    font-weight: 700;
+}
+
+/* 요청사항 섹션 */
+.request-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.request-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.request-text {
+    font-size: 16px;
+    color: #000;
+    flex: 1;
+}
+
+.request-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: #235FD2;
+}
+
+/* 딜러 정보 */
+.dealer-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.dealer-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.dealer-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #F0F0F0;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dealer-details {
+    flex: 1;
+}
+
+.dealer-name {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
+
+.dealer-name span {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.verified-badge {
+    display: flex;
+    align-items: center;
+}
+
+.dealer-stats {
+    display: flex;
+    gap: 12px;
+}
+
+.rating {
+    font-size: 14px;
+    color: #235FD2;
+    font-weight: 600;
+}
+
+.quotes {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 하단 버튼 */
+.bottom-button {
+    padding: 16px;
+    background: #fff;
+    border-top: 1px solid #E5E7EB;
+}
+
+.btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 12px;
+    }
+    
+    .section-header {
+        padding: 14px 16px;
+    }
+    
+    .section-content {
+        padding: 16px;
+    }
+    
+    .car-name {
+        font-size: 18px;
+    }
+    
+    .car-spec {
+        font-size: 13px;
+    }
+    
+    .section-title {
+        font-size: 16px;
+    }
+}
+
+/* 애니메이션 효과 */
+.section-content {
+    transition: all 0.3s ease;
+}
+
+.toggle-icon {
+    transition: transform 0.3s ease;
+}
+
+/* 접힌 상태 스타일 */
+.section-content.collapsed {
+    display: none;
+}
+
+ .toggle-icon.rotated {
+     transform: rotate(180deg);
+ }
+
+/* 모달 스타일 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+    opacity: 1;
+    z-index: 2001;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 20px 0 20px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 0 20px 20px 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin: 0 0 16px 0;
+    line-height: 1.3;
+}
+
+.modal-description {
+    margin-bottom: 20px;
+}
+
+.modal-description p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.modal-bullet-points {
+    margin-bottom: 20px;
+}
+
+.bullet-point {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.bullet {
+    font-size: 16px;
+    color: #666;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.point-text {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.modal-checkbox {
+    margin-bottom: 24px;
+}
+
+.modal-checkbox .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.modal-checkbox-input {
+    display: none;
+}
+
+.modal-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 4px;
+    position: relative;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.modal-checkbox-input:checked + .checkmark {
+    background: #235FD2;
+    border-color: #235FD2;
+}
+
+.modal-checkbox-input:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.modal-checkbox .checkbox-text {
+    font-size: 16px;
+    color: #000;
+    flex: 1;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-buttons .btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.modal-buttons .btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.modal-buttons .btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.modal-buttons .btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 모달 */
+@media (max-width: 375px) {
+    .modal {
+        max-width: 100%;
+    }
+    
+    .modal-content {
+        padding: 0 16px 16px 16px;
+    }
+    
+    .modal-title {
+        font-size: 18px;
+    }
+    
+    .modal-description p {
+        font-size: 13px;
+    }
+    
+    .point-text {
+        font-size: 13px;
+    }
+} 

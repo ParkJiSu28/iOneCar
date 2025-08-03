@@ -7,6 +7,7 @@ import com.ionecar.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import javax.servlet.http.HttpSession;
 import org.springframework.ui.Model;
+
 import com.ionecar.domain.Customer;
 
 @Controller
@@ -28,6 +29,5 @@ public class ChoiceController {
         model.addAttribute("hasQuote", hasQuote);
 
         return "choice";
-
     }
 }

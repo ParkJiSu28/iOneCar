@@ -55,8 +55,8 @@
             <div class="dealer-label">딜러와 상담요청전입니다.</div>
             <div class="dealer-card">
                 <img th:src="@{/css/images/dealer1.png}" alt="벤츠박사 프로필" class="dealer-photo" />
-                <div class="dealer-profile-info">
-                    <span class="dealer-name">벤츠박사</span>
+                                 <div class="dealer-profile-info">
+                     <span class="dealer-name" onclick="goToProfile('1')" style="cursor: pointer;">벤츠박사</span>
                     <span class="dealer-rating">
                         <img th:src="@{/css/images/star.png}" alt="별" class="star-icon" />
                         <span>5.0</span>
@@ -77,8 +77,8 @@
             <div class="dealer-label">딜러와 상담요청전입니다.</div>
             <div class="dealer-card">
                 <img th:src="@{/css/images/dealer2.png}" alt="곽율과장 프로필" class="dealer-photo" />
-                <div class="dealer-profile-info">
-                    <span class="dealer-name">곽율과장</span>
+                                 <div class="dealer-profile-info">
+                     <span class="dealer-name" onclick="goToProfile('2')" style="cursor: pointer;">곽율과장</span>
                     <span class="dealer-rating">
                         <img th:src="@{/css/images/star.png}" alt="별" class="star-icon" />
                         <span>5.0</span>
@@ -96,5 +96,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function goToProfile(dealerId) {
+        window.location.href = '/profile?dealerId=' + dealerId;
+    }
+</script>
 </body>
 </html>

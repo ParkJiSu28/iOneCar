@@ -1,66 +1,115 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>IBK 카드</title>
-  <link rel="stylesheet" th:href="@{/css/home.css}">
+  <link rel="stylesheet" href="/css/home.css">
+  <!-- 아이콘 폰트(예시) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var promoBanner = document.querySelector('.promo-banner');
+      if (promoBanner) {
+        promoBanner.style.cursor = 'pointer';
+        promoBanner.addEventListener('click', function () {
+          window.location.href = '/type';
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <div class="container">
-    <header class="top-bar">
-      <div class="logo">IBK 카드</div>
-      <div class="notification-icon">🔔</div>
+    <!-- 상단바 -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="status-icons">
+        <span class="icon signal"></span>
+        <span class="icon wifi"></span>
+        <span class="icon battery"></span>
+      </div>
+    </div>
+    <!-- 헤더 -->
+    <header>
+      <div class="header-left">
+        <span class="logo">IBK 카드</span>
+      </div>
+      <div class="header-right">
+        <i class="ri-notification-3-line bell"></i>
+      </div>
     </header>
-
-    <section class="banner" onclick="location.href='/type'">
-        <p><span>자동차 구매의 모든 과정을 하나로!</span></p>
-        <h2>i-One Car 서비스 출시!</h2>
-        <div class="car-icon">🚗</div>
-    </section>
-
-    <section class="payment-box">
+    <!-- 프로모션 배너 -->
+    <div class="promo-banner">
+      <span class="promo-text">
+        자동차 구매의 모든 과정을 하나로!<br>
+        <b>i-One Car 서비스 출시!</b>
+      </span>
+      <span class="promo-img">
+        <img src="/css/images/car-illust.png" alt="car" />
+      </span>
+    </div>
+    <!-- 결제예정금액 카드 -->
+    <div class="payment-card">
       <div class="payment-header">
-        <div class="payment-title">다음 결제예정금액</div>
-        <div class="payment-date">2025.07.24 기준</div>
+        <span class="payment-title">
+          <img src="/css/images/ibk-icon.png" alt="결제 아이콘" class="payment-icon-img">
+          다음 결제예정금액
+        </span>
+        <span class="payment-date">2025.07.24 기준</span>
       </div>
-      <div class="payment-amount">642,000<span>원</span></div>
-      <div class="payment-buttons">
-        <button class="pay-now">즉시결제</button>
-        <button class="change-installment">할부변경</button>
+      <div class="payment-amount">642,000<span class="unit">원</span></div>
+      <div class="payment-actions">
+        <button class="btn primary">즉시결제</button>
+        <button class="btn">할부변경</button>
       </div>
-      <div class="total-bill">06월 15일 명세서 <span>1,401,600원 ></span></div>
-    </section>
-
-    <section class="transaction-history">
-      <div class="item">
-        <div class="item-left">
-          <div class="merchant">오뚜기</div>
-          <div class="date">25.07.11 | 14:00 | 국내일시불</div>
+      <div class="payment-detail">
+        <span>06월 15일 명세서</span>
+        <span class="detail-amount">1,401,600원 <i class="ri-arrow-right-s-line"></i></span>
+      </div>
+    </div>
+    <!-- 최근 내역 -->
+    <div class="recent-list">
+      <div class="recent-item">
+        <div class="recent-info">
+          <span class="recent-title">오뚜기</span>
+          <span class="recent-date">25.07.11 | 14:00  | 국내외식불</span>
         </div>
-        <div class="amount">1,800원</div>
+        <div class="recent-amount">1,800원</div>
       </div>
-      <div class="item">
-        <div class="item-left">
-          <div class="merchant">네이버페이</div>
-          <div class="date">25.07.09 | 15:20 | 국내일시불</div>
+      <div class="recent-item">
+        <div class="recent-info">
+          <span class="recent-title">네이버페이</span>
+          <span class="recent-date">25.07.09 | 15:20  | 국내외식불</span>
         </div>
-        <div class="amount">23,000원</div>
+        <div class="recent-amount">23,000원</div>
       </div>
-      <div class="item">
-        <div class="item-left">
-          <div class="merchant">쿠팡</div>
-          <div class="date">25.07.08 | 19:17 | 국내일시불</div>
+      <div class="recent-item">
+        <div class="recent-info">
+          <span class="recent-title">쿠팡</span>
+          <span class="recent-date">25.07.08 | 19:17  | 국내외식불</span>
         </div>
-        <div class="amount">53,200원</div>
+        <div class="recent-amount">53,200원</div>
       </div>
-    </section>
-
+    </div>
+    <!-- 하단 네비게이션 -->
     <nav class="bottom-nav">
-      <div class="nav-item">마이</div>
-      <div class="nav-item">포인트</div>
-      <div class="nav-item">혜택</div>
-      <div class="nav-item">전체메뉴</div>
+      <a href="#" class="nav-item active">
+        <img src="/css/images/nav-home.png" alt="마이" class="nav-icon-img">
+        <span>마이</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="/css/images/nav-point.png" alt="포인트" class="nav-icon-img">
+        <span>포인트</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="/css/images/nav-benefit.png" alt="혜택" class="nav-icon-img">
+        <span>혜택</span>
+      </a>
+      <a href="#" class="nav-item">
+        <img src="/css/images/nav-menu.png" alt="전체메뉴" class="nav-icon-img">
+        <span>전체메뉴</span>
+      </a>
     </nav>
   </div>
 </body>

@@ -30,10 +30,8 @@ public class HomeController {
     @GetMapping
     public String home(@ModelAttribute("edpsCsn") String edpsCsn, Model model) {
         model.addAttribute("edpsCsn", edpsCsn); // 필요하다면
-
-
+        return "home";
     }
-
 
     // @PostMapping
     // public String loginByEdpsCsn(@RequestParam("edps_csn") String edpsCsn, Model model) {
