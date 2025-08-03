@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 견적신청</title>
+    <link rel="stylesheet" th:href="@{/css/apply.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 견적신청</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 진행률 바 -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 차량 정보 -->
+            <div class="car-info-section">
+                <h2 class="car-name">A-Class</h2>
+                <p class="car-desc">2025형 해치백 가솔린 2.0</p>
+                <p class="car-model">A220</p>
+                <div class="car-image">
+                    <img src="/css/images/a-class.png" alt="A-Class" class="car-img">
+                </div>
+            </div>
+
+            <!-- 차량 가격 정보 -->
+            <div class="price-section">
+                <h3 class="section-title">차량</h3>
+                <div class="price-details">
+                    <div class="price-row">
+                        <span class="price-label">차량 기본가</span>
+                        <span class="price-value">+48,100,000원</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-label">추가 옵션가</span>
+                        <span class="price-value">+520,000원</span>
+                    </div>
+                    <div class="price-divider"></div>
+                    <div class="price-row total">
+                        <span class="price-label">총 예상금액</span>
+                        <span class="price-value total">48,620,000원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 포함 서비스 -->
+            <div class="service-section">
+                <h3 class="section-title">포함 서비스</h3>
+                <div class="service-list">
+                    <span class="service-item">썬팅/블랙박스</span>
+                </div>
+            </div>
+
+            <!-- 요청사항 -->
+            <div class="request-section">
+                <h3 class="section-title">요청사항</h3>
+                <form th:action="@{/quote/apply}" method="post" class="request-form">
+                    <div class="checkbox-group">
+                        <label class="checkbox-item disabled">
+                            <input type="checkbox" disabled>
+                            <span class="checkmark disabled"></span>
+                            <span class="checkbox-text">대면 거래만 희망해요</span>
+                        </label>
+                        
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="nonFaceToFace" value="true" checked>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">비대면 거래도 괜찮아요</span>
+                        </label>
+                        
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="accessoryService" value="true" checked>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">출고시 용품 서비스가 궁금해요</span>
+                        </label>
+                        
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="contractIntent" value="true" checked>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">조건이 맞으면 계약 의사가 있어요</span>
+                        </label>
+                    </div>
+
+                    <!-- 요청내용 -->
+                    <div class="request-content">
+                        <h4 class="content-title">요청내용(선택)</h4>
+                        <textarea 
+                            name="requestContent" 
+                            class="content-textarea" 
+                            placeholder="(카매니저에게 전달하고 싶은 내용 작성)"
+                            rows="4"></textarea>
+                    </div>
+
+                    <!-- 버튼 영역 -->
+                    <div class="button-group">
+                        <button type="button" class="btn btn-secondary" onclick="history.back()">이전</button>
+                        <button type="submit" class="btn btn-primary">신청하기</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 
