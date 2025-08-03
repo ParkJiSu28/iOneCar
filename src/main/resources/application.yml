@@ -12,6 +12,7 @@ mybatis:
   type-aliases-package: com.ionecar.domain
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 
 
 

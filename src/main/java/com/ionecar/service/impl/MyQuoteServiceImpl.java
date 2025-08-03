@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MyQuoteImpl implements MyQuoteService {
+public class MyQuoteServiceImpl implements MyQuoteService {
     private final MyQuoteMapper myQuoteMapper;
 
     @Override

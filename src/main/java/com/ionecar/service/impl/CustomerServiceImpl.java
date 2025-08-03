@@ -14,9 +14,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     // 고객 로그인 시 해당 고객 존재 여부 확인
     @Override
-    public boolean loginByEdpsCsn(long edpsCsn) {
+    public boolean findCustomerByEdpsCsn(long edpsCsn) {
         Customer customer = customerMapper.findCustomerByEdpsCsn(edpsCsn);
-        return customer != null; // edps_csn 존재 시 true
+        System.out.println("customer = " + customer); // 로그로 확인
+        return customer != null;
+    }
+    @Override
+    public Customer getCustomerByEdpsCsn(long edpsCsn) {
+        return customerMapper.findCustomerByEdpsCsn(edpsCsn);
     }
     // 고객로그인 시 고객 견적 받은 이력 있는지 확인
     @Override
