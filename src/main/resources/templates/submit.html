@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 견적신청 완료</title>
+    <link rel="stylesheet" th:href="@{/css/submit.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <div class="header-content">
+                <span class="app-title">i-One Car</span>
+                <span class="header-separator">|</span>
+                <span class="page-title">견적신청</span>
+            </div>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 성공 아이콘 -->
+            <div class="success-icon">
+                <div class="icon-circle">
+                    <svg class="checkmark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- 완료 메시지 -->
+            <div class="completion-message">
+                <h1 class="main-title">견적 신청이 완료됐어요!</h1>
+                <p class="description">48시간 동안 카매니저들의 견적서를 받아보세요</p>
+                <p class="description">받은 견적은 내 견적함에서 확인할 수 있어요</p>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-buttons">
+            <button class="btn btn-secondary" onclick="location.href='/'">홈으로</button>
+            <button class="btn btn-primary" onclick="location.href='/quote/myquote'">내 견적함</button>
+        </div>
+    </div>
+</body>
+</html> 
