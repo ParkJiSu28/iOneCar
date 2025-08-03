@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 내 견적함</title>
+    <link rel="stylesheet" th:href="@{/css/detail.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 내 견적함</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 상세견적 섹션 -->
+            <div class="detail-section">
+                <div class="section-header" onclick="toggleSection('detail')">
+                    <h2 class="section-title">상세견적</h2>
+                    <div class="toggle-icon" id="detail-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="section-content" id="detail-content">
+                    <!-- 차량 정보 -->
+                    <div class="car-info">
+                        <div class="car-details">
+                            <h3 class="car-name">벤츠 A-Class</h3>
+                            <p class="car-spec">2025형 해치백 가솔린 2.0 A 220</p>
+                        </div>
+                        <div class="car-image">
+                            <img src="/css/images/a-class.png" alt="A-Class" class="car-img">
+                        </div>
+                    </div>
+
+                    <!-- 가격 정보 -->
+                    <div class="price-info">
+                        <div class="price-row">
+                            <span class="price-label">차량 기본가</span>
+                            <span class="price-value">48,100,000원</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">추가 옵션가</span>
+                            <span class="price-value">+520,000원</span>
+                        </div>
+                        <div class="price-row option-detail">
+                            <span class="option-text">버튼시동팩</span>
+                        </div>
+                        <div class="price-row discount">
+                            <span class="price-label">할인가</span>
+                            <span class="price-value discount">-5,000,000원</span>
+                        </div>
+                        <div class="price-row total">
+                            <span class="price-label">총 예상금액</span>
+                            <span class="price-value total">43,620,000원</span>
+                        </div>
+                        <div class="price-note">
+                            차량가는 개별 소비세 3.5%가 적용된 가격입니다.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 등록비용 섹션 -->
+            <div class="registration-section">
+                <div class="section-header" onclick="toggleSection('registration')">
+                    <h2 class="section-title">등록비용</h2>
+                    <div class="toggle-icon" id="registration-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="section-content" id="registration-content">
+                    <div class="registration-total">
+                        <span class="total-label">합계</span>
+                        <span class="total-amount">2,834,246원</span>
+                    </div>
+                    <div class="registration-details">
+                        <div class="detail-row">
+                            <span class="detail-label">취득세</span>
+                            <span class="detail-value">2,648,545원</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">면세조건</span>
+                            <span class="detail-value">일반인(해당없음)</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">공채할인(예상)</span>
+                            <span class="detail-value">185,701원</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">탁송료</span>
+                            <span class="detail-value">0원</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">기타 부대비용</span>
+                            <span class="detail-value">0원</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 구매정보 섹션 -->
+            <div class="purchase-section">
+                <div class="section-header" onclick="toggleSection('purchase')">
+                    <h2 class="section-title">구매정보</h2>
+                    <div class="toggle-icon" id="purchase-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="section-content" id="purchase-content">
+                    <div class="purchase-method">
+                        <span class="method-label">구매방법</span>
+                        <span class="method-value">할부</span>
+                    </div>
+                    <div class="purchase-details">
+                        <div class="detail-row">
+                            <span class="detail-label">금융사</span>
+                            <span class="detail-value">IBK 카드</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">할부신청금</span>
+                            <span class="detail-value">33,620,000원</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">할부기간</span>
+                            <span class="detail-value">48개월</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">선납금</span>
+                            <span class="detail-value">10,000,000원</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">금리(연)</span>
+                            <span class="detail-value">7%</span>
+                        </div>
+                        <div class="detail-row highlight">
+                            <span class="detail-label">월 납입금</span>
+                            <span class="detail-value highlight">805,073원</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">출고전 납입금액</span>
+                            <span class="detail-value">10,000,000원</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 차량 상세 정보 -->
+            <div class="car-details-section">
+                <div class="detail-row">
+                    <span class="detail-label">지역</span>
+                    <span class="detail-value">서울</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">재고유무</span>
+                    <span class="detail-value">1개월 이내 출고</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">외장색상</span>
+                    <span class="detail-value">폴라 화이트</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">내장색상</span>
+                    <span class="detail-value">아티코 블랙 / 블랙</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">포함서비스</span>
+                    <span class="detail-value">틴팅, 블랙박스</span>
+                </div>
+            </div>
+
+            <!-- 요청사항 섹션 -->
+            <div class="requests-section">
+                <div class="section-header" onclick="toggleSection('requests')">
+                    <h2 class="section-title">요청사항</h2>
+                    <div class="toggle-icon" id="requests-icon">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                            <path d="M7 10l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="section-content" id="requests-content">
+                    <div class="request-list">
+                        <div class="request-item">
+                            <span class="request-text">비대면 거래도 괜찮아요</span>
+                            <input type="checkbox" class="request-checkbox" checked>
+                        </div>
+                        <div class="request-item">
+                            <span class="request-text">출고 시 용품 서비스가 궁금해요</span>
+                            <input type="checkbox" class="request-checkbox" checked>
+                        </div>
+                        <div class="request-item">
+                            <span class="request-text">조건이 맞으면 계약 의사가 있어요</span>
+                            <input type="checkbox" class="request-checkbox" checked>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 딜러 정보 -->
+            <div class="dealer-section">
+                <div class="dealer-info">
+                    <div class="dealer-profile">
+                        <div class="dealer-avatar">
+                            <img src="/css/images/dealer1.png" alt="딜러" class="avatar-img">
+                        </div>
+                        <div class="dealer-details">
+                            <div class="dealer-name">
+                                <span>벤츠박사</span>
+                                <div class="verified-badge">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="#235FD2">
+                                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="dealer-stats">
+                                <span class="rating">5.0(67)</span>
+                                <span class="quotes">매칭견적 1,416건</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-primary">상담 신청하기</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId + '-content');
+            const icon = document.getElementById(sectionId + '-icon');
+            
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                content.style.display = 'none';
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+
+        // 페이지 로드 시 모든 섹션을 펼쳐진 상태로 시작
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = ['detail', 'registration', 'purchase', 'requests'];
+            sections.forEach(sectionId => {
+                const icon = document.getElementById(sectionId + '-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+    </script>
+</body>
+</html> 
