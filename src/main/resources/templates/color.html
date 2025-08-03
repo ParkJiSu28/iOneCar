@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>외장 색상 선택</title>
+  <link rel="stylesheet" th:href="@{/css/model.css}">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const colorItems = document.querySelectorAll('.color-option');
+      const nextButton = document.querySelector('.next-button');
+
+      colorItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const group = item.dataset.group;
+          // 그룹 내 선택 해제
+          document.querySelectorAll(`.color-option[data-group="${group}"]`)
+            .forEach(el => el.classList.remove('selected'));
+
+          // 선택 추가
+          item.classList.add('selected');
+
+          // 모든 그룹이 선택되었을 때 버튼 활성화
+          const totalGroups = new Set([...colorItems].map(i => i.dataset.group));
+          const selectedGroups = new Set([...document.querySelectorAll('.color-option.selected')].map(i => i.dataset.group));
+          if (totalGroups.size === selectedGroups.size) {
+            nextButton.classList.add('active');
+            nextButton.disabled = false;
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <span>i-One Car</span>
+    <span style="margin-left: 8px; font-size: 16px; font-weight: normal;">견적신청</span>
+    <span style="margin-left: auto; cursor: pointer;">✕</span>
+  </header>
+
+  <div class="progress-bar"><div class="progress"></div></div>
+
+  <div class="container">
+    <div class="title">외장 색상</div>
+
+    <div class="car-image">
+      <img src="/images/a-class-white.png" alt="A-Class Preview">
+    </div>
+
+    <div class="color-group">
+      <div class="group-title">외장</div>
+      <div class="color-label">폴라화이트트</div>
+      <div class="color-options">
+        <div class="color-option" data-group="ext" style="background-image: url('/images/ext_light.png');"></div>
+        <div class="color-option" data-group="ext" style="background-image: url('/images/ext_dark.png');"></div>
+      </div>
+    </div>
+
+    <div class="color-group">
+      <div class="group-title">내장</div>
+      <div class="color-label">아티코 블랙</div>
+      <div class="color-options">
+        <div class="color-option" data-group="int" style="background-image: url('/images/int_gray.png');"></div>
+        <div class="color-option" data-group="int" style="background-image: url('/images/int_brown.png');"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button class="prev-button">이전</button>
+    <form th:action="@{/quote/option}" method="get">
+      <button type="submit" class="next-button" disabled>다음</button>
+    </form>
+  </div>
+</body>
+</html>
