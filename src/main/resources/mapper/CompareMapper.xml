@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ionecar.mapper.CompareMapper">
+
+    <select id="selectCompareByEdpsCsnAndCarSrn" parameterType="java.lang.Long" resultType="com.ionecar.domain.Compare">
+         
+    SELECT 
+        a.edps_csn      AS edpsCsn,
+        a.car_srn       AS carSrn, 
+        a.car_price     AS carPrice,
+        a.car_class     AS carClass,
+        a.car_sub_class AS carSubClass, 
+        b.purchase_method AS purchaseMethod,
+        b.purchase_period AS purchasePeriod,
+        c.opt_price     AS optPrice
+    FROM Car a
+    INNER JOIN Purchase b    ON a.car_srn = b.car_srn
+    INNER JOIN Option_table c ON b.car_srn = c.car_srn
+    WHERE a.edps_csn= #{edpsCsn} 
+    AND b.car_srn = #{carSrn}
+    </select>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ionecar.mapper.OptionTableMapper">
+
+    <insert id="insertOption" parameterType="com.ionecar.domain.Option">
+        INSERT INTO Option_table (car_srn, opt_name, opt_price, opt_def)
+        VALUES (#{carSrn}, #{optName}, #{optPrice}, #{optDef})
+    </insert>
+
+</mapper>

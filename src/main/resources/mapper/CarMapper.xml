@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ionecar.mapper.CarMapper">
+
+    <insert id="insertCar" parameterType="com.ionecar.domain.Car" useGeneratedKeys="true" keyProperty="edpsCsn"> 
+        INSERT INTO Car(edpsCsn) VALUES (#{edpsCsn}) 
+    </insert> 
+
+    <update id="updateCarBrand" parameterType="com.ionecar.domain.Car">
+        UPDATE customers SET car_brand = #{carBrand} WHERE car_srn = #{carSrn}
+    </update>
+
+
+    <update id="updateCarClass" parameterType="com.ionecar.domain.Car">
+        UPDATE customers SET car_class = #{carClass} WHERE car_srn = #{carSrn}
+    </update>
+
+    
+    <update id="updateCarSubClass" parameterType="com.ionecar.domain.Car">
+        UPDATE customers SET car_sub_class = #{carSubClass} WHERE car_srn = #{carSrn}
+    </update>
+
+
+    <update id="updateCarColor" parameterType="com.ionecar.domain.Car">
+        UPDATE customers SET car_color = #{carColor} WHERE car_srn = #{carSrn}
+    </update>
+
+
+    <update id="updateCarInteriorColor" parameterType="com.ionecar.domain.Car">
+        UPDATE customers SET car_interior_color = #{carInteriorColor} WHERE car_srn = #{carSrn}
+    </update>
+
+    <delete id="deleteCarByCarSrn" parameterType="com.ionecar.domain.Car">
+        DELETE FROM Car WHERE car_srn = #{carSrn}
+    </delete>
+
+    <delete id="deleteCarByEdpsCsn" parameterType="com.ionecar.domain.Car">
+        DELETE FROM Car WHERE edps_csn = #{edpsCsn}
+    </delete>
+
+</mapper>

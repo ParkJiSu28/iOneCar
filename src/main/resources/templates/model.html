@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>모델 선택</title>
+  <link rel="stylesheet" href="/css/model-selection.css">
+</head>
+<body>
+  <header class="header">
+    <div class="top-bar">
+      <span class="title-bold">i-One Car</span>
+      <span class="title-normal">견적신청</span>
+      <button class="close-button">✕</button>
+    </div>
+    <div class="progress-container">
+      <div class="progress-bar"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="section-title">모델 선택</div>
+
+    <div class="model-list">
+      <div class="model-card">
+        <div class="brand">벤츠</div>
+        <div class="name">A-Class</div>
+        <div class="price">4,810 ~ 8,770 만원</div>
+      </div>
+      <div class="model-card">
+        <div class="brand">벤츠</div>
+        <div class="name">C-Class</div>
+        <div class="price">6,130 ~ 6,590 만원</div>
+      </div>
+      <div class="model-card">
+        <div class="brand">벤츠</div>
+        <div class="name">E-Class</div>
+        <div class="price">6,900 ~ 13,860 만원</div>
+      </div>
+      <div class="model-card">
+        <div class="brand">벤츠</div>
+        <div class="name">S-Class</div>
+        <div class="price">15,160 ~ 29,160 만원</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="bottom-buttons">
+    <button class="btn prev">이전</button>
+    <button class="btn next" disabled>다음</button>
+  </footer>
+</body>
+</html>

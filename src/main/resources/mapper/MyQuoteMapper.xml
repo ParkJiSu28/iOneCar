@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ionecar.mapper.MyQuoteMapper">
+
+    <select id="selectMyQuoteByEdpsCsn" parameterType="java.lang.Long" resultType="com.ionecar.domain.MyQuote">
+        select 
+            a.edps_csn as edpsCsn,
+            a.car_srn as carSrn, 
+            a.car_class as carClass,
+            a.car_sub_class as carSubClass, 
+            b.purchase_method as purchaseMethod,
+            b.purchase_period as purchasePeriod 
+            from Car a
+            inner join Purchase b on a.car_srn = b.car_srn
+            where a.edps_csn= #{edpsCsn}
+    </select>
+</mapper>

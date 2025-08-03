@@ -5,7 +5,18 @@
 <mapper namespace="com.ionecar.mapper.CustomerMapper">
 
     <select id="findCustomerByEdpsCsn" resultType="com.ionecar.domain.Customer">
-        SELECT * FROM customers WHERE edps_csn = #{edpsCsn}
+        SELECT edps_csn, qnt_yn FROM Customer WHERE edps_csn = #{edpsCsn}
     </select>
+    <select id="getCustomerByEdpsCsn" resultType="com.ionecar.domain.Customer">
+        SELECT edps_csn, qnt_yn FROM Customer WHERE edps_csn = #{edpsCsn}
+    </select>
+
+    <update id="updateQntYn" parameterType="com.ionecar.domain.Customer">
+        UPDATE Customer SET qnt_yn = #{qntYn} WHERE edps_csn = #{edpsCsn}
+    </update>
+
+    <delete id="deleteCustomerByEdpsCsn" parameterType="com.ionecar.domain.Customer">
+        DELETE FROM Customer WHERE edps_csn = #{edpsCsn}
+    </delete>
 
 </mapper>

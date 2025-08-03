@@ -86,17 +86,41 @@ body, html {
   /* Menu Items */
   .menu-list {
     margin: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    border-radius: 16px;
+    background: #fff;
+    color: #3B3E4A;
+    transition: background 0.2s, color 0.2s;
+    padding: 0;
   }
   
-  .menu-item {
-    background: #3B3E4A;
-    border-radius: 12px;
-    padding: 16px;
-    color: white;
+  .menu-list.active {
+    background: #397cff;
+    color: #fff;
+    cursor: pointer;
   }
+  
+  .menu-list.inactive {
+    background: #f6f8fc;
+    color: #767676;
+    cursor: default;
+  }
+  
+  /* 아래 메뉴 개별 카드를 검은색(짙은 회색)으로 */
+  .menu-item.black-card {
+    background: #232329;      /* 진한 검은색 또는 원하는 색상 */
+    border-radius: 16px;
+    padding: 22px 20px;
+    color: #fff;
+    margin: 0;
+  }
+  /* menu-item에서 배경 없애기! */
+  .menu-item {
+    background: none;      /* <<< 여기! 기존 #3B3E4A 제거 */
+    border-radius: 16px;
+    padding: 22px 20px;
+    color: inherit;        /* 부모 .menu-list 색상 따라감 */
+  }
+  
   
   .menu-title {
     font-size: 14px;

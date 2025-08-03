@@ -15,9 +15,10 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Map;
 import com.ionecar.domain.Vehicle;
-import com.ionecar.domain.VehicleDto;
 import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 
 @Controller
 @RequestMapping("/home")
@@ -27,8 +28,10 @@ public class HomeController {
 
     // 로그인 폼을 반환하는 GET 매핑 추가
     @GetMapping
-    public String home() {
-        return "home"; // login.html 타임리프 템플릿 반환
+    public String home(@ModelAttribute("edpsCsn") String edpsCsn, Model model) {
+        model.addAttribute("edpsCsn", edpsCsn); // 필요하다면
+
+
     }
 
 

@@ -1,0 +1,195 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+/* 상단 고정 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+/* 헤더 타이틀 */
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin-left: 6px;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+/* 닫기버튼 */
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 카드뷰 */
+.estimate-card {
+    margin: 72px auto 20px auto; /* fixed header 만큼 margin-top 추가 */
+    width: 100%;
+    max-width: 337px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #CCCCCC;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.03);
+    box-sizing: border-box;
+    padding: 25px 18px 20px 18px;
+    overflow: hidden;
+}
+
+/* 카드 라벨 줄 */
+.card-label-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    width: 100%;
+}
+.status-label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #235FD2;
+    line-height: 22px;
+}
+.label-separator {
+    width: 100%;
+    height: 1px;
+    background: #EAECEE;  /* 또는 기존 카드 실선 컬러 */
+    margin: 12px 0;
+    border: none;
+}
+.compare-area {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.compare-link {
+    display: inline-flex;
+    align-items: center;
+}
+.compare-icon {
+    width: 10px;   /* 원본 이미지에 맞춰 조정. 더 작거나 크게 원하면 수정 */
+    height: 13px;
+    margin-left: 1px;
+}
+.compare-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #101116;
+    margin: 0; /* 좌우 마진 초기화 */
+}
+.compare-badge {
+    width: 13px;
+    height: 13px;
+    background: #235FD2;
+    border-radius: 50%;
+    color: #FFF;
+    font-size: 11px;
+    text-align: center;
+    line-height: 13px;
+    font-weight: 400;
+}
+
+/* 차량정보+이미지 */
+.car-info-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+.car-info-text {
+    flex: 1 1 0%;
+    min-width: 0;
+}
+.car-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #101116;
+    margin-bottom: 8px;
+}
+.car-desc {
+    font-size: 12px;
+    color: #999;
+    font-weight: 500;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+.car-img-block {
+    width: 147px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.car-img {
+    width: 147px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: none;
+    box-shadow: none;
+}
+
+/* 견적 만료 박스 */
+.expire-box {
+    width: 100%;
+    max-width: 301px;
+    height: 43px;
+    margin: 0 auto 20px auto;
+    background: #F3F9FF;
+    border: 1px solid #235FD2;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+.expire-time, .expire-label {
+    font-size: 14px;
+    color: #235FD2;
+    font-weight: 400;
+}

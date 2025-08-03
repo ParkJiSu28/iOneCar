@@ -1,0 +1,43 @@
+/* 수정된 footer 및 버튼 스타일 */
+.bottom-buttons {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
+  z-index: 1000;
+  height: 72px; /* 버튼 높이에 맞춤 */
+}
+
+.btn {
+  width: 48%;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  border: none;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+}
+
+.btn.prev {
+  background-color: #e8f0fe;
+  color: #1967d2;
+}
+
+.btn.next {
+  background-color: #d2d2d2;
+  color: #fff;
+}
+
+.btn.next.active {
+  background-color: #1a73e8;
+}
+
+/* 컨텐츠 영역 아래 여백 추가 */
+.container {
+  padding: 24px 16px 120px; /* 기존 100px → 120px로 footer 높이 확보 */
+}

@@ -7,7 +7,9 @@ import com.ionecar.domain.Customer;
 @Mapper
 public interface CustomerMapper {
   
-    Customer findCustomerByEdpsCsn(String edpsCsn);
+    Customer findCustomerByEdpsCsn(long edpsCsn);
+    void deleteCustomerByEdpsCsn(long edpsCsn);
+    void updateQntYn(long edpsCsn, String qntYn);
 }
 
 

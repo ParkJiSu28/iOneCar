@@ -1,10 +1,6 @@
 package com.ionecar.service.impl;
 
 import com.ionecar.domain.Vehicle;
-import com.ionecar.domain.VehicleDto;
-import com.ionecar.domain.VehicleOption;
-import com.ionecar.domain.TaxPayment;
-import com.ionecar.domain.Insurance;
 import com.ionecar.service.VehicleService;
 import com.ionecar.mapper.VehicleMapper;
 import org.springframework.stereotype.Service;
