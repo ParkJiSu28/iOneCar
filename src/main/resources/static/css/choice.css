@@ -121,6 +121,7 @@ body, html {
     color: inherit;        /* 부모 .menu-list 색상 따라감 */
   }
   
+  
   .menu-title {
     font-size: 14px;
     font-weight: bold;
