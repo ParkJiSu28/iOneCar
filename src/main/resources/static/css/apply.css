@@ -1,0 +1,374 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+/* 상단 고정 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+/* 헤더 타이틀 */
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin-left: 6px;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+/* 닫기버튼 */
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 진행률 바 */
+.progress-bar {
+    position: fixed;
+    top: 48px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #E5E7EB;
+    z-index: 999;
+}
+
+.progress-fill {
+    width: 60%;
+    height: 100%;
+    background: #235FD2;
+    transition: width 0.3s ease;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 72px;
+    padding: 20px 0;
+}
+
+/* 차량 정보 섹션 */
+.car-info-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.car-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 8px 0;
+}
+
+.car-desc {
+    font-size: 16px;
+    color: #666;
+    margin: 0 0 4px 0;
+}
+
+.car-model {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 20px 0;
+}
+
+.car-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 16px;
+}
+
+.car-img {
+    width: 200px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 섹션 공통 스타일 */
+.section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px 0;
+}
+
+/* 가격 섹션 */
+.price-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.price-details {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-label {
+    font-size: 16px;
+    color: #666;
+}
+
+.price-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+}
+
+.price-value.total {
+    font-size: 18px;
+    font-weight: 700;
+    color: #235FD2;
+}
+
+.price-divider {
+    height: 1px;
+    background: #E5E7EB;
+    margin: 8px 0;
+}
+
+/* 서비스 섹션 */
+.service-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.service-item {
+    background: #F0F4FF;
+    color: #235FD2;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 요청사항 섹션 */
+.request-section {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 체크박스 그룹 */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 12px;
+}
+
+.checkbox-item.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.checkbox-item input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 4px;
+    position: relative;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.checkmark.disabled {
+    background: #F3F4F6;
+    border-color: #D1D5DB;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark {
+    background: #235FD2;
+    border-color: #235FD2;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-text {
+    font-size: 16px;
+    color: #000;
+    flex: 1;
+}
+
+/* 요청내용 */
+.request-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.content-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+}
+
+.content-textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 16px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-family: 'Pretendard', sans-serif;
+    font-size: 14px;
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.content-textarea::placeholder {
+    color: #9CA3AF;
+}
+
+.content-textarea:focus {
+    outline: none;
+    border-color: #235FD2;
+}
+
+/* 버튼 그룹 */
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .container {
+        padding: 0 8px;
+    }
+    
+    .car-info-section,
+    .price-section,
+    .service-section,
+    .request-section {
+        padding: 16px;
+    }
+    
+    .car-name {
+        font-size: 24px;
+    }
+    
+    .car-img {
+        width: 180px;
+    }
+} 
