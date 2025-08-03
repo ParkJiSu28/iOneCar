@@ -17,6 +17,8 @@ import java.util.Map;
 import com.ionecar.domain.Vehicle;
 import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/login")
@@ -32,12 +34,13 @@ public class LoginController {
 
 
     @PostMapping
-    public String loginByEdpsCsn(@RequestParam("edps_csn") long edpsCsn, Model model) {
+    public String findCustomerByEdpsCsn(@RequestParam("edpsCsn") long edpsCsn, Model model, HttpSession session) {
     
-        boolean exists = customerService.loginByEdpsCsn(edpsCsn);
+        boolean exists = customerService.findCustomerByEdpsCsn(edpsCsn);
 
         if (exists) {
-            return "redirect:/api/vehicles/vehicles";
+            session.setAttribute("edpsCsn", edpsCsn); // ▼ 세션에 저장!
+            return "redirect:/home";
         } else {
             model.addAttribute("error", "존재하지 않는 고객 번호");
             return "login";

@@ -9,21 +9,20 @@
 </head>
 <body>
 <div class="container">
-    <!-- 최상단 고정 헤더 (카드스크롤 되어도 상단 고정) -->
     <div class="main-header">
         <span class="header-title">i-One Car ㅣ 내 견적함</span>
         <button class="close-btn">
             <img th:src="@{/css/images/X.png}" alt="닫기" class="close-icon" />
         </button>
     </div>
-    <!-- 카드뷰 본문 -->
     <div class="estimate-card">
         <div class="card-label-row">
             <span class="status-label">상담전</span>
             <div class="compare-area">
                 <span class="compare-label">비교견적</span>
                 <span class="compare-badge">2</span>
-                <a th:href="@{/compare(edpsCsn=${edpsCsn}, carSrn=${carSrn})}" class="compare-link">
+                <!-- DB 값 전달 활용, 실제 값으로 바뀜 -->
+                <a th:href="@{'/compare'(edpsCsn=${edpsCsn}, carSrn=${carSrn})}" class="compare-link">
                     <img th:src="@{/css/images/right.png}" alt="비교견적 아이콘" class="compare-icon" />
                 </a>
             </div>
@@ -31,14 +30,16 @@
         <div class="label-separator"></div>
         <div class="car-info-row">
             <div class="car-info-text">
-                <div class="car-name" th:text="${carClass}">벤츠 A-Class</div>
-                <div class="car-desc" >
-                    <span th:text="${carSubClass}">2025형 해치백 가솔린 2.0 A220</span><br/>
-                    <span th:text="${purchaseMethod}">할부</span>
-                    <span th:text="${purchasePeriod} + '개월'">48개월</span>
+                <!-- DB에서 가져온 자동차 클래스명 -->
+                <div class="car-name" th:text="${carClass}">차량종류</div>
+                <div class="car-desc">
+                    <span th:text="${carSubClass}">세부차종</span><br/>
+                    <span th:text="${purchaseMethod}">구매방법</span>
+                    <span th:text="${purchasePeriod} + '개월'">구매기간</span>
                 </div>
             </div>
             <div class="car-img-block">
+                <!-- 실제 DB에서 이미지 경로를 갖고 있다면 carImgUrl 속성을 추가해 처리 가능 -->
                 <img th:src="@{/css/images/a-class.png}" alt="차 이미지" class="car-img" />
             </div>
         </div>

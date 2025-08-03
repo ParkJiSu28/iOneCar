@@ -14,12 +14,20 @@
     <div class="login-container">
       <h1><strong>IBK</strong> 카드</h1>
   
-      <label for="edps_scn">전산고객번호</label>
       <div class="input-box">
-        <input type="text" id="edps_scn" placeholder="고객번호를 입력하세요" />
+        <form th:action="@{/login}" method="post">
+          <label for="edpsCsn">고객번호:</label>
+          <input type="text" id="edpsCsn" name="edpsCsn" required>
+          <button class="login-button">로그인</button>
+        </form>
+        <div th:if="${error}">
+            <p th:text="${error}" style="color:red;"></p>
+        </div>
       </div>
   
-      <button class="login-button">로그인</button>
+
+
+
     </div>
   </body>
 </html>

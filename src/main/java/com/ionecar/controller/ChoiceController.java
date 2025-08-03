@@ -3,14 +3,30 @@ package com.ionecar.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import com.ionecar.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import javax.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import com.ionecar.domain.Customer;
 
 @Controller
-@RequestMapping("/choice")
 @RequiredArgsConstructor
 public class ChoiceController {
-    @GetMapping
-    public String choice() {
-        return "choice"; // choice.html 타임리프 템플릿 반환
+
+    private final CustomerService customerService;
+
+    @GetMapping("/choice")
+    public String choice(HttpSession session, Model model) {
+        Long edpsCsn = (Long) session.getAttribute("edpsCsn");
+        if (edpsCsn == null) {
+            return "redirect:/login";
+        }
+        Customer customer = customerService.getCustomerByEdpsCsn(edpsCsn);
+        // qntYn이 Y인지 소문자로 내려보내면 편함
+        boolean hasQuote = "Y".equalsIgnoreCase(customer.getQntYn());
+        model.addAttribute("edpsCsn", edpsCsn);
+        model.addAttribute("hasQuote", hasQuote);
+
+        return "choice";
     }
 }
