@@ -1,77 +1,188 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>외장 색상 선택</title>
-  <link rel="stylesheet" th:href="@{/css/model.css}">
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const colorItems = document.querySelectorAll('.color-option');
-      const nextButton = document.querySelector('.next-button');
-
-      colorItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const group = item.dataset.group;
-          // 그룹 내 선택 해제
-          document.querySelectorAll(`.color-option[data-group="${group}"]`)
-            .forEach(el => el.classList.remove('selected'));
-
-          // 선택 추가
-          item.classList.add('selected');
-
-          // 모든 그룹이 선택되었을 때 버튼 활성화
-          const totalGroups = new Set([...colorItems].map(i => i.dataset.group));
-          const selectedGroups = new Set([...document.querySelectorAll('.color-option.selected')].map(i => i.dataset.group));
-          if (totalGroups.size === selectedGroups.size) {
-            nextButton.classList.add('active');
-            nextButton.disabled = false;
-          }
-        });
-      });
-    });
-  </script>
+  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>i-One Car | 색상 선택</title>
+  <link rel="stylesheet" href="/css/color.css">
 </head>
 <body>
-  <header>
-    <span>i-One Car</span>
-    <span style="margin-left: 8px; font-size: 16px; font-weight: normal;">견적신청</span>
-    <span style="margin-left: auto; cursor: pointer;">✕</span>
-  </header>
-
-  <div class="progress-bar"><div class="progress"></div></div>
-
   <div class="container">
-    <div class="title">외장 색상</div>
-
-    <div class="car-image">
-      <img src="/images/a-class-white.png" alt="A-Class Preview">
+    <!-- 상단바 -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="status-icons">
+        <span class="icon signal"></span>
+        <span class="icon wifi"></span>
+        <span class="icon battery"></span>
+      </div>
+    </div>
+    
+    <!-- 헤더 -->
+    <div class="header">
+      <div class="header-content">
+        <span class="app-name">i-One Car</span>
+        <span class="separator">|</span>
+        <span class="page-title">견적신청</span>
+      </div>
+      <span class="close-btn">X</span>
     </div>
 
-    <div class="color-group">
-      <div class="group-title">외장</div>
-      <div class="color-label">폴라화이트트</div>
-      <div class="color-options">
-        <div class="color-option" data-group="ext" style="background-image: url('/images/ext_light.png');"></div>
-        <div class="color-option" data-group="ext" style="background-image: url('/images/ext_dark.png');"></div>
+    <!-- 진행바 -->
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
+    <!-- 메인 콘텐츠 -->
+    <div class="content">
+      <h2 class="section-title">외장 색상</h2>
+      
+      <!-- 차량 이미지 -->
+      <div class="car-image-container">
+        <img id="carImage" src="/css/images/a-class-white.png" alt="A-Class" />
+      </div>
+      
+      <!-- 외장 색상 선택 -->
+      <div class="color-section">
+        <h3 class="color-title">외장</h3>
+        <p id="exteriorColorName" class="selected-color">폴라화이트</p>
+        <div class="color-swatches">
+          <div class="color-swatch" data-type="exterior" data-color="폴라화이트" data-image="/css/images/a-class-white.png">
+            <img src="/css/images/ext_light.png" alt="폴라화이트" class="swatch-img">
+          </div>
+          <div class="color-swatch" data-type="exterior" data-color="마운틴그레이" data-image="/css/images/a-class-gray.png">
+            <img src="/css/images/ext_dark.png" alt="마운틴그레이" class="swatch-img">
+          </div>
+        </div>
+      </div>
+      
+      <!-- 내장 색상 선택 -->
+      <div class="color-section">
+        <h3 class="color-title">내장</h3>
+        <p id="interiorColorName" class="selected-color">아티코 블랙</p>
+        <div class="color-swatches">
+          <div class="color-swatch" data-type="interior" data-color="아티코 블랙">
+            <img src="/css/images/int_gray.png" alt="아티코 블랙" class="swatch-img">
+          </div>
+          <div class="color-swatch" data-type="interior" data-color="마키아토 베이지">
+            <img src="/css/images/int_brown.png" alt="마키아토 베이지" class="swatch-img">
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="color-group">
-      <div class="group-title">내장</div>
-      <div class="color-label">아티코 블랙</div>
-      <div class="color-options">
-        <div class="color-option" data-group="int" style="background-image: url('/images/int_gray.png');"></div>
-        <div class="color-option" data-group="int" style="background-image: url('/images/int_brown.png');"></div>
-      </div>
+    <!-- 하단 버튼 -->
+    <div class="bottom-buttons">
+      <button class="btn prev-btn">이전</button>
+      <button class="btn next-btn" id="nextBtn" disabled>다음</button>
     </div>
   </div>
 
-  <div class="button-group">
-    <button class="prev-button">이전</button>
-    <form th:action="@{/quote/option}" method="get">
-      <button type="submit" class="next-button" disabled>다음</button>
-    </form>
-  </div>
+  <!-- 하단 네비게이션 -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>마이</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>포인트</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>혜택</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>전체메뉴</span>
+    </a>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const carImage = document.getElementById('carImage');
+      const exteriorColorName = document.getElementById('exteriorColorName');
+      const interiorColorName = document.getElementById('interiorColorName');
+      const nextBtn = document.getElementById('nextBtn');
+      const colorSwatches = document.querySelectorAll('.color-swatch');
+      
+      let selectedExterior = '폴라화이트';
+      let selectedInterior = '아티코 블랙';
+      
+      // 초기 선택 상태 설정
+      function initializeSelection() {
+        // 외장 초기 선택 (폴라화이트)
+        const initialExterior = document.querySelector('.color-swatch[data-color="폴라화이트"]');
+        if (initialExterior) {
+          initialExterior.classList.add('selected');
+        }
+        
+        // 내장 초기 선택 (아티코 블랙)
+        const initialInterior = document.querySelector('.color-swatch[data-color="아티코 블랙"]');
+        if (initialInterior) {
+          initialInterior.classList.add('selected');
+        }
+        
+        checkButtonState();
+      }
+      
+      // 색상 스와치 클릭 이벤트
+      colorSwatches.forEach(swatch => {
+        swatch.addEventListener('click', function() {
+          const type = this.dataset.type;
+          const color = this.dataset.color;
+          const image = this.dataset.image;
+          
+          // 같은 타입의 다른 스와치 선택 해제
+          document.querySelectorAll(`.color-swatch[data-type="${type}"]`).forEach(s => {
+            s.classList.remove('selected');
+          });
+          
+          // 현재 스와치 선택
+          this.classList.add('selected');
+          
+          // 선택된 색상 업데이트
+          if (type === 'exterior') {
+            selectedExterior = color;
+            exteriorColorName.textContent = color;
+            if (image) {
+              carImage.src = image;
+            }
+          } else if (type === 'interior') {
+            selectedInterior = color;
+            interiorColorName.textContent = color;
+          }
+          
+          checkButtonState();
+        });
+      });
+      
+      // 버튼 상태 확인
+      function checkButtonState() {
+        if (selectedExterior && selectedInterior) {
+          nextBtn.classList.add('active');
+          nextBtn.disabled = false;
+        } else {
+          nextBtn.classList.remove('active');
+          nextBtn.disabled = true;
+        }
+      }
+      
+      // 이전 버튼
+      document.querySelector('.prev-btn').addEventListener('click', function() {
+        window.history.back();
+      });
+      
+      // 다음 버튼
+      nextBtn.addEventListener('click', function() {
+        if (!nextBtn.disabled) {
+          window.location.href = '/quote/option';
+        }
+      });
+      
+      // 초기화
+      initializeSelection();
+    });
+  </script>
 </body>
 </html>

@@ -1,53 +1,116 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>모델 선택</title>
-  <link rel="stylesheet" href="/css/model-selection.css">
+  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>i-One Car | 모델 선택</title>
+  <link rel="stylesheet" href="/css/model.css">
 </head>
 <body>
-  <header class="header">
-    <div class="top-bar">
-      <span class="title-bold">i-One Car</span>
-      <span class="title-normal">견적신청</span>
-      <button class="close-button">✕</button>
-    </div>
-    <div class="progress-container">
-      <div class="progress-bar"></div>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="section-title">모델 선택</div>
-
-    <div class="model-list">
-      <div class="model-card">
-        <div class="brand">벤츠</div>
-        <div class="name">A-Class</div>
-        <div class="price">4,810 ~ 8,770 만원</div>
-      </div>
-      <div class="model-card">
-        <div class="brand">벤츠</div>
-        <div class="name">C-Class</div>
-        <div class="price">6,130 ~ 6,590 만원</div>
-      </div>
-      <div class="model-card">
-        <div class="brand">벤츠</div>
-        <div class="name">E-Class</div>
-        <div class="price">6,900 ~ 13,860 만원</div>
-      </div>
-      <div class="model-card">
-        <div class="brand">벤츠</div>
-        <div class="name">S-Class</div>
-        <div class="price">15,160 ~ 29,160 만원</div>
+  <div class="container">
+    <!-- 상단바 -->
+    <div class="status-bar">
+      <span class="time">9:41</span>
+      <div class="status-icons">
+        <span class="icon signal"></span>
+        <span class="icon wifi"></span>
+        <span class="icon battery"></span>
       </div>
     </div>
-  </main>
+    
+    <!-- 헤더 -->
+    <div class="header">
+      <div class="header-left">
+        <span class="app-name">i-One Car</span>
+        <span class="separator">|</span>
+        <span class="page-title">견적신청</span>
+      </div>
+      <span class="close-btn">X</span>
+    </div>
 
-  <footer class="bottom-buttons">
-    <button class="btn prev">이전</button>
-    <button class="btn next" disabled>다음</button>
-  </footer>
+    <!-- 진행바 -->
+    <div class="progress-bar">
+      <div class="progress-fill" style="width: 25%;"></div>
+    </div>
+
+    <!-- 모델 선택 섹션 -->
+    <div class="model-selection-section">
+      <h2 class="section-title">모델 선택</h2>
+      <div class="model-list">
+        <!-- A-Class -->
+        <div class="model-item selected" data-model="A-Class">
+          <span class="manufacturer">벤츠</span>
+          <span class="model-name">A-Class</span>
+          <span class="price-range">4,810 ~ 8,770 만원</span>
+        </div>
+        <!-- C-Class -->
+        <div class="model-item" data-model="C-Class">
+          <span class="manufacturer">벤츠</span>
+          <span class="model-name">C-Class</span>
+          <span class="price-range">6,130 ~ 6,590 만원</span>
+        </div>
+        <!-- E-Class -->
+        <div class="model-item" data-model="E-Class">
+          <span class="manufacturer">벤츠</span>
+          <span class="model-name">E-Class</span>
+          <span class="price-range">6,900 ~ 13,860 만원</span>
+        </div>
+        <!-- S-Class -->
+        <div class="model-item" data-model="S-Class">
+          <span class="manufacturer">벤츠</span>
+          <span class="model-name">S-Class</span>
+          <span class="price-range">15,160 ~ 29,160 만원</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 하단 버튼 -->
+    <div class="bottom-buttons">
+      <button class="btn prev-btn">이전</button>
+      <button class="btn next-btn">다음</button>
+    </div>
+  </div>
+
+  <!-- 하단 네비게이션 -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>마이</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>포인트</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>혜택</span>
+    </a>
+    <a href="#" class="nav-item">
+      <div class="nav-icon"></div>
+      <span>전체메뉴</span>
+    </a>
+  </nav>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const modelItems = document.querySelectorAll('.model-item');
+      const nextButton = document.querySelector('.next-btn');
+
+      // 모델 항목 클릭 이벤트
+      modelItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // 모든 항목에서 'selected' 클래스 제거
+          modelItems.forEach(i => i.classList.remove('selected'));
+          // 클릭된 항목에 'selected' 클래스 추가
+          this.classList.add('selected');
+        });
+      });
+
+      // 다음 버튼 클릭 이벤트
+      nextButton.addEventListener('click', function() {
+        window.location.href = '/quote/model_sub';
+      });
+    });
+  </script>
 </body>
 </html>

@@ -1,200 +1,384 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  min-height: 100vh;
+  background: #fff;
+  font-family: 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  color: #000;
+}
+
 body {
-    margin: 0;
-    font-family: 'Apple SD Gothic Neo', sans-serif;
-    background-color: #fff;
-    color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 375px;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #fff;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding-bottom: 80px;
+}
+
+.status-bar {
+  width: 100%;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #000;
+  margin-top: 4px;
+  padding: 0 12px;
+  box-sizing: border-box;
+}
+
+.status-bar .time {
+  font-weight: 500;
+}
+
+.status-bar .status-icons {
+  display: flex;
+  gap: 4px;
+}
+
+.status-bar .icon {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.status-bar .signal { background-image: url('/css/images/signal.svg'); }
+.status-bar .wifi { background-image: url('/css/images/wifi.svg'); }
+.status-bar .battery { background-image: url('/css/images/battery.svg'); }
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #eee;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.app-name {
+  color: #000;
+}
+
+.separator {
+  color: #ccc;
+}
+
+.page-title {
+  color: #000;
+  font-weight: normal;
+}
+
+.close-btn {
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 2px;
+  background: #e0e0e0;
+}
+
+.progress-fill {
+  width: 25%;
+  height: 100%;
+  background: #0C5BEF;
+}
+
+.content {
+  flex: 1;
+  padding: 20px 16px;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+  margin: 0 0 20px 0;
+  text-align: left;
+}
+
+.car-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.car-details {
+  flex: 1;
+}
+
+.brand {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.model-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.price-range {
+  font-size: 14px;
+  color: #666;
+}
+
+.car-image {
+  width: 80px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.combo-container {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.combo-button {
+  width: 100%;
+  padding: 14px 16px;
+  background: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  color: #000;
+}
+
+.combo-button:hover {
+  background: #eee;
+}
+
+.combo-text {
+  font-weight: 500;
+}
+
+.combo-arrow {
+  font-size: 12px;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.dropdown-menu.show {
+  max-height: 100px;
+  opacity: 1;
+  transform: translateY(0);
+  margin-top: 4px;
+}
+
+.dropdown-item {
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #f5f5f5;
+  border-radius: 8px;
+  margin: 4px;
+  border: 2px solid transparent;
+}
+
+.dropdown-item:hover {
+  background: #eee;
+}
+
+/* brand.css 스타일 적용 */
+.dropdown-item.selected {
+  border-color: #3A7BFF;
+  background-color: white;
+  animation: selectPop 0.3s ease;
+}
+
+@keyframes selectPop {
+  0% {
+    transform: scale(1);
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px;
+  50% {
+    transform: scale(1.02);
   }
-  
-  .title-wrap {
-    display: flex;
-    align-items: baseline;
-    font-size: 18px;
+  100% {
+    transform: scale(1);
   }
-  
-  .title-bold {
-    font-weight: 600;
-    margin-right: 4px;
+}
+
+.item-name {
+  font-size: 16px;
+  font-weight: 500;
+  color: #000;
+}
+
+.item-price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #666;
+}
+
+.bottom-buttons {
+  display: flex;
+  gap: 10px;
+  padding: 16px;
+  box-sizing: border-box;
+  border-top: 1px solid #eee;
+}
+
+.btn {
+  flex: 1;
+  height: 44px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-prev {
+  background: #e6f0ff;
+  color: #0C5BEF;
+}
+
+/* brand.css 스타일 적용 */
+.btn-next {
+  background-color: #CCCCCC;
+  color: white;
+  cursor: not-allowed;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.btn-next.active {
+  background-color: #3A7BFF !important;
+  color: white !important;
+  cursor: pointer !important;
+  animation: buttonActivate 0.3s ease;
+}
+
+@keyframes buttonActivate {
+  0% {
+    background: #CCCCCC;
+    transform: scale(1);
   }
-  
-  .title-regular {
-    font-weight: 400;
-    font-size: 16px;
+  50% {
+    background: #3A7BFF;
+    transform: scale(1.05);
   }
-  
-  .close {
-    font-size: 20px;
-    cursor: pointer;
+  100% {
+    background: #3A7BFF;
+    transform: scale(1);
   }
-  
-  .progress-bar {
-    height: 4px;
-    background-color: #eee;
-    position: relative;
-    margin: 0 16px;
-    border-radius: 4px;
-  }
-  
-  .progress-bar .progress {
-    height: 4px;
-    width: 25%;
-    background-color: #2962F6;
-    border-radius: 4px;
-  }
-  
-  .container {
-    padding: 20px 16px;
-  }
-  
-  .step-title {
-    font-size: 17px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .model-info {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #F7F8FA;
-    border-radius: 12px;
-    padding: 16px;
-    margin-bottom: 16px;
-  }
-  
-  .model-info .text {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  
-  .model-info .brand {
-    font-size: 12px;
-    color: #888;
-  }
-  
-  .model-info .model {
-    font-size: 16px;
-    font-weight: bold;
-  }
-  
-  .model-info .price {
-    font-size: 13px;
-    color: #888;
-  }
-  
-  .image img {
-    width: 96px;
-  }
-  
-  .dropdown-wrapper {
-    margin-bottom: 16px;
-  }
-  
-  .dropdown-btn {
-    width: 100%;
-    padding: 14px;
-    font-size: 14px;
-    background-color: #F7F8FA;
-    border: 1px solid #D9D9D9;
-    border-radius: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .trim-list {
-    transition: all 0.3s ease;
-  }
-  
-  .trim-card {
-    border: 1px solid #D9D9D9;
-    background-color: #F7F8FA;
-    border-radius: 10px;
-    padding: 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
-    transition: 0.3s ease;
-    cursor: pointer;
-  }
-  
-  .trim-card.selected {
-    border-color: #2962F6;
-    background-color: #fff;
-  }
-  
-  .trim-card .trim-name {
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .trim-card .trim-price {
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .button-group {
-    display: flex;
-    gap: 12px;
-    padding: 24px 16px;
-    background-color: #fff;
-  }
-  
-  .btn {
-    flex: 1;
-    padding: 14px 0;
-    font-size: 15px;
-    border-radius: 12px;
-    border: none;
-  }
-  
-  .btn.prev {
-    background-color: #EAF2FF;
-    color: #2962F6;
-  }
-  
-  .btn.next {
-    background-color: #D9D9D9;
-    color: #888;
-  }
-  
-  .btn.next.active,
-  .btn.next:not(.disabled) {
-    background-color: #2962F6;
-    color: #fff;
-  }
-  
-  .btn.disabled {
-    pointer-events: none;
-  }
-  
-  footer {
-    display: flex;
-    justify-content: space-around;
-    padding: 8px 0;
-    border-top: 1px solid #eee;
-  }
-  
-  footer .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
-    color: #444;
-  }
-  
-  footer .nav-item img {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 4px;
-  }
-  
+}
+
+.bottom-nav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 375px;
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 60px;
+  z-index: 100;
+}
+
+.nav-item {
+  flex: 1;
+  text-align: center;
+  color: #000;
+  font-size: 12px;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6px;
+  transition: color 0.2s;
+}
+
+.nav-icon {
+  width: 24px;
+  height: 24px;
+  background: #000;
+  margin-bottom: 2px;
+  border-radius: 2px;
+}
+
+.nav-item.active,
+.nav-item:active {
+  color: #0C5BEF;
+}
+
+.nav-item.active .nav-icon,
+.nav-item:active .nav-icon {
+  background: #0C5BEF;
+}
