@@ -458,6 +458,208 @@ body {
     display: none;
 }
 
-.toggle-icon.rotated {
-    transform: rotate(180deg);
+ .toggle-icon.rotated {
+     transform: rotate(180deg);
+ }
+
+/* 모달 스타일 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    background: #fff;
+    border-radius: 20px 20px 0 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+    opacity: 1;
+    z-index: 2001;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 20px 0 20px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.modal-content {
+    padding: 0 20px 20px 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    margin: 0 0 16px 0;
+    line-height: 1.3;
+}
+
+.modal-description {
+    margin-bottom: 20px;
+}
+
+.modal-description p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.modal-bullet-points {
+    margin-bottom: 20px;
+}
+
+.bullet-point {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+}
+
+.bullet {
+    font-size: 16px;
+    color: #666;
+    font-weight: bold;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.point-text {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.modal-checkbox {
+    margin-bottom: 24px;
+}
+
+.modal-checkbox .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.modal-checkbox-input {
+    display: none;
+}
+
+.modal-checkbox .checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #D1D5DB;
+    border-radius: 4px;
+    position: relative;
+    background: #fff;
+    transition: all 0.2s ease;
+}
+
+.modal-checkbox-input:checked + .checkmark {
+    background: #235FD2;
+    border-color: #235FD2;
+}
+
+.modal-checkbox-input:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.modal-checkbox .checkbox-text {
+    font-size: 16px;
+    color: #000;
+    flex: 1;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-buttons .btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.modal-buttons .btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.modal-buttons .btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.modal-buttons .btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 모달 */
+@media (max-width: 375px) {
+    .modal {
+        max-width: 100%;
+    }
+    
+    .modal-content {
+        padding: 0 16px 16px 16px;
+    }
+    
+    .modal-title {
+        font-size: 18px;
+    }
+    
+    .modal-description p {
+        font-size: 13px;
+    }
+    
+    .point-text {
+        font-size: 13px;
+    }
 } 

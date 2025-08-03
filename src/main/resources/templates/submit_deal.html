@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 내 견적함</title>
+    <link rel="stylesheet" th:href="@{/css/submit_deal.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 내 견적함</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 성공 아이콘 -->
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#235FD2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- 메인 제목 -->
+            <h2 class="main-title">상담 요청 완료</h2>
+
+            <!-- 설명 텍스트 -->
+            <div class="description">
+                <p>담당 딜러가 확인 후 연락드릴 예정이니</p>
+                <p>잠시만 기다려주세요!</p>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-buttons">
+            <button class="btn btn-secondary" onclick="goToHome()">홈으로</button>
+            <button class="btn btn-primary" th:onclick="'goToMyQuote(' + ${edpsCsn} + ')'">내 견적함</button>
+        </div>
+    </div>
+
+    <script>
+        function goToHome() {
+            // edpsCsn 정보를 홈으로 전달
+            const urlParams = new URLSearchParams(window.location.search);
+            const edpsCsn = urlParams.get('edpsCsn');
+            
+            if (edpsCsn) {
+                window.location.href = '/home?edpsCsn=' + edpsCsn;
+            } else {
+                window.location.href = '/home';
+            }
+        }
+
+        function goToMyQuote(edpsCsn) {
+            if (edpsCsn) {
+                window.location.href = '/myquote?edpsCsn=' + edpsCsn;
+            } else {
+                window.location.href = '/myquote';
+            }
+        }
+    </script>
+</body>
+</html> 

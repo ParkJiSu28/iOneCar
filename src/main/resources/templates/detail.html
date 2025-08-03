@@ -241,36 +241,137 @@
             </div>
         </main>
 
-        <!-- 하단 버튼 -->
-        <div class="bottom-button">
-            <button class="btn btn-primary">상담 신청하기</button>
-        </div>
-    </div>
+                 <!-- 하단 버튼 -->
+         <div class="bottom-button">
+             <button class="btn btn-primary" onclick="showModal()">상담 신청하기</button>
+         </div>
+     </div>
 
-    <script>
-        function toggleSection(sectionId) {
-            const content = document.getElementById(sectionId + '-content');
-            const icon = document.getElementById(sectionId + '-icon');
-            
-            if (content.style.display === 'none') {
-                content.style.display = 'block';
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                content.style.display = 'none';
-                icon.style.transform = 'rotate(180deg)';
-            }
-        }
+     <!-- 모달 오버레이 -->
+     <div class="modal-overlay" id="modalOverlay">
+         <!-- 모달 -->
+         <div class="modal" id="modal">
+             <div class="modal-header">
+                 <button class="modal-close-btn" onclick="hideModal()">
+                     <img src="/css/images/X.png" alt="닫기" class="close-icon">
+                 </button>
+             </div>
+             
+             <div class="modal-content">
+                 <h2 class="modal-title">해당 견적으로 신청하겠습니까?</h2>
+                 
+                 <div class="modal-description">
+                     <p>이제 선택하신 견적을 바탕으로 매니저가 1:1로 배정돼요. 계약까지 함께할 매니저인 만큼, 아래 내용 확인해 주세요 😊</p>
+                 </div>
+                 
+                 <div class="modal-bullet-points">
+                     <div class="bullet-point">
+                         <span class="bullet">•</span>
+                         <span class="point-text">선택한 차량 정보, 옵션, 색상, 금융 방식(할부/리스/렌트), 그리고 부가비용(탁송비, 등록비 등)을 다시 한번 체크해 주세요.</span>
+                     </div>
+                     <div class="bullet-point">
+                         <span class="bullet">•</span>
+                         <span class="point-text">매니저 배정 이후에는 견적 변경이 어려울 수 있어요.</span>
+                     </div>
+                     <div class="bullet-point">
+                         <span class="bullet">•</span>
+                         <span class="point-text">재고나 조건은 실제 딜러 상황에 따라 달라질 수 있어요. 매니저가 다시 한번 확인해 드릴 거예요!</span>
+                     </div>
+                     <div class="bullet-point">
+                         <span class="bullet">•</span>
+                         <span class="point-text">카랩 매니저 회원은 모두 제휴계약서를 작성한 검증된 분들이며, 법적으로 보호받을 수 있는 공식 매니저입니다. 믿고 진행해 주세요</span>
+                     </div>
+                 </div>
+                 
+                 <div class="modal-checkbox">
+                     <label class="checkbox-item">
+                         <input type="checkbox" id="confirmCheckbox" class="modal-checkbox-input">
+                         <span class="checkmark"></span>
+                         <span class="checkbox-text">위 내용을 모두 확인했습니다.</span>
+                     </label>
+                 </div>
+                 
+                 <div class="modal-buttons">
+                     <button class="btn btn-secondary" onclick="hideModal()">취소</button>
+                     <button class="btn btn-primary" onclick="confirmSelection()">확인</button>
+                 </div>
+             </div>
+         </div>
+     </div>
 
-        // 페이지 로드 시 모든 섹션을 펼쳐진 상태로 시작
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = ['detail', 'registration', 'purchase', 'requests'];
-            sections.forEach(sectionId => {
-                const icon = document.getElementById(sectionId + '-icon');
-                if (icon) {
-                    icon.style.transform = 'rotate(0deg)';
-                }
-            });
-        });
-    </script>
+     <script>
+         function toggleSection(sectionId) {
+             const content = document.getElementById(sectionId + '-content');
+             const icon = document.getElementById(sectionId + '-icon');
+             
+             if (content.style.display === 'none') {
+                 content.style.display = 'block';
+                 icon.style.transform = 'rotate(0deg)';
+             } else {
+                 content.style.display = 'none';
+                 icon.style.transform = 'rotate(180deg)';
+             }
+         }
+
+         function showModal() {
+             const overlay = document.getElementById('modalOverlay');
+             const modal = document.getElementById('modal');
+             
+             overlay.style.display = 'flex';
+             overlay.style.opacity = '0';
+             modal.style.transform = 'translateY(100%)';
+             
+             setTimeout(() => {
+                 overlay.style.opacity = '1';
+                 modal.style.transform = 'translateY(0)';
+             }, 10);
+         }
+
+         function hideModal() {
+             const overlay = document.getElementById('modalOverlay');
+             const modal = document.getElementById('modal');
+             
+             overlay.style.opacity = '0';
+             modal.style.transform = 'translateY(100%)';
+             setTimeout(() => {
+                 overlay.style.display = 'none';
+             }, 300);
+         }
+
+         function confirmSelection() {
+             const checkbox = document.getElementById('confirmCheckbox');
+             if (!checkbox.checked) {
+                 alert('위 내용을 모두 확인해 주세요.');
+                 return;
+             }
+             
+             // URL에서 edpsCsn과 carSrn 파라미터 가져오기
+             const urlParams = new URLSearchParams(window.location.search);
+             const edpsCsn = urlParams.get('edpsCsn');
+             const carSrn = urlParams.get('carSrn');
+             
+             // submit_deal 페이지로 이동
+             let redirectUrl = '/quote/submit-deal';
+             if (edpsCsn) {
+                 redirectUrl += '?edpsCsn=' + edpsCsn;
+                 if (carSrn) {
+                     redirectUrl += '&carSrn=' + carSrn;
+                 }
+             }
+             
+             window.location.href = redirectUrl;
+         }
+
+         // 페이지 로드 시 모든 섹션을 펼쳐진 상태로 시작
+         document.addEventListener('DOMContentLoaded', function() {
+             const sections = ['detail', 'registration', 'purchase', 'requests'];
+             sections.forEach(sectionId => {
+                 const icon = document.getElementById(sectionId + '-icon');
+                 if (icon) {
+                     icon.style.transform = 'rotate(0deg)';
+                 }
+             });
+         });
+     </script>
 </body>
 </html> 
