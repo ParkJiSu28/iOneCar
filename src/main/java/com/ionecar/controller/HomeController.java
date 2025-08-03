@@ -19,6 +19,7 @@ import com.ionecar.service.VehicleService;
 import com.ionecar.service.CustomerService;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+
 @Controller
 @RequestMapping("/home")
 @RequiredArgsConstructor
@@ -29,7 +30,8 @@ public class HomeController {
     @GetMapping
     public String home(@ModelAttribute("edpsCsn") String edpsCsn, Model model) {
         model.addAttribute("edpsCsn", edpsCsn); // 필요하다면
-        return "home"; // login.html 타임리프 템플릿 반환
+
+
     }
 
 
