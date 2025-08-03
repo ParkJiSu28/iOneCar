@@ -28,6 +28,5 @@ public class ChoiceController {
         model.addAttribute("hasQuote", hasQuote);
 
         return "choice";
-
     }
 }
