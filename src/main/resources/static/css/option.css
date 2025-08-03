@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: sans-serif;
-    background-color: #f2f5fc;
+    background-color: #ffffff;
   }
   
   header {
@@ -10,7 +10,8 @@ body {
     padding: 16px;
     font-weight: bold;
     font-size: 20px;
-    background: #eef1f8;
+    background: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
   }
   
   .progress-bar {
@@ -26,29 +27,36 @@ body {
   
   .container {
     padding: 20px;
+    background-color: #ffffff;
   }
   
   .title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 16px;
+    color: #333;
   }
   
   .model-summary {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: #f8f9fa;
+    border-radius: 12px;
   }
   
   .model-summary .text .name {
     font-weight: bold;
     font-size: 18px;
+    color: #333;
   }
   
   .model-summary .text .desc {
     font-size: 14px;
-    color: gray;
+    color: #666;
+    line-height: 1.4;
   }
   
   .model-summary .image img {
@@ -65,49 +73,54 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #f8f9fc;
+    background: #f8f9fa;
     border-radius: 12px;
-    padding: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     border: 2px solid transparent;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
     cursor: pointer;
   }
   
   .option-card .option-left {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
   }
   
   .option-card .check {
-    font-size: 16px;
+    font-size: 18px;
     color: #ccc;
+    transition: color 0.2s ease;
   }
   
   .option-card .label {
     font-size: 16px;
+    font-weight: 500;
+    color: #333;
   }
   
   .option-card .price {
     font-size: 14px;
     font-weight: bold;
-    color: #888;
+    color: #666;
   }
   
   .option-card .tooltip {
     margin-left: 8px;
     background: #e0e0e0;
     border-radius: 50%;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     font-size: 12px;
     text-align: center;
-    line-height: 18px;
+    line-height: 20px;
+    color: #666;
   }
   
   .option-card.selected {
     border-color: #3977f5;
+    background: #f0f4ff;
   }
   
   .option-card.selected .check {
@@ -116,52 +129,47 @@ body {
   
   .button-group {
     display: flex;
-    gap: 8px;
-    margin: 24px 20px;
+    gap: 16px;
+    margin: 40px 20px 20px 20px;
+    padding-bottom: 20px;
   }
   
   .prev-button,
   .next-button {
-    flex: 1;
-    padding: 12px;
-    font-size: 16px;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
     border: none;
     border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    min-height: 60px;
   }
   
   .prev-button {
+    flex: 0.4;
     background: #e9f0ff;
     color: #3977f5;
   }
   
+  .prev-button:hover {
+    background: #d9e6ff;
+  }
+  
   .next-button {
-    background: #d0d0d0;
-    color: white;
+    flex: 0.6;
+    background: #e0e0e0;
+    color: #999;
   }
   
   .next-button.active {
-    background: #3977f5;
+    background: #3977f5 !important;
+    color: white !important;
   }
   
-  footer {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    background: white;
-    border-top: 1px solid #ccc;
-  }
-  
-  footer .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
-    color: #333;
-  }
-  
-  footer .nav-item img {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 4px;
+  .next-button:disabled {
+    background: #e0e0e0 !important;
+    color: #999 !important;
+    cursor: not-allowed;
   }
   
