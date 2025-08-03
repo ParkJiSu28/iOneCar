@@ -11,18 +11,14 @@
         purchase_period,
         purchase_advance,
         purchase_location,
-        purchase_dutyFree,
-        finance_name,
-        finance_rate
+        purchase_dutyFree
     ) VALUES (
         #{carSrn},
         #{purchaseMethod},
         #{purchasePeriod},
         #{purchaseAdvance},
         #{purchaseLocation},
-        #{purchaseDutyFree},
-        #{financeName},
-        #{financeRate}
+        #{purchaseDutyFree}
     )
 </insert>
 
