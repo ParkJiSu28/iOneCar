@@ -2,12 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=375, initial-scale=1.0, user-scalable=no" />
   <link rel="stylesheet" th:href="@{/css/choice.css}" />
   <title>i-One Car - Choice</title>
 </head>
 <body>
   <div class="container">
+
+    <!-- Header -->
     <header class="header">
       <span class="logo">i-One Car</span>
       <div class="user-type">
@@ -17,37 +19,54 @@
       <div class="icon-bell">🔔</div>
     </header>
 
+    <!-- 견적 배너 -->
     <section class="quote-card">
       <p class="quote-title">신차 구매 예정이신가요?</p>
       <p class="quote-subtitle">최저가 견적을 무료로 받아보세요</p>
       <a th:href="@{/quote/brand}" class="quote-btn">비교견적 신청하기</a>
     </section>
 
-    <section class="menu-list">
-      <div class="menu-item">
-        <p class="menu-title">이전 비교견적 내역 조회</p>
-        <p class="menu-desc">설명란</p>
-      </div>
-      <div class="menu-item">
-        <p class="menu-title">번호판 등록</p>
-        <p class="menu-desc">설명란</p>
-      </div>
-      <div class="menu-item">
-        <p class="menu-title">취등록세 납부</p>
-        <p class="menu-desc">설명란</p>
-      </div>
-      <div class="menu-item">
-        <p class="menu-title">보험 비교</p>
-        <p class="menu-desc">설명란</p>
-      </div>
-    </section>
+    <!-- 견적 확인 카드 -->
+    <section class="menu-list"
+    th:classappend="${hasQuote} ? ' active' : ' inactive'"
+    th:onclick="${hasQuote} ? 'location.href=\'/myquote?edpsCsn=' + ${edpsCsn} + '\'' : ''"
+    th:style="${hasQuote} ? 'cursor:pointer;' : 'cursor:default;'" 
+    style="margin:16px 16px 0 16px;">
+    <div class="menu-item">
+      <p class="menu-title">견적 확인하기</p>
+      <p class="menu-desc">나의 신차 견적을 빠르게 확인하세요.</p>
+    </div>
+  </section>
 
+    <!-- 기타 메뉴 카드 -->
+    <!-- 아래 메뉴 카드(각각 분리) -->
+  <section class="menu-list" style="margin: 0 16px 12px 16px;">
+    <div class="menu-item black-card">
+      <p class="menu-title">번호판 등록</p>
+      <p class="menu-desc">신차 등록 후 번호판 발급이 진행됩니다.</p>
+    </div>
+  </section>
+  <section class="menu-list" style="margin: 0 16px 12px 16px;">
+    <div class="menu-item black-card">
+      <p class="menu-title">취등록세 납부</p>
+      <p class="menu-desc">신차 구매 시 취득·등록세를 간편하게 납부해보세요.</p>
+    </div>
+  </section>
+  <section class="menu-list" style="margin: 0 16px 16px 16px;">
+    <div class="menu-item black-card">
+      <p class="menu-title">보험 비교</p>
+      <p class="menu-desc">다양한 보험 상품을 한 번에 비교할 수 있습니다.</p>
+    </div>
+  </section>
+
+    <!-- 하단 네비게이션 -->
     <footer class="bottom-nav">
       <div class="nav-item">마이</div>
       <div class="nav-item">포인트</div>
       <div class="nav-item">혜택</div>
       <div class="nav-item">전체메뉴</div>
     </footer>
+
   </div>
 </body>
 </html>
