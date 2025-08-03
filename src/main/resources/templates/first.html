@@ -1,29 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>i-ONE Car</title>
-  <link rel="stylesheet" th:href="@{/css/first.css}">
+  <link rel="stylesheet" href="/css/first.css">
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      document.body.addEventListener('click', function () {
+        window.location.href = '/login';
+      });
+    });
+  </script>
 </head>
-<body onclick="location.href='/login'">
+<body>
   <div class="container">
-    <h1><span class="dot">●</span> i-ONE Car</h1>
-    <p class="subtitle">내게 딱 맞는 은행을 찾다</p>
-
-    <div class="award">
-      <img src="images/nsa_logo.png" alt="NSA 로고" />
-      <div>
-        <p>모바일뱅킹부문</p>
-        <p>4년 연속 국가서비스 대상 수상</p>
+    <div class="logo-area">
+      <div class="logo">
+        <span class="logo-i">
+          <span class="dot"></span>
+          <span class="i-char">i</span>
+        </span>
+        <span class="logo-text-rest">-ONE Car</span>
       </div>
+      <p class="slogan">내게 딱 맞는 은행을 찾다</p>
     </div>
-
-    <div class="award">
-      <img src="images/green_logo.png" alt="친환경 로고" />
-      <div>
-        <p>모바일뱅킹부문</p>
-        <p>4년 연속 국가서비스 대상 수상</p>
+    <div class="award-list">
+      <div class="award">
+        <img src="/css/images/award-1.png" alt="수상1">
+        <div class="award-text">
+          <div>모바일뱅킹부문</div>
+          <div>4년 연속 국가서비스 대상 수상</div>
+        </div>
+      </div>
+      <div class="award">
+        <img src="/css/images/award-2.png" alt="수상2">
+        <div class="award-text">
+          <div>모바일뱅킹부문</div>
+          <div>4년 연속 국가서비스 대상 수상</div>
+        </div>
       </div>
     </div>
   </div>
