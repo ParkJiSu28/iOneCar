@@ -1,7 +1,8 @@
 package com.ionecar.service;
 
 import com.ionecar.domain.MyQuote;
+import java.util.List;
 
 public interface MyQuoteService {
-    MyQuote selectMyQuoteByEdpsCsn(Long edpsCsn);
+    List<MyQuote> selectMyQuoteByEdpsCsn(Long edpsCsn);
 }

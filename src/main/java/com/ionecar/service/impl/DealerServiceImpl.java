@@ -25,6 +25,11 @@ public class DealerServiceImpl implements DealerService {
     }
     
     @Override
+    public Dealer getDealerByDealerId(String dealerId) {
+        return dealerMapper.selectDealerByDealerId(dealerId);
+    }
+    
+    @Override
     public List<Dealer> getDealersByCarSrn(Long carSrn) {
         return dealerMapper.selectDealersByCarSrn(carSrn);
     }

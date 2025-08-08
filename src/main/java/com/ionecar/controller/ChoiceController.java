@@ -22,6 +22,10 @@ public class ChoiceController {
         if (edpsCsn == null) {
             return "redirect:/login";
         }
+        
+        // NULL 값 정리 및 qnt_yn 업데이트
+        customerService.cleanupNullDataAndUpdateQntYn(edpsCsn);
+        
         Customer customer = customerService.getCustomerByEdpsCsn(edpsCsn);
         // qntYn이 Y인지 소문자로 내려보내면 편함
         boolean hasQuote = "Y".equalsIgnoreCase(customer.getQntYn());

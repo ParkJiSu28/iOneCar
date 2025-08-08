@@ -15,27 +15,29 @@
             <img th:src="@{/css/images/X.png}" alt="닫기" class="close-icon" />
         </button>
     </div>
-    <div class="estimate-card">
+    
+    <!-- 여러 차량을 반복하여 표시 -->
+    <div th:each="myQuote : ${myQuotes}" class="estimate-card">
         <div class="card-label-row">
             <span class="status-label">상담전</span>
             <div class="compare-area">
                 <span class="compare-label">비교견적</span>
                 <span class="compare-badge">2</span>
-                <!-- DB 값 전달 활용, 실제 값으로 바뀜 -->
-                <a th:href="@{'/compare'(edpsCsn=${edpsCsn}, carSrn=${carSrn})}" class="compare-link">
+                <!-- 비교견적 아이콘 클릭 시 POST 방식으로 전송 -->
+                <div class="compare-link" th:onclick="'sendToCompare(' + ${myQuote.carSrn} + ', ' + ${edpsCsn} + ')'" style="cursor: pointer;">
                     <img th:src="@{/css/images/right.png}" alt="비교견적 아이콘" class="compare-icon" />
-                </a>
+                </div>
             </div>
         </div>
         <div class="label-separator"></div>
         <div class="car-info-row">
             <div class="car-info-text">
                 <!-- DB에서 가져온 자동차 클래스명 -->
-                <div class="car-name" th:text="${carClass}">차량종류</div>
+                <div class="car-name" th:text="${myQuote.carClass}">차량종류</div>
                 <div class="car-desc">
-                    <span th:text="${carSubClass}">세부차종</span><br/>
-                    <span th:text="${purchaseMethod}">구매방법</span>
-                    <span th:text="${purchasePeriod} + '개월'">구매기간</span>
+                    <span th:text="${myQuote.carSubClass}">세부차종</span><br/>
+                    <span th:text="${myQuote.purchaseMethod == 'I' ? '할부' : (myQuote.purchaseMethod == 'C' ? '현금' : '기타')}">구매방법</span>
+                    <span th:text="${myQuote.purchasePeriod} + '개월'">구매기간</span>
                 </div>
             </div>
             <div class="car-img-block">
@@ -48,6 +50,35 @@
             <span class="expire-label">견적만료까지 남은시간 입니다</span>
         </div>
     </div>
+    
+    <!-- 차량이 없는 경우 표시할 메시지 -->
+    <div th:if="${#lists.isEmpty(myQuotes)}" class="no-quotes-message">
+        <p>등록된 견적이 없습니다.</p>
+    </div>
 </div>
+
+<script th:inline="javascript">
+    function sendToCompare(carSrn, edpsCsn) {
+        // POST 방식으로 carSrn과 edpsCsn을 전송
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/myquote/compare';
+        
+        const carSrnInput = document.createElement('input');
+        carSrnInput.type = 'hidden';
+        carSrnInput.name = 'carSrn';
+        carSrnInput.value = carSrn;
+        
+        const edpsCsnInput = document.createElement('input');
+        edpsCsnInput.type = 'hidden';
+        edpsCsnInput.name = 'edpsCsn';
+        edpsCsnInput.value = edpsCsn;
+        
+        form.appendChild(carSrnInput);
+        form.appendChild(edpsCsnInput);
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
 </body>
 </html>

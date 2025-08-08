@@ -5,7 +5,7 @@ import com.ionecar.domain.Option;
 import com.ionecar.service.OptionService;
 import com.ionecar.mapper.OptionTableMapper;
 import lombok.RequiredArgsConstructor;
-
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,5 +18,9 @@ public class OptionServiceImpl implements OptionService  {
         optionTableMapper.insertOption(option);
     }
     
+    @Override
+    public List<Option> selectOptionsByCarSrn(long carSrn){
+        return optionTableMapper.selectOptionsByCarSrn(carSrn);
+    }
 
 }

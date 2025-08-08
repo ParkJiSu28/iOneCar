@@ -14,6 +14,7 @@
             b.purchase_period as purchasePeriod 
             from Car a
             inner join Purchase b on a.car_srn = b.car_srn
-            where a.edps_csn= #{edpsCsn}
+            where a.edps_csn = #{edpsCsn}
+            order by a.car_srn desc
     </select>
 </mapper>

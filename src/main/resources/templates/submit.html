@@ -44,8 +44,8 @@
 
         <!-- 하단 버튼 -->
         <div class="bottom-buttons">
-            <button class="btn btn-secondary" onclick="location.href='/'">홈으로</button>
-            <button class="btn btn-primary" onclick="location.href='/quote/myquote'">내 견적함</button>
+            <button class="btn btn-secondary" onclick="location.href='/home'">홈으로</button>
+            <button class="btn btn-primary" th:onclick="'location.href=\'/myquote?edpsCsn=' + ${edpsCsn} + '\''">내 견적함</button>
         </div>
     </div>
 </body>

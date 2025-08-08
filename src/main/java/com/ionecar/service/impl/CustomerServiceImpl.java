@@ -40,5 +40,26 @@ public class CustomerServiceImpl implements CustomerService {
         customerMapper.updateQntYn(edpsCsn, qntYn);
     }
     
+    // carSrn으로 고객의 qnt_yn 업데이트
+    @Override
+    public void updateQntYnByCarSrn(long carSrn, String qntYn) {
+        customerMapper.updateQntYnByCarSrn(carSrn, qntYn);
+    }
+
+    // NULL 값 정리 및 qnt_yn 업데이트
+    @Override
+    public void cleanupNullDataAndUpdateQntYn(long edpsCsn) {
+        // 1. NULL 값이 있는 Car 삭제
+        customerMapper.deleteNullCars(edpsCsn);
+        
+        // 2. 삭제된 Car와 연결된 Option 삭제
+        customerMapper.deleteOrphanedOptions();
+        
+        // 3. 삭제된 Car와 연결된 Purchase 삭제
+        customerMapper.deleteOrphanedPurchases();
+        
+        // 4. 완전한 데이터가 있는지 확인하여 qnt_yn 업데이트
+        customerMapper.updateQntYnBasedOnCompleteData(edpsCsn);
+    }
 
 }

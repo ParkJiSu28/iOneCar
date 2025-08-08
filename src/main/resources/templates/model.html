@@ -91,10 +91,15 @@
     </a>
   </nav>
 
-  <script>
+  <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function() {
       const modelItems = document.querySelectorAll('.model-item');
       const nextButton = document.querySelector('.next-btn');
+      let selectedModel = 'A-Class'; // 기본값
+      
+      // URL에서 carSrn 파라미터 가져오기
+      const urlParams = new URLSearchParams(window.location.search);
+      const carSrn = urlParams.get('carSrn');
 
       // 모델 항목 클릭 이벤트
       modelItems.forEach(item => {
@@ -103,12 +108,34 @@
           modelItems.forEach(i => i.classList.remove('selected'));
           // 클릭된 항목에 'selected' 클래스 추가
           this.classList.add('selected');
+          // 선택된 모델명 저장
+          selectedModel = this.getAttribute('data-model');
         });
       });
 
       // 다음 버튼 클릭 이벤트
       nextButton.addEventListener('click', function() {
-        window.location.href = '/quote/model_sub';
+        if (selectedModel && carSrn) {
+          // POST 방식으로 모델 정보 전송
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/quote/model';
+          
+          const modelInput = document.createElement('input');
+          modelInput.type = 'hidden';
+          modelInput.name = 'modelName';
+          modelInput.value = selectedModel;
+          
+          const carSrnInput = document.createElement('input');
+          carSrnInput.type = 'hidden';
+          carSrnInput.name = 'carSrn';
+          carSrnInput.value = carSrn;
+          
+          form.appendChild(modelInput);
+          form.appendChild(carSrnInput);
+          document.body.appendChild(form);
+          form.submit();
+        }
       });
     });
   </script>

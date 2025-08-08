@@ -11,6 +11,7 @@
       const brandContainers = document.querySelectorAll('.brand-grid');
       const brandCards = document.querySelectorAll('.brand-card');
       const nextButton = document.querySelector('.next-button');
+      let selectedBrand = '';
 
       categoryButtons.forEach(btn => {
         btn.addEventListener('click', function () {
@@ -28,7 +29,32 @@
           this.classList.add('selected');
           nextButton.classList.add('active');
           nextButton.disabled = false;
+          
+          // 선택된 브랜드의 alt 값을 저장
+          const brandImg = this.querySelector('img');
+          selectedBrand = brandImg.getAttribute('alt');
         });
+      });
+
+      // 다음 버튼 클릭 시 POST 방식으로 브랜드 정보 전송
+      nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        if (selectedBrand) {
+          // POST 방식으로 브랜드 정보를 서버에 전송
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/quote/brand';
+          
+          const brandInput = document.createElement('input');
+          brandInput.type = 'hidden';
+          brandInput.name = 'brand';
+          brandInput.value = selectedBrand;
+          
+          form.appendChild(brandInput);
+          document.body.appendChild(form);
+          form.submit();
+        }
       });
     });
   </script>
@@ -80,9 +106,7 @@
     </div>
   </div>
 
-  <form th:action="@{/quote/model}" method="get">
-    <button type="submit" class="next-button" disabled>다음</button>
-  </form>
+  <button type="button" class="next-button" disabled>다음</button>
 
   <footer>
     <div class="nav-item">

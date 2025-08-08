@@ -33,7 +33,7 @@
 
         <!-- 가격정보: 하나의 회색 박스 -->
         <div class="price-area-box">
-                        <!-- 차량 기본가 -->
+            <!-- 차량 기본가 -->
             <div class="price-detail">
                 <span class="label">차량 기본가</span>
                 <span class="value" th:text="${#numbers.formatInteger(carPrice, 0, 'COMMA')} + '원'">48,100,000원</span>
@@ -50,56 +50,43 @@
             </div>
         </div>
 
-        <!-- 1번 딜러 : 라벨 + 카드 -->
-        <div class="dealer-label-with-card">
+        <!-- 딜러 정보를 동적으로 표시 -->
+        <div th:each="compare : ${compares}" class="dealer-label-with-card">
             <div class="dealer-label">딜러와 상담요청전입니다.</div>
             <div class="dealer-card">
-                <img th:src="@{/css/images/dealer1.png}" alt="벤츠박사 프로필" class="dealer-photo" />
-                                 <div class="dealer-profile-info">
-                     <span class="dealer-name" onclick="goToProfile('1')" style="cursor: pointer;">벤츠박사</span>
+                <img th:src="@{/css/images/dealer1.png}" alt="딜러 프로필" class="dealer-photo" />
+                <div class="dealer-profile-info">
+                    <span class="dealer-name" th:onclick="'goToProfile(\'' + ${compare.dealerNo} + '\')'" style="cursor: pointer;" th:text="${compare.dealerName}">딜러명</span>
                     <span class="dealer-rating">
                         <img th:src="@{/css/images/star.png}" alt="별" class="star-icon" />
-                        <span>5.0</span>
-                        <span class="review-count">(67)</span>
+                        <span th:text="${compare.rating}">5.0</span>
+                        <span class="review-count" th:text="'(' + ${compare.reviewCnt} + ')'">(67)</span>
                     </span>
-                    <span class="quotation-count">1,416건</span>
+                    <span class="quotation-count" th:text="${compare.quotationCnt} + '건'">1,416건</span>
                 </div>
                 <div class="dealer-body">
-                    <div class="info-col"><span class="label">할인금액</span><span class="value">5,000,000원</span></div>
-                    <div class="info-col"><span class="label">월납입료</span><span class="value">805,073원</span></div>
-                    <div class="info-col"><span class="label">이용금리</span><span class="value">7%</span></div>
+                    <div class="info-col">
+                        <span class="label">할인금액</span>
+                        <span class="value" th:text="${#numbers.formatInteger(compare.discount, 0, 'COMMA')} + '원'">5,000,000원</span>
+                    </div>
+                    <div class="info-col">
+                        <span class="label">월납입료</span>
+                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'">805,073원</span>
+                    </div>
+                    <div class="info-col">
+                        <span class="label">이용금리</span>
+                        <span class="value" th:text="${compare.rate} + '%'">7%</span>
+                    </div>
                 </div>
-                <a href="/detailquote/1" class="dealer-detail-btn">상세견적</a>
-            </div>
-        </div>
-        <!-- 2번 딜러 : 라벨 + 카드 -->
-        <div class="dealer-label-with-card">
-            <div class="dealer-label">딜러와 상담요청전입니다.</div>
-            <div class="dealer-card">
-                <img th:src="@{/css/images/dealer2.png}" alt="곽율과장 프로필" class="dealer-photo" />
-                                 <div class="dealer-profile-info">
-                     <span class="dealer-name" onclick="goToProfile('2')" style="cursor: pointer;">곽율과장</span>
-                    <span class="dealer-rating">
-                        <img th:src="@{/css/images/star.png}" alt="별" class="star-icon" />
-                        <span>5.0</span>
-                        <span class="review-count">(45)</span>
-                    </span>
-                    <span class="quotation-count">944건</span>
-                </div>
-                <div class="dealer-body">
-                    <div class="info-col"><span class="label">할인금액</span><span class="value">7,000,000원</span></div>
-                    <div class="info-col"><span class="label">월납입료</span><span class="value">728,186원</span></div>
-                    <div class="info-col"><span class="label">이용금리</span><span class="value">5%</span></div>
-                </div>
-                <a href="/detailquote/2" class="dealer-detail-btn">상세견적</a>
+                <a th:href="@{'/detailquote/' + ${compare.dealerNo}}" class="dealer-detail-btn">상세견적</a>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    function goToProfile(dealerId) {
-        window.location.href = '/profile?dealerId=' + dealerId;
+    function goToProfile(dealerNo) {
+        window.location.href = '/profile?dealerNo=' + dealerNo;
     }
 </script>
 </body>
