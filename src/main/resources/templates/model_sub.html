@@ -93,7 +93,7 @@
     </a>
   </nav>
 
-  <script>
+  <script th:inline="javascript">
     document.addEventListener('DOMContentLoaded', function() {
       const comboButton = document.getElementById('comboButton');
       const dropdownMenu = document.getElementById('dropdownMenu');
@@ -101,6 +101,13 @@
       const nextBtn = document.getElementById('nextBtn');
       
       let isDropdownOpen = false;
+      let selectedComboText = '';
+      let selectedItemName = '';
+      let selectedPrice = '';
+      
+      // URL에서 carSrn 파라미터 가져오기
+      const urlParams = new URLSearchParams(window.location.search);
+      const carSrn = urlParams.get('carSrn');
       
       // 콤보버튼 클릭 이벤트
       comboButton.addEventListener('click', function() {
@@ -115,7 +122,7 @@
         }
       });
       
-      // 드롭다운 아이템 클릭 이벤트 (brand.html 스타일)
+      // 드롭다운 아이템 클릭 이벤트
       dropdownItem.addEventListener('click', function() {
         console.log('Dropdown item clicked!'); // 디버깅용
         
@@ -127,11 +134,20 @@
         // 클릭된 아이템에 selected 클래스 추가
         this.classList.add('selected');
         
-        // 다음 버튼 활성화 (brand.html 스타일)
+        // 선택된 값들 저장
+        selectedComboText = document.querySelector('.combo-text').textContent;
+        selectedItemName = this.querySelector('.item-name').textContent;
+        selectedPrice = this.getAttribute('data-price');
+        
+        // 다음 버튼 활성화
         nextBtn.classList.add('active');
         nextBtn.disabled = false;
         
-        console.log('Next button activated:', nextBtn.classList.contains('active')); // 디버깅용
+        console.log('Selected values:', {
+          comboText: selectedComboText,
+          itemName: selectedItemName,
+          price: selectedPrice
+        }); // 디버깅용
       });
       
       // 이전 버튼
@@ -141,8 +157,38 @@
       
       // 다음 버튼
       nextBtn.addEventListener('click', function() {
-        if (!nextBtn.disabled) {
-          window.location.href = '/quote/color';
+        if (!nextBtn.disabled && selectedComboText && selectedItemName && selectedPrice && carSrn) {
+          // POST 방식으로 데이터 전송
+          const form = document.createElement('form');
+          form.method = 'POST';
+          form.action = '/quote/model_sub';
+          
+          const comboTextInput = document.createElement('input');
+          comboTextInput.type = 'hidden';
+          comboTextInput.name = 'comboText';
+          comboTextInput.value = selectedComboText;
+          
+          const itemNameInput = document.createElement('input');
+          itemNameInput.type = 'hidden';
+          itemNameInput.name = 'itemName';
+          itemNameInput.value = selectedItemName;
+          
+          const priceInput = document.createElement('input');
+          priceInput.type = 'hidden';
+          priceInput.name = 'price';
+          priceInput.value = selectedPrice;
+          
+          const carSrnInput = document.createElement('input');
+          carSrnInput.type = 'hidden';
+          carSrnInput.name = 'carSrn';
+          carSrnInput.value = carSrn;
+          
+          form.appendChild(comboTextInput);
+          form.appendChild(itemNameInput);
+          form.appendChild(priceInput);
+          form.appendChild(carSrnInput);
+          document.body.appendChild(form);
+          form.submit();
         }
       });
       

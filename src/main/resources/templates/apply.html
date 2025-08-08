@@ -42,16 +42,16 @@
                 <div class="price-details">
                     <div class="price-row">
                         <span class="price-label">차량 기본가</span>
-                        <span class="price-value">+48,100,000원</span>
+                        <span class="price-value">+<span th:text="${#numbers.formatInteger(carPrice, 3, 'COMMA')}">0</span>원</span>
                     </div>
                     <div class="price-row">
                         <span class="price-label">추가 옵션가</span>
-                        <span class="price-value">+520,000원</span>
+                        <span class="price-value">+<span th:text="${#numbers.formatInteger(optionPrice, 3, 'COMMA')}">0</span>원</span>
                     </div>
                     <div class="price-divider"></div>
                     <div class="price-row total">
                         <span class="price-label">총 예상금액</span>
-                        <span class="price-value total">48,620,000원</span>
+                        <span class="price-value total"><span th:text="${#numbers.formatInteger(carPrice + optionPrice, 3, 'COMMA')}">0</span>원</span>
                     </div>
                 </div>
             </div>
@@ -68,6 +68,9 @@
             <div class="request-section">
                 <h3 class="section-title">요청사항</h3>
                 <form th:action="@{/quote/apply}" method="post" class="request-form">
+                    <!-- carSrn을 hidden input으로 추가 -->
+                    <input type="hidden" name="carSrn" th:value="${carSrn}">
+                    
                     <div class="checkbox-group">
                         <label class="checkbox-item disabled">
                             <input type="checkbox" disabled>

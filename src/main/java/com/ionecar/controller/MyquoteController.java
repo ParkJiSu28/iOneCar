@@ -21,17 +21,18 @@ import com.ionecar.domain.MyQuote;
 public class MyquoteController {   
     private final MyQuoteService myQuoteService;
 
-       // 내 견적함함을 반환하는 GET 매핑 추가
+       // 내 견적함을 반환하는 GET 매핑 추가
        @GetMapping("/myquote")
        public String myquotePage(@RequestParam(value = "edpsCsn", required = false) Long edpsCsn, Model model) {
-            MyQuote myQuote = myQuoteService.selectMyQuoteByEdpsCsn(edpsCsn);
+            List<MyQuote> myQuotes = myQuoteService.selectMyQuoteByEdpsCsn(edpsCsn);
             System.out.println("Received edpsCsn param: " + edpsCsn);
-            if(myQuote == null){
-               System.out.println("myQuote is null");
+            if(myQuotes == null || myQuotes.isEmpty()){
+               System.out.println("myQuotes is null or empty");
 
                 return "/login";
             }else{
-               //System.out.println(myQuote);
+               // 첫 번째 차량의 정보를 사용 (가장 최근 차량)
+               MyQuote myQuote = myQuotes.get(0);
                String purchaseMethodLabel = "기타";  // 기본값
                if ("I".equals(myQuote.getPurchaseMethod())) {
                   purchaseMethodLabel = "할부";
@@ -44,7 +45,16 @@ public class MyquoteController {
                model.addAttribute("purchasePeriod", myQuote.getPurchasePeriod());
                model.addAttribute("carSrn", myQuote.getCarSrn());
                model.addAttribute("edpsCsn", edpsCsn);
+               model.addAttribute("myQuotes", myQuotes); // 모든 차량 정보도 전달
                return "myquote"; // myquote.html 타임리프 템플릿 반환
             }
            }  
+           
+       // 비교견적 POST 요청 처리
+       @PostMapping("/myquote/compare")
+       public String comparePage(@RequestParam("carSrn") Long carSrn, 
+                                @RequestParam("edpsCsn") Long edpsCsn) {
+            // carSrn과 edpsCsn을 받아서 compare 페이지로 리다이렉트
+            return "redirect:/compare?carSrn=" + carSrn + "&edpsCsn=" + edpsCsn;
+       }
      }

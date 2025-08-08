@@ -32,6 +32,21 @@
         WHERE dealer_no = #{dealerNo}
     </select>
     
+    <!-- 딜러 ID로 딜러 조회 -->
+    <select id="selectDealerByDealerId" resultType="com.ionecar.domain.Dealer">
+        SELECT 
+            dealer_no as dealerNo,
+            dealer_name as dealerName,
+            dealer_phone as dealerPhone,
+            car_srn as carSrn,
+            review_cnt as reviewCnt,
+            rating,
+            quotation_cnt as quotationCnt,
+            cert_yn as certYn
+        FROM Dealer
+        WHERE dealer_no = #{dealerId}
+    </select>
+    
     <!-- 차량 번호로 딜러 조회 -->
     <select id="selectDealersByCarSrn" resultType="com.ionecar.domain.Dealer">
         SELECT 

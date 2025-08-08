@@ -9,4 +9,15 @@
         VALUES (#{carSrn}, #{optName}, #{optPrice}, #{optDef})
     </insert>
 
+    <select id="selectOptionsByCarSrn" parameterType="long" resultType="com.ionecar.domain.Option">
+        SELECT 
+            car_srn,
+            opt_srn,
+            opt_name,
+            opt_price,
+            opt_def
+        FROM Option_table 
+        WHERE car_srn = #{carSrn}
+    </select>
+
 </mapper>

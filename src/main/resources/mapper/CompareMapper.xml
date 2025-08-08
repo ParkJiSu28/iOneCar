@@ -4,21 +4,40 @@
 
 <mapper namespace="com.ionecar.mapper.CompareMapper">
 
-    <select id="selectCompareByEdpsCsnAndCarSrn" parameterType="java.lang.Long" resultType="com.ionecar.domain.Compare">
-         
-    SELECT 
-        a.edps_csn      AS edpsCsn,
-        a.car_srn       AS carSrn, 
-        a.car_price     AS carPrice,
-        a.car_class     AS carClass,
-        a.car_sub_class AS carSubClass, 
-        b.purchase_method AS purchaseMethod,
-        b.purchase_period AS purchasePeriod,
-        c.opt_price     AS optPrice
-    FROM Car a
-    INNER JOIN Purchase b    ON a.car_srn = b.car_srn
-    INNER JOIN Option_table c ON b.car_srn = c.car_srn
-    WHERE a.edps_csn= #{edpsCsn} 
-    AND b.car_srn = #{carSrn}
+    <!-- carSrn으로 Dealer와 Deal 정보 조회 -->
+    <select id="selectCompareByCarSrn" parameterType="java.lang.Long" resultType="com.ionecar.domain.Compare">    
+            SELECT 
+                a.edps_csn      AS edpsCsn,
+                a.car_srn       AS carSrn, 
+                a.car_price     AS carPrice,
+                a.car_class     AS carClass,
+                a.car_sub_class AS carSubClass, 
+                b.purchase_method AS purchaseMethod,
+                b.purchase_period AS purchasePeriod,
+                c.opt_price     AS optPrice,
+                d.dealer_name   AS dealerName,
+                d.dealer_no     AS dealerNo,
+                d.rating        AS rating,
+                d.review_cnt    AS reviewCnt,
+                d.quotation_cnt AS quotationCnt,
+                e.discount      AS discount,
+                e.rate          AS rate
+            FROM Car a
+            INNER JOIN Purchase b    ON a.car_srn = b.car_srn
+            INNER JOIN Option_table c ON b.car_srn = c.car_srn
+            INNER JOIN Dealer d      ON d.car_srn = a.car_srn
+            INNER JOIN Deal e        ON e.dealer_no = d.dealer_no
+            WHERE a.car_srn = #{carSrn}
     </select>
+
+    <!-- Dealer 테이블의 car_srn 업데이트 -->
+    <update id="updateDealerCarSrn">
+        UPDATE Dealer SET car_srn = #{carSrn} WHERE dealer_no = #{dealerNo}
+    </update>
+
+    <!-- Deal 테이블의 car_srn 업데이트 -->
+    <update id="updateDealCarSrn">
+        UPDATE Deal SET car_srn = #{carSrn} WHERE dealer_no = #{dealerNo}
+    </update>
+
 </mapper>

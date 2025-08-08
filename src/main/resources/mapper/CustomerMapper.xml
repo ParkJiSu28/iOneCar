@@ -15,6 +15,57 @@
         UPDATE Customer SET qnt_yn = #{qntYn} WHERE edps_csn = #{edpsCsn}
     </update>
 
+    <update id="updateQntYnByCarSrn">
+        UPDATE Customer c 
+        INNER JOIN Car car ON c.edps_csn = car.edps_csn 
+        SET c.qnt_yn = #{qntYn} 
+        WHERE car.car_srn = #{carSrn}
+    </update>
+
+    <!-- NULL 값이 있는 Car 삭제 -->
+    <delete id="deleteNullCars">
+        DELETE FROM Car 
+        WHERE edps_csn = #{edpsCsn} 
+        AND (car_brand IS NULL OR car_class IS NULL OR car_sub_class IS NULL 
+             OR car_price IS NULL OR car_color IS NULL OR car_interior_color IS NULL)
+    </delete>
+
+    <!-- 삭제된 Car와 연결된 Option 삭제 -->
+    <delete id="deleteOrphanedOptions">
+        DELETE o FROM Option_table o
+        LEFT JOIN Car c ON o.car_srn = c.car_srn
+        WHERE c.car_srn IS NULL
+    </delete>
+
+    <!-- 삭제된 Car와 연결된 Purchase 삭제 -->
+    <delete id="deleteOrphanedPurchases">
+        DELETE p FROM Purchase p
+        LEFT JOIN Car c ON p.car_srn = c.car_srn
+        WHERE c.car_srn IS NULL
+    </delete>
+
+    <!-- 완전한 데이터가 있는지 확인하여 qnt_yn 업데이트 -->
+    <update id="updateQntYnBasedOnCompleteData">
+        UPDATE Customer c
+        SET c.qnt_yn = CASE 
+            WHEN EXISTS (
+                SELECT 1 FROM Car car
+                INNER JOIN Purchase pur ON car.car_srn = pur.car_srn
+                WHERE car.edps_csn = #{edpsCsn}
+                AND car.car_brand IS NOT NULL 
+                AND car.car_class IS NOT NULL 
+                AND car.car_sub_class IS NOT NULL
+                AND car.car_price IS NOT NULL
+                AND car.car_color IS NOT NULL
+                AND car.car_interior_color IS NOT NULL
+                AND pur.purchase_method IS NOT NULL
+                AND pur.purchase_period IS NOT NULL
+            ) THEN 'Y'
+            ELSE 'N'
+        END
+        WHERE c.edps_csn = #{edpsCsn}
+    </update>
+
     <delete id="deleteCustomerByEdpsCsn" parameterType="com.ionecar.domain.Customer">
         DELETE FROM Customer WHERE edps_csn = #{edpsCsn}
     </delete>

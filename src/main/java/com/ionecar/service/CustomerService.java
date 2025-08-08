@@ -7,4 +7,6 @@ public interface CustomerService {
     boolean qntYnCheckByEdpsCsn(long edpsCsn);
     void deleteCustomerByEdpsCsn(long edpsCsn);
     void updateQntYn(long edpsCsn, String qntYn);
+    void updateQntYnByCarSrn(long carSrn, String qntYn);
+    void cleanupNullDataAndUpdateQntYn(long edpsCsn);
 }

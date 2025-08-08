@@ -7,20 +7,21 @@ import org.springframework.ui.Model;
 import com.ionecar.domain.Compare;
 import com.ionecar.service.CompareSerivce;
 import lombok.RequiredArgsConstructor;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class DetailController {
     private final CompareSerivce compareSerivce;
 
-    @GetMapping("/detail")
-    public String DetailPage(@RequestParam(value = "edpsCsn", required = false) Long edpsCsn, 
-                           @RequestParam(value = "carSrn", required = false) Long carSrn, 
+    @GetMapping("/myquote/detail")
+    public String DetailPage(@RequestParam(value = "carSrn", required = false) Long carSrn, 
                            Model model) {
-        Compare compare = compareSerivce.selectCompareByEdpsCsnAndCarSrn(edpsCsn, carSrn);
-        if(compare == null){
+        List<Compare> compares = compareSerivce.selectCompareByCarSrn(carSrn);
+        if(compares == null || compares.isEmpty()){
             return "myquote";
         }else{
+            Compare compare = compares.get(0); // 첫 번째 결과 사용
             model.addAttribute("carClass", compare.getCarClass());
             model.addAttribute("carSubClass", compare.getCarSubClass());
             model.addAttribute("purchaseMethod", compare.getPurchaseMethod());
