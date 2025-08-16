@@ -20,8 +20,11 @@
     <div th:each="myQuote : ${myQuotes}" class="estimate-card">
         <div class="card-label-row">
             <span class="status-label" 
-                  th:text="${myQuote.progress == '1' ? '상담전' : (myQuote.progress == '2' ? '상담중' : '상담전')}"
-                  th:style="${myQuote.progress == '2' ? 'color: red;' : ''}"></span>
+                  th:text="${myQuote.progress == '1' ? '상담전' : (myQuote.progress == '2' ? '상담중' : (myQuote.progress == '3' ? '최종견적' : '상담전'))}"
+                  th:style="${myQuote.progress == '2' ? 'color: red; cursor: pointer;' : (myQuote.progress == '3' ? 'color: green; font-weight: bold;' : '')}"
+                  th:data-progress="${myQuote.progress}"
+                  th:data-car-srn="${myQuote.carSrn}"
+                  th:data-edps-csn="${edpsCsn}"></span>
             <div class="compare-area">
                 <span class="compare-label">비교견적</span>
                 <span class="compare-badge">2</span>
@@ -48,10 +51,13 @@
             </div>
         </div>
         <div class="expire-box">
+            <div th:if="${myQuote.progress == '3'}">
+                <span class="expire-time" style="color: green; font-weight: bold;">최종견적 신청이 들어왔어요!</span>
+            </div>
             <div th:if="${myQuote.progress == '2'}">
                 <span class="expire-time" style="color: red;">상담이 진행 중입니다</span>
             </div>
-            <div th:unless="${myQuote.progress == '2'}">
+            <div th:if="${myQuote.progress != '2' and myQuote.progress != '3'}">
                 <span class="expire-time">31:35:27</span>
                 <span class="expire-label">견적만료까지 남은시간 입니다</span>
             </div>
@@ -65,6 +71,24 @@
 </div>
 
 <script th:inline="javascript">
+    // 페이지 로드 시 이벤트 리스너 등록
+    document.addEventListener('DOMContentLoaded', function() {
+        // 모든 status-label에 클릭 이벤트 추가
+        const statusLabels = document.querySelectorAll('.status-label');
+        statusLabels.forEach(label => {
+            label.addEventListener('click', function() {
+                const progress = this.dataset.progress;
+                const carSrn = this.dataset.carSrn;
+                const edpsCsn = this.dataset.edpsCsn;
+                
+                // progress가 '2'(상담중)인 경우에만 이스터에그 실행
+                if (progress === '2') {
+                    updateProgressEasterEgg(carSrn, edpsCsn);
+                }
+            });
+        });
+    });
+
     function sendToCompare(carSrn, edpsCsn) {
         // POST 방식으로 carSrn과 edpsCsn을 전송
         const form = document.createElement('form');
@@ -85,6 +109,30 @@
         form.appendChild(edpsCsnInput);
         document.body.appendChild(form);
         form.submit();
+    }
+    
+    // 이스터에그: 상담중 상태 클릭 시 progress를 3으로 업데이트
+    function updateProgressEasterEgg(carSrn, edpsCsn) {
+        // AJAX 요청으로 progress 업데이트
+        fetch('/myquote/updateProgress', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `carSrn=${carSrn}&edpsCsn=${edpsCsn}`
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data === 'SUCCESS') {
+                // 성공 시 페이지 새로고침하여 업데이트된 상태 반영
+                window.location.reload();
+            } else {
+                console.error('Failed to update progress:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
     }
 </script>
 </body>

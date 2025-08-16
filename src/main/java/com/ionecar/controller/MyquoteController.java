@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.ui.Model;
@@ -13,13 +14,16 @@ import lombok.RequiredArgsConstructor;
 import java.util.List;
 import java.util.Map;
 import com.ionecar.service.MyQuoteService;
+import com.ionecar.service.DealService;
 import com.ionecar.domain.MyQuote;
+import com.ionecar.domain.Deal;
 
 @Controller
 //@RequestMapping("/myquote")
 @RequiredArgsConstructor
 public class MyquoteController {   
     private final MyQuoteService myQuoteService;
+    private final DealService dealService;
 
        // 내 견적함을 반환하는 GET 매핑 추가
        @GetMapping("/myquote")
@@ -55,6 +59,31 @@ public class MyquoteController {
        public String comparePage(@RequestParam("carSrn") Long carSrn, 
                                 @RequestParam("edpsCsn") Long edpsCsn) {
             // carSrn과 edpsCsn을 받아서 compare 페이지로 리다이렉트
-            return "redirect:/compare?carSrn=" + carSrn + "&edpsCsn=" + edpsCsn;
+            return "redirect:/compare?carSrn=" + carSrn;
        }
-     }
+       
+       // 이스터에그: 상담중 상태 클릭 시 progress를 3으로 업데이트
+       @PostMapping("/myquote/updateProgress")
+       @ResponseBody
+       public ResponseEntity<String> updateProgressToFinal(@RequestParam("carSrn") Long carSrn,
+                                                           @RequestParam("edpsCsn") Long edpsCsn) {
+           try {
+               // 해당 carSrn의 모든 Deal을 progress 3으로 업데이트
+               List<Deal> deals = dealService.getDealsByCarSrn(carSrn);
+               
+               if (deals != null && !deals.isEmpty()) {
+                   for (Deal deal : deals) {
+                       if ("2".equals(deal.getProgress())) { // 상담중 상태인 경우만
+                           deal.setProgress("3");
+                           dealService.updateDeal(deal);
+                       }
+                   }
+                   return ResponseEntity.ok("SUCCESS");
+               } else {
+                   return ResponseEntity.badRequest().body("No deals found");
+               }
+           } catch (Exception e) {
+               return ResponseEntity.internalServerError().body("Error updating progress");
+           }
+       }
+}
