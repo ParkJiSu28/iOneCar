@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 할부절차</title>
+    <link rel="stylesheet" th:href="@{/css/payment.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car 할부절차</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 할부절차 안내 섹션 -->
+            <div class="payment-section">
+                <div class="section-header">
+                    <h2 class="section-title">할부절차</h2>
+                </div>
+                
+                <div class="section-content">
+                    <div class="process-steps">
+                        <!-- 01단계 -->
+                        <div class="step-item">
+                            <div class="step-number">01</div>
+                            <div class="step-details">
+                                <h3 class="step-title">적합성·적정성 고객정보 확인서 작성</h3>
+                                <p class="step-description">상품이 고객님에게 적합 및 적정하지<br>여부를 사전에 확인합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 02단계 -->
+                        <div class="step-item">
+                            <div class="step-number">02</div>
+                            <div class="step-details">
+                                <h3 class="step-title">할부신청 전 확인사항</h3>
+                                <p class="step-description">할부신청 전 주요사항을 안내하오니<br>충분히 확인하신 후 진행하시기 바랍니다.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 03단계 -->
+                        <div class="step-item">
+                            <div class="step-number">03</div>
+                            <div class="step-details">
+                                <h3 class="step-title">필요 정보 입력</h3>
+                                <p class="step-description">할부 신청 금액, 상환방법, 할부금리 등<br>필수 정보를 입력하여 주세요.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 04단계 -->
+                        <div class="step-item">
+                            <div class="step-number">04</div>
+                            <div class="step-details">
+                                <h3 class="step-title">약정서 작성</h3>
+                                <p class="step-description">할부약관, 상품설명서 및 약정서를<br>확인하여 주세요.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 05단계 -->
+                        <div class="step-item">
+                            <div class="step-number">05</div>
+                            <div class="step-details">
+                                <h3 class="step-title">추가인증</h3>
+                                <p class="step-description">보이스피싱, 피싱사이트 등에 의한<br>고객님의 피해를 예방하기 위해<br>추가인증으로 보안을 강화합니다.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- 06단계 -->
+                        <div class="step-item">
+                            <div class="step-number">06</div>
+                            <div class="step-details">
+                                <h3 class="step-title">할부신청 완료</h3>
+                                <p class="step-description">신청 이후, ARS 안내를 완료하면<br>할부가 실행됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 확인 체크박스 섹션 -->
+            <div class="payment-section">
+                <div class="confirmation-section">
+                    <label class="confirmation-item">
+                        <input type="checkbox" id="confirmCheckbox" name="confirmCheckbox">
+                        <span class="checkmark"></span>
+                        <span class="confirmation-text">위 내용을 모두 확인했습니다.</span>
+                    </label>
+                </div>
+            </div>
+        </main>
+        
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" id="applyBtn" onclick="handleApply()">할부 신청하기</button>
+        </div>
+    </div>
+
+    <script>
+        const confirmCheckbox = document.getElementById('confirmCheckbox');
+        const applyBtn = document.getElementById('applyBtn');
+
+        // 체크박스 상태 변경 감지
+        confirmCheckbox.addEventListener('change', function() {
+            updateApplyButton();
+        });
+
+        // 할부 신청하기 버튼 상태 업데이트
+        function updateApplyButton() {
+            if (confirmCheckbox.checked) {
+                applyBtn.classList.remove('btn-secondary');
+                applyBtn.classList.add('btn-primary');
+            } else {
+                applyBtn.classList.remove('btn-primary');
+                applyBtn.classList.add('btn-secondary');
+            }
+        }
+
+        // 할부 신청하기 버튼 클릭 처리
+        function handleApply() {
+            if (!confirmCheckbox.checked) {
+                alert('위 내용을 모두 확인했다는 체크박스를 선택해주세요.');
+                return;
+            }
+            
+            // verification 페이지로 이동
+            window.location.href = '/verification';
+        }
+
+        // 초기 상태 설정
+        updateApplyButton();
+    </script>
+</body>
+</html>

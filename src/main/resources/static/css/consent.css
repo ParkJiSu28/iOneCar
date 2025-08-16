@@ -1,0 +1,368 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 48px;
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px; /* 하단 버튼 공간 확보 */
+}
+
+/* 동의서 섹션 */
+.consent-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.consent-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+/* 동의 그룹 */
+.consent-group {
+    margin-bottom: 12px;
+    border-radius: 8px;
+    border: 1px solid #E5E7EB;
+    overflow: hidden;
+}
+
+.consent-group.main-consent {
+    border: 2px solid #235FD2;
+    background: #F8FAFF;
+}
+
+/* 동의 항목 */
+.consent-item {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    position: relative;
+}
+
+.consent-item:hover {
+    background: #F8F9FA;
+}
+
+.main-consent .consent-item {
+    background: #F8FAFF;
+}
+
+.main-consent .consent-item:hover {
+    background: #F0F6FF;
+}
+
+.consent-item input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #E5E7EB;
+    border-radius: 4px;
+    margin-right: 12px;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.consent-item input[type="checkbox"]:checked + .checkmark {
+    background: #235FD2;
+    border-color: #235FD2;
+}
+
+.consent-item input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.consent-text {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.4;
+    flex: 1;
+    font-weight: 500;
+}
+
+.main-consent .consent-text {
+    font-weight: 600;
+    color: #235FD2;
+}
+
+.arrow {
+    font-size: 16px;
+    color: #9CA3AF;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+/* 상세 동의 항목들 */
+.consent-details {
+    background: #F8F9FA;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 16px;
+}
+
+.consent-details .consent-group {
+    margin-bottom: 8px;
+    border: 1px solid #E5E7EB;
+    background: #fff;
+}
+
+.consent-details .consent-group:last-of-type {
+    margin-bottom: 0;
+}
+
+/* 동의시 안내문 */
+.consent-notice {
+    padding: 12px;
+    background: #FEF3C7;
+    border-radius: 6px;
+    margin-top: 8px;
+}
+
+.consent-notice p {
+    font-size: 12px;
+    color: #92400E;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* 하단 버튼 */
+.bottom-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    background: #fff;
+    border-top: 1px solid #E5E7EB;
+    padding: 16px;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 12px;
+    }
+    
+    .consent-section {
+        padding: 16px;
+    }
+    
+    .consent-title {
+        font-size: 16px;
+    }
+    
+    .consent-item {
+        padding: 12px;
+    }
+    
+    .consent-text {
+        font-size: 13px;
+    }
+    
+    .consent-notice p {
+        font-size: 11px;
+    }
+    
+    .bottom-button {
+        padding: 12px;
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 10px;
+    }
+    
+    .btn {
+        height: 44px;
+        font-size: 15px;
+        flex: 1;
+    }
+}
+
+/* 스크롤바 스타일 */
+.main-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 2px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* 페이드인 애니메이션 */
+.consent-section {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 체크박스 애니메이션 */
+.checkmark {
+    transition: all 0.3s ease;
+}
+
+.consent-item input[type="checkbox"]:checked + .checkmark {
+    transform: scale(1.1);
+}
+
+.consent-item input[type="checkbox"]:checked + .checkmark::after {
+    animation: checkmark 0.3s ease-out 0.1s both;
+}
+
+@keyframes checkmark {
+    0% {
+        opacity: 0;
+        transform: rotate(45deg) scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: rotate(45deg) scale(1);
+    }
+}
+
+/* 호버 효과 강화 */
+.consent-group:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+}
+
+.main-consent:hover {
+    box-shadow: 0 4px 12px rgba(35, 95, 210, 0.15);
+}

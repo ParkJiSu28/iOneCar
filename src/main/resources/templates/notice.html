@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 결제하기</title>
+    <link rel="stylesheet" th:href="@{/css/notice.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 결제하기</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 대출신청 전 확인사항 -->
+            <div class="notice-section">
+                <h2 class="notice-title">대출신청 전 확인사항</h2>
+                
+                <!-- 대상 고객 -->
+                <div class="notice-item">
+                    <div class="notice-header">
+                        <div class="check-icon">✓</div>
+                        <h3 class="item-title">대상 고객</h3>
+                    </div>
+                    <div class="notice-content">
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">만 직장인 6개월 이상 재직 중이며, 기업은행에 12개월 이상 급여이체(매월 50만원 이상) 중인 고객</span>
+                        </div>
+                        <div class="content-item special-note">
+                            <span class="bullet">※</span>
+                            <span class="text">급여이체는 타행 급여이체도 신청 타행 전자 금융 등록 등에 '급여, 월급, 상여금'의 용어로 입금된 경우만 인정됩니다.</span>
+                        </div>
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">개인 CB등급 7등급 이내</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 대출 한도 -->
+                <div class="notice-item">
+                    <div class="notice-header">
+                        <div class="check-icon">✓</div>
+                        <h3 class="item-title">대출 한도</h3>
+                    </div>
+                    <div class="notice-content">
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">연소득 범위 내 "최소 1백만원~최대 5천만원"</span>
+                        </div>
+                        <div class="content-item special-note">
+                            <span class="bullet">※</span>
+                            <span class="text">대출한도는 신용등급, 기존 신용이력 총괄, 협력서비스 급여 등에 따라 고객별로 다를 수 있음</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 거치 확인 서류 -->
+                <div class="notice-item">
+                    <div class="notice-header">
+                        <div class="check-icon">✓</div>
+                        <h3 class="item-title">거치 확인 서류</h3>
+                    </div>
+                    <div class="notice-content">
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">대출 신청 단계에서 건강보험자격득실확인서 또는 국민연금 가입자 가입증명 정보를 기준으로 저희 검증</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 상품 정보의 이해 -->
+                <div class="notice-item">
+                    <div class="notice-header">
+                        <div class="check-icon">✓</div>
+                        <h3 class="item-title">상품 정보의 이해</h3>
+                    </div>
+                    <div class="notice-content">
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">대출금리는 신용등급에 따라 다르게 적용</span>
+                        </div>
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">당행대출 신규 고객은 0.1% 금리우대</span>
+                        </div>
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">변한상환방식 중 원리금균등 연장일 상환 시, 매년(약정일 기준)최저하여 0.1%(최대 0.2%)우대 가능</span>
+                        </div>
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">가계대출 금리목록에 의한 금리우대 적용(최대 0.2%)</span>
+                        </div>
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">수시상환(마이너스통장)은 0.5% 금리가산</span>
+                        </div>
+                        <div class="content-dropdown">
+                            <button class="dropdown-btn" onclick="toggleDropdown()">
+                                <span>가계대출 금리목록 세부내용</span>
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            <div class="dropdown-content" id="dropdownContent">
+                                <p>가계대출 금리목록에 대한 세부 내용이 여기에 표시됩니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 추가 안내 사항 -->
+                <div class="notice-item">
+                    <div class="notice-header">
+                        <div class="check-icon">✓</div>
+                        <h3 class="item-title">추가 안내 사항</h3>
+                    </div>
+                    <div class="notice-content">
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">본 상품은 통신인증 최대 3건까지 신청 가능함</span>
+                        </div>
+                        <div class="content-item">
+                            <span class="bullet">•</span>
+                            <span class="text">기타 문의에서 정한 신용등급 등 취급제한 사유에 따라 대출 차단이 거절될 수 있음</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 하단 확인 체크박스 -->
+                <div class="confirmation-section">
+                    <label class="confirmation-checkbox">
+                        <input type="checkbox" id="confirmCheckbox">
+                        <span class="checkmark"></span>
+                        <span class="confirmation-text">본인은 위 내용에 대해 충분히 이해하고, 대출을 신청합니다.</span>
+                    </label>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" onclick="goBack()">이전</button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="handleNext()">다음</button>
+        </div>
+    </div>
+
+    <script>
+        const confirmCheckbox = document.getElementById('confirmCheckbox');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // 체크박스 상태 변경 감지
+        confirmCheckbox.addEventListener('change', function() {
+            updateNextButton();
+        });
+
+        // 다음 버튼 상태 업데이트
+        function updateNextButton() {
+            if (confirmCheckbox.checked) {
+                nextBtn.classList.remove('btn-secondary');
+                nextBtn.classList.add('btn-primary');
+            } else {
+                nextBtn.classList.remove('btn-primary');
+                nextBtn.classList.add('btn-secondary');
+            }
+        }
+
+        // 드롭다운 토글
+        function toggleDropdown() {
+            const dropdownContent = document.getElementById('dropdownContent');
+            const dropdownBtn = document.querySelector('.dropdown-btn');
+            const arrow = dropdownBtn.querySelector('.dropdown-arrow');
+            
+            if (dropdownContent.style.display === 'block') {
+                dropdownContent.style.display = 'none';
+                arrow.textContent = '▼';
+            } else {
+                dropdownContent.style.display = 'block';
+                arrow.textContent = '▲';
+            }
+        }
+
+        // 다음 버튼 클릭 처리
+        function handleNext() {
+            if (!confirmCheckbox.checked) {
+                alert('대출신청 전 확인사항을 모두 확인하고 동의해주세요.');
+                return;
+            }
+            
+            // consent 페이지로 진행
+            window.location.href = '/consent';
+        }
+
+        // 이전 버튼 클릭
+        function goBack() {
+            window.location.href = '/verification/check';
+        }
+
+        // 초기 상태 설정
+        updateNextButton();
+    </script>
+</body>
+</html>

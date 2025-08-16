@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 결제하기</title>
+    <link rel="stylesheet" th:href="@{/css/verification.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 결제하기</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 안내 섹션 -->
+            <div class="info-section">
+                <div class="guardian-checkbox" data-question="guardianConfirm">
+                    <label class="checkbox-item">
+                        <input type="checkbox" id="guardianCheckbox" name="guardianConfirm">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">후견인 부존재 확인</span>
+                    </label>
+                </div>
+                <div class="info-description">
+                    본인과 관련하여 금일 현재 가정법원에 후견개시<br>
+                    심판을 청구하였거나, 가정법원에서 후견 개시결정을<br>
+                    받은 사실이 없음을 확인합니다.
+                </div>
+            </div>
+
+            <!-- 고객정보 입력 섹션 -->
+            <div class="customer-info-section">
+                <h2 class="section-title">계약서 수령 및 관리(권유)직원</h2>
+                
+                <div class="info-detail">
+                    <p>대출실행이 완료되면 '금융소비자 보호에 관한 법률'</p>
+                    <p>등에 따라 대출계약 주요사항 및 권편서류를 고객님의</p>
+                    <p>email 주소로 재공하여 드립니다.</p>
+                    <p class="highlight">
+                        (개정된 상품설명서는 i-ONE뱅크 내<br>
+                        '대출계획서류족희' 에서 확인하실 수 있습니다.)
+                    </p>
+                </div>
+
+                <div class="email-section">
+                    <div class="email-header">
+                        <span class="section-subtitle">계약서류 제공방법</span>
+                        <button class="change-btn">내정보변경</button>
+                    </div>
+                    
+                    <div class="email-info">
+                        <div class="email-label">e-mail</div>
+                        <div class="email-value" th:text="${customerInfo.email}">ibk1234@gmail.com</div>
+                    </div>
+                    
+                    <div class="email-notice">
+                        <p>• 계약서 내용을 받으실 email은 필수입니다.</p>
+                        <p>• 고객님의 email 주소를 확인하시고, 변경이 필요한</p>
+                        <p>&nbsp;&nbsp;경우에는 기업은행 i-ONE Bank에서 'myOne - 내정보'에서</p>
+                        <p>&nbsp;&nbsp;수정해 주시기 바랍니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 적합성·적정성 고객정보 확인서 -->
+            <div class="verification-form">
+                <h2 class="form-title">적합성·적정성 고객정보 확인서(개인용)</h2>
+                
+                <div class="form-description">
+                    본 확인서는 '금융소비자 보호에 관한 법률' 등<br>
+                    관계법령에 근거하여 영업, 대출 특정(할부) 등의<br>
+                    판매하는, 자금의 용도 및 조건에 대한 고객님의<br>
+                    투자성향과 위험성향을 파악하기 위해 작성하는<br>
+                    서류로 활용됩니다. 아래 항목요소에 고객님의<br>
+                    정보를 정확하게 선택 기재해 주시기 바랍니다.<br>
+                    상세(체크부시)하여주시기 바랍니다.
+                </div>
+
+                <!-- 금융소비자 유형 -->
+                <div class="form-group">
+                    <h3 class="group-title">금융소비자 유형</h3>
+                    <div class="form-row">
+                        <span class="label">소비자 유형</span>
+                        <span class="value" th:text="${customerInfo.consumerType}">일반금융 소비자</span>
+                    </div>
+                    <div class="form-row">
+                        <span class="label">연령</span>
+                        <span class="value" th:text="${customerInfo.age}">42세</span>
+                    </div>
+                </div>
+
+                <!-- 적합성·적정성 관련 정보 -->
+                <div class="form-group">
+                    <h3 class="group-title">적합성·적정성 관련 정보</h3>
+                    
+                    <!-- 대출용도 -->
+                    <div class="question-group" data-question="loanPurpose">
+                        <h4 class="question-title">대출용도</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="loanPurpose" value="household">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">가계일반자금</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="loanPurpose" value="housing">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">주택자금</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="loanPurpose" value="rental">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">임차자금</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="loanPurpose" value="debtConsolidation">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">타기관 대출금 상환</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="loanPurpose" value="other">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">기타(자동차구입)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 보유자산 -->
+                    <div class="question-group" data-question="assets">
+                        <h4 class="question-title">보유자산</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="assets" value="under100">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">1억 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="assets" value="100to1000">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">1억 이상 10억 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="assets" value="over1000">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">10억 이상</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 현재소득 -->
+                    <div class="question-group" data-question="income">
+                        <h4 class="question-title">현재소득</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="income" value="under20">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">2천만원 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="income" value="20to100">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">2천만원 이상 1억 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="income" value="over100">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">1억 이상</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 미래예상소득 -->
+                    <div class="question-group" data-question="futureIncome">
+                        <h4 class="question-title">미래예상소득</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="futureIncome" value="decrease">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재보다 감소</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="futureIncome" value="maintain">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재수준 유지</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="futureIncome" value="increase">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재보다 증가</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 부채 -->
+                    <div class="question-group" data-question="debt">
+                        <h4 class="question-title">부채</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="debt" value="under100">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">1억 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="debt" value="100to1000">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">1억 이상 10억 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="debt" value="over1000">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">10억 이상</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 고정지출 -->
+                    <div class="question-group" data-question="fixedExpense">
+                        <h4 class="question-title">고정지출</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="fixedExpense" value="10percent">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재소득의 10% 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="fixedExpense" value="10to50percent">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재소득의 10% 이상 50% 미만</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="fixedExpense" value="over50percent">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재소득의 50% 이상</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 연체정보 -->
+                    <div class="question-group" data-question="creditHistory">
+                        <h4 class="question-title">연체정보</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="creditHistory" value="currentDelay">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재 연체 중이며 연체정리가 어려움</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="creditHistory" value="delayButResolving">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재 연체 중이나 정리예정</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="creditHistory" value="noDelay">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">현재 연체정보 없음</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 신용점수 -->
+                    <div class="question-group" data-question="creditScore">
+                        <h4 class="question-title">신용점수</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="creditScore" value="input">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">입력하기</span>
+                                <div class="score-input-container" id="scoreInputContainer">
+                                    <input type="text" id="scoreInput" class="score-input" placeholder="점수 입력" maxlength="3" disabled>
+                                    <span class="score-unit">점</span>
+                                </div>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="creditScore" value="unknown">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">잘모름</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 평가기준 -->
+                    <div class="question-group" data-question="evaluationStandard">
+                        <h4 class="question-title">평가기준</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="evaluationStandard" value="kcb">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">KCB 신용평가</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="evaluationStandard" value="nice">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">NICE 신용평가</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 변제방법 -->
+                    <div class="question-group" data-question="repaymentMethod">
+                        <h4 class="question-title">변제방법</h4>
+                        <div class="radio-group">
+                            <label class="radio-item">
+                                <input type="radio" name="repaymentMethod" value="salary">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">근로소득</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="repaymentMethod" value="business">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">사업소득</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="repaymentMethod" value="rental">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">임대소득</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="repaymentMethod" value="pension">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">연금소득</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="repaymentMethod" value="financial">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">금융소득</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="repaymentMethod" value="other">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">기타소득</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" onclick="showCancelModal()">이전</button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="handleNext()">다음</button>
+        </div>
+    </div>
+
+    <!-- 고객확인 취소 모달 -->
+    <div class="cancel-modal-overlay" id="cancelModalOverlay">
+        <div class="cancel-modal" id="cancelModal">
+            <div class="cancel-modal-content">
+                <h3 class="cancel-modal-title">고객확인을 취소합니다.</h3>
+                <p class="cancel-modal-text">이전 단계로 돌아가시겠습니까?</p>
+                
+                <div class="cancel-modal-buttons">
+                    <button class="btn btn-secondary" onclick="hideCancelModal()">취소</button>
+                    <button class="btn btn-primary" onclick="confirmCancel()">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 모든 질문 그룹 (후견인 확인 포함)
+        const questionGroups = document.querySelectorAll('.question-group');
+        const guardianCheckbox = document.getElementById('guardianCheckbox');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        // 각 질문의 선택 상태를 추적
+        const selections = {};
+        
+        // 후견인 체크박스 변경 감지
+        guardianCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                selections['guardianConfirm'] = true;
+            } else {
+                delete selections['guardianConfirm'];
+            }
+            updateNextButton();
+        });
+        
+        // 라디오 버튼 변경 감지
+        questionGroups.forEach(group => {
+            const questionName = group.dataset.question;
+            const radioInputs = group.querySelectorAll('input[type="radio"]');
+            
+            radioInputs.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // 대출용도 검증
+                    if (questionName === 'loanPurpose' && this.value !== 'other') {
+                        alert('본건의 대출은 자동차구입 목적입니다. 기타(자동차구입)을 선택해주세요');
+                        // 선택 해제
+                        this.checked = false;
+                        delete selections[questionName];
+                        updateNextButton();
+                        return;
+                    }
+                    
+                    // 신용점수 입력하기 선택 시 입력칸 활성화
+                    if (questionName === 'creditScore') {
+                        const scoreInput = document.getElementById('scoreInput');
+                        if (this.value === 'input') {
+                            scoreInput.disabled = false;
+                            scoreInput.focus();
+                            // 입력값이 있는 경우에만 selections에 추가
+                            if (scoreInput.value && scoreInput.value.length > 0) {
+                                selections[questionName] = this.value;
+                            } else {
+                                // 입력값이 없으면 selections에서 제거
+                                delete selections[questionName];
+                            }
+                        } else {
+                            scoreInput.disabled = true;
+                            scoreInput.value = '';
+                            selections[questionName] = this.value;
+                        }
+                    } else {
+                        selections[questionName] = this.value;
+                    }
+                    
+                    updateNextButton();
+                });
+            });
+        });
+        
+        // 다음 버튼 상태 업데이트
+        function updateNextButton() {
+            const requiredQuestions = ['guardianConfirm', 'loanPurpose', 'assets', 'income', 'futureIncome', 'debt', 'fixedExpense', 'creditHistory', 'creditScore', 'evaluationStandard', 'repaymentMethod'];
+            const selectedQuestions = Object.keys(selections);
+            
+            const allSelected = requiredQuestions.every(question => selectedQuestions.includes(question));
+            
+            if (allSelected) {
+                nextBtn.classList.remove('btn-secondary');
+                nextBtn.classList.add('btn-primary');
+                nextBtn.disabled = false;
+            } else {
+                nextBtn.classList.remove('btn-primary');
+                nextBtn.classList.add('btn-secondary');
+                nextBtn.disabled = false; // 클릭은 가능하게 하여 미선택 항목으로 스크롤
+            }
+        }
+        
+        // 다음 버튼 클릭 처리
+        function handleNext() {
+            const requiredQuestions = ['guardianConfirm', 'loanPurpose', 'assets', 'income', 'futureIncome', 'debt', 'fixedExpense', 'creditHistory', 'creditScore', 'evaluationStandard', 'repaymentMethod'];
+            
+            // 각 항목별 상세 검증
+            let firstUnselectedQuestion = null;
+            
+            for (let question of requiredQuestions) {
+                if (question === 'guardianConfirm') {
+                    if (!document.getElementById('guardianCheckbox').checked) {
+                        firstUnselectedQuestion = question;
+                        break;
+                    }
+                } else if (question === 'creditScore') {
+                    const creditScoreRadio = document.querySelector('input[name="creditScore"]:checked');
+                    if (!creditScoreRadio) {
+                        firstUnselectedQuestion = question;
+                        break;
+                    } else if (creditScoreRadio.value === 'input') {
+                        const scoreInput = document.getElementById('scoreInput');
+                        if (!scoreInput.value || scoreInput.value.length === 0) {
+                            firstUnselectedQuestion = question;
+                            break;
+                        }
+                    }
+                } else {
+                    const selectedRadio = document.querySelector(`input[name="${question}"]:checked`);
+                    if (!selectedRadio) {
+                        firstUnselectedQuestion = question;
+                        break;
+                    }
+                }
+            }
+            
+            // 미선택 항목이 있으면 해당 위치로 스크롤
+            if (firstUnselectedQuestion) {
+                if (firstUnselectedQuestion === 'guardianConfirm') {
+                    const guardianSection = document.querySelector('.guardian-checkbox');
+                    guardianSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    guardianSection.classList.add('highlight-required');
+                    setTimeout(() => {
+                        guardianSection.classList.remove('highlight-required');
+                    }, 2000);
+                } else {
+                    const unselectedGroup = document.querySelector(`[data-question="${firstUnselectedQuestion}"]`);
+                    if (unselectedGroup) {
+                        unselectedGroup.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // 해당 그룹을 잠시 강조
+                        unselectedGroup.classList.add('highlight-required');
+                        setTimeout(() => {
+                            unselectedGroup.classList.remove('highlight-required');
+                        }, 2000);
+                    }
+                }
+                return;
+            }
+            
+            // 모든 항목이 선택되었으면 verification check 페이지로 이동
+            // 선택된 데이터를 세션스토리지에 저장
+            saveVerificationData();
+            // verification check 페이지로 이동
+            window.location.href = '/verification/check';
+        }
+        
+        // 신용점수 입력 관련
+        const scoreInput = document.getElementById('scoreInput');
+        
+        // 숫자만 입력 허용하는 이벤트 핸들러
+        scoreInput.addEventListener('input', function() {
+            // 숫자가 아닌 문자 제거
+            this.value = this.value.replace(/[^0-9]/g, '');
+            
+            // 3자리 제한
+            if (this.value.length > 3) {
+                this.value = this.value.slice(0, 3);
+            }
+            
+            // 신용점수 입력하기가 선택된 상태에서만 처리
+            const creditScoreRadio = document.querySelector('input[name="creditScore"]:checked');
+            if (creditScoreRadio && creditScoreRadio.value === 'input') {
+                if (this.value && this.value.length > 0) {
+                    selections['creditScore'] = 'input';
+                } else {
+                    delete selections['creditScore'];
+                }
+                updateNextButton();
+            }
+        });
+        
+        // 키보드 입력 시 숫자가 아닌 키 차단
+        scoreInput.addEventListener('keypress', function(e) {
+            // 숫자, 백스페이스, 삭제, 탭, 화살표 키만 허용
+            if (!/[0-9]/.test(e.key) && 
+                !['Backspace', 'Delete', 'Tab', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+        
+        // 취소 모달 관련
+        function showCancelModal() {
+            const overlay = document.getElementById('cancelModalOverlay');
+            const modal = document.getElementById('cancelModal');
+            
+            overlay.style.display = 'flex';
+            overlay.style.opacity = '0';
+            modal.style.transform = 'scale(0.8)';
+            
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                modal.style.transform = 'scale(1)';
+            }, 10);
+        }
+        
+        function hideCancelModal() {
+            const overlay = document.getElementById('cancelModalOverlay');
+            const modal = document.getElementById('cancelModal');
+            
+            overlay.style.opacity = '0';
+            modal.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 300);
+        }
+        
+        function confirmCancel() {
+            hideCancelModal();
+            // payment 페이지로 이동
+            window.location.href = '/payment';
+        }
+        
+        // verification 데이터 저장 함수
+        function saveVerificationData() {
+            const data = {};
+            
+            // 후견인 확인
+            data.guardianConfirm = document.getElementById('guardianCheckbox').checked;
+            
+            // 각 라디오 버튼 선택값 수집
+            const questions = ['loanPurpose', 'assets', 'income', 'futureIncome', 'debt', 'fixedExpense', 'creditHistory', 'creditScore', 'evaluationStandard', 'repaymentMethod'];
+            
+            questions.forEach(question => {
+                const selectedRadio = document.querySelector(`input[name="${question}"]:checked`);
+                if (selectedRadio) {
+                    data[question] = selectedRadio.value;
+                    
+                    // 신용점수 입력값도 함께 저장
+                    if (question === 'creditScore' && selectedRadio.value === 'input') {
+                        const scoreInput = document.getElementById('scoreInput');
+                        data.creditScoreValue = scoreInput.value;
+                    }
+                }
+            });
+            
+            // 세션스토리지에 저장
+            sessionStorage.setItem('verificationData', JSON.stringify(data));
+        }
+        
+        // 초기 상태 설정
+        updateNextButton();
+    </script>
+</body>
+</html>
