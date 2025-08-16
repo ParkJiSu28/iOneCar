@@ -22,5 +22,16 @@
     )
 </insert>
 
+<select id="selectPurchaseByCarSrn" parameterType="long" resultType="com.ionecar.domain.Purchase">
+    SELECT 
+        car_srn,
+        purchase_method,
+        purchase_period,
+        purchase_advance,
+        purchase_location,
+        purchase_dutyFree
+    FROM Purchase 
+    WHERE car_srn = #{carSrn}
+</select>
 
 </mapper>
