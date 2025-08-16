@@ -10,5 +10,6 @@ public class MyQuote {
     private String carSubClass;   // ex) 2025형 해치백 가솔린
     private String purchaseMethod;    // ex) 할부
     private Long purchasePeriod;         // ex) 48개월
+    private String progress;        // Deal 테이블의 progress
 
 }

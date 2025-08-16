@@ -1,0 +1,589 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 48px;
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px; /* 하단 버튼 공간 확보 */
+}
+
+/* 안내 섹션 */
+.info-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.guardian-checkbox {
+    margin-bottom: 16px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #E5E7EB;
+    border-radius: 4px;
+    margin-right: 12px;
+    margin-top: 2px;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark {
+    background: #235FD2;
+    border-color: #235FD2;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    line-height: 1.4;
+}
+
+.info-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* 고객정보 섹션 */
+.customer-info-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 16px 0;
+}
+
+.info-detail {
+    margin-bottom: 20px;
+}
+
+.info-detail p {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    margin: 2px 0;
+}
+
+.info-detail .highlight {
+    color: #235FD2;
+    font-weight: 500;
+}
+
+.email-section {
+    border-top: 1px solid #F0F0F0;
+    padding-top: 20px;
+}
+
+.email-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.change-btn {
+    padding: 6px 12px;
+    background: #235FD2;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.change-btn:hover {
+    background: #1E40AF;
+}
+
+.email-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.email-label {
+    font-size: 14px;
+    color: #666;
+    margin-right: 20px;
+    min-width: 60px;
+}
+
+.email-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.email-notice {
+    background: #F8F9FA;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.email-notice p {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.4;
+    margin: 2px 0;
+}
+
+/* 적합성 확인서 폼 */
+.verification-form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+.form-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 16px 0;
+    text-align: center;
+}
+
+.form-description {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.form-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.group-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px 0;
+}
+
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.form-row:last-child {
+    border-bottom: none;
+}
+
+.form-row .label {
+    font-size: 14px;
+    color: #666;
+    font-weight: 500;
+}
+
+.form-row .value {
+    font-size: 14px;
+    color: #000;
+    font-weight: 600;
+}
+
+/* 질문 그룹 */
+.question-group {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.question-group:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.question-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    margin: 0 0 16px 0;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+    position: relative;
+}
+
+.radio-item:hover {
+    background: #F8F9FA;
+}
+
+.radio-item input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #E5E7EB;
+    border-radius: 50%;
+    margin-right: 12px;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.radio-item input[type="radio"]:checked + .radio-custom {
+    border-color: #235FD2;
+    background: #235FD2;
+}
+
+.radio-item input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.radio-text {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.4;
+    flex: 1;
+}
+
+/* 신용점수 입력 */
+.score-input-container {
+    display: flex;
+    align-items: center;
+    margin-left: 32px;
+    margin-top: 8px;
+}
+
+.score-input {
+    width: 80px;
+    height: 36px;
+    border: 1px solid #E5E7EB;
+    border-radius: 6px;
+    padding: 0 8px;
+    font-size: 14px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+.score-input:disabled {
+    background: #F3F4F6;
+    color: #9CA3AF;
+}
+
+.score-input:focus {
+    outline: none;
+    border-color: #235FD2;
+}
+
+.score-unit {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 하단 버튼 */
+.bottom-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    background: #fff;
+    border-top: 1px solid #E5E7EB;
+    padding: 16px;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 12px;
+    }
+    
+    .section-header {
+        padding: 14px 16px;
+    }
+    
+    .section-content {
+        padding: 16px;
+    }
+    
+    .step-title {
+        font-size: 15px;
+    }
+    
+    .step-description {
+        font-size: 13px;
+    }
+    
+    .form-title,
+    .section-title {
+        font-size: 15px;
+    }
+    
+    .bottom-button {
+        padding: 12px;
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 10px;
+    }
+    
+    .btn {
+        height: 44px;
+        font-size: 15px;
+        flex: 1;
+    }
+}
+
+/* 스크롤바 스타일 */
+.main-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 2px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* 취소 모달 */
+.cancel-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cancel-modal {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 280px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.cancel-modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.cancel-modal-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    margin: 0;
+}
+
+.cancel-modal-text {
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.cancel-modal-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+/* 강조 애니메이션 */
+.highlight-required {
+    animation: highlightPulse 2s ease-in-out;
+}
+
+@keyframes highlightPulse {
+    0% { background-color: transparent; }
+    25% { background-color: rgba(235, 95, 211, 0.1); }
+    50% { background-color: rgba(235, 95, 211, 0.2); }
+    75% { background-color: rgba(235, 95, 211, 0.1); }
+    100% { background-color: transparent; }
+}

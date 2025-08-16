@@ -36,8 +36,8 @@
                     <!-- 차량 정보 -->
                     <div class="car-info">
                         <div class="car-details">
-                            <h3 class="car-name">벤츠 A-Class</h3>
-                            <p class="car-spec">2025형 해치백 가솔린 2.0 A 220</p>
+                            <h3 class="car-name" th:text="${car.carClass}"></h3>
+                            <p class="car-spec" th:text="${car.carSubClass}"></p>
                         </div>
                         <div class="car-image">
                             <img src="/css/images/a-class.png" alt="A-Class" class="car-img">
@@ -48,22 +48,24 @@
                     <div class="price-info">
                         <div class="price-row">
                             <span class="price-label">차량 기본가</span>
-                            <span class="price-value">48,100,000원</span>
+                            <span class="price-value" th:text="${#numbers.formatInteger(car.carPrice, 0, 'COMMA')} + '원'">48,100,000원</span>
                         </div>
                         <div class="price-row">
                             <span class="price-label">추가 옵션가</span>
-                            <span class="price-value">+520,000원</span>
+                            <span class="price-value" th:text="'+' + ${#numbers.formatInteger(optPrice, 0, 'COMMA')} + '원'">+520,000원</span>
                         </div>
-                        <div class="price-row option-detail">
-                            <span class="option-text">버튼시동팩</span>
+                        <!-- 옵션 상세 정보 -->
+                        <div th:each="option : ${options}" class="price-row option-detail">
+                            <span class="option-text" th:text="${option.optName}">버튼시동팩</span>
+                            <span class="option-price" th:text="${#numbers.formatInteger(option.optPrice, 0, 'COMMA')} + '원'"></span>
                         </div>
                         <div class="price-row discount">
                             <span class="price-label">할인가</span>
-                            <span class="price-value discount">-5,000,000원</span>
+                            <span class="price-value discount" th:text="'-' + ${#numbers.formatInteger(discount, 0, 'COMMA')} + '원'">-5,000,000원</span>
                         </div>
                         <div class="price-row total">
                             <span class="price-label">총 예상금액</span>
-                            <span class="price-value total">43,620,000원</span>
+                            <span class="price-value total" th:text="${#numbers.formatInteger(car.carPrice + optPrice - discount, 0, 'COMMA')} + '원'">43,620,000원</span>
                         </div>
                         <div class="price-note">
                             차량가는 개별 소비세 3.5%가 적용된 가격입니다.
@@ -86,12 +88,12 @@
                 <div class="section-content" id="registration-content">
                     <div class="registration-total">
                         <span class="total-label">합계</span>
-                        <span class="total-amount">2,834,246원</span>
+                        <span class="total-amount" th:text="${#numbers.formatInteger((car.carPrice * 0.07) + (car.carPrice * 0.12 * 0.05), 0, 'COMMA')} + '원'">2,834,246원</span>
                     </div>
                     <div class="registration-details">
                         <div class="detail-row">
                             <span class="detail-label">취득세</span>
-                            <span class="detail-value">2,648,545원</span>
+                            <span class="detail-value" th:text="${#numbers.formatInteger(car.carPrice * 0.07, 0, 'COMMA')} + '원'">2,648,545원</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">면세조건</span>
@@ -99,7 +101,7 @@
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">공채할인(예상)</span>
-                            <span class="detail-value">185,701원</span>
+                            <span class="detail-value" th:text="${#numbers.formatInteger(car.carPrice * 0.12 * 0.05, 0, 'COMMA')} + '원'">185,701원</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">탁송료</span>
@@ -127,7 +129,7 @@
                 <div class="section-content" id="purchase-content">
                     <div class="purchase-method">
                         <span class="method-label">구매방법</span>
-                        <span class="method-value">할부</span>
+                        <span class="method-value" th:text="${purchase != null ? (purchase.purchaseMethod == 'I' ? '할부' : (purchase.purchaseMethod == 'C' ? '일시불' : '할부')) : '할부'}">할부</span>
                     </div>
                     <div class="purchase-details">
                         <div class="detail-row">
@@ -136,27 +138,30 @@
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">할부신청금</span>
-                            <span class="detail-value">33,620,000원</span>
+                            <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger(purchase.purchaseAdvance, 0, 'COMMA') + '원' : '33,620,000원'}">33,620,000원</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">할부기간</span>
-                            <span class="detail-value">48개월</span>
+                            <span class="detail-value" th:text="${purchase != null ? purchase.purchasePeriod + '개월' : '48개월'}">48개월</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">선납금</span>
-                            <span class="detail-value">10,000,000원</span>
+                            <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}">10,000,000원</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">금리(연)</span>
-                            <span class="detail-value">7%</span>
+                            <span class="detail-value" th:text="${rate != null ? rate + '%' : '7%'}"></span>
                         </div>
                         <div class="detail-row highlight">
                             <span class="detail-label">월 납입금</span>
-                            <span class="detail-value highlight">805,073원</span>
+                            <span class="detail-value highlight" th:text="${purchase != null && rate != null ? #numbers.formatInteger(T(java.lang.Math).round((purchase.purchaseAdvance * (1 + rate/100)) / purchase.purchasePeriod), 0, 'COMMA') + '원' : '805,073원'}">805,073원</span>
                         </div>
                         <div class="detail-row">
                             <span class="detail-label">출고전 납입금액</span>
-                            <span class="detail-value">10,000,000원</span>
+                            <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) + (car.carPrice * 0.07) + (car.carPrice * 0.12 * 0.05) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}">10,000,000원</span>
+                        </div>
+                        <div class="detail-note" style="font-size: 12px; color: #666; margin-top: 5px;">
+                            차량등록금액이 포함된 금액입니다.
                         </div>
                     </div>
                 </div>
@@ -166,7 +171,7 @@
             <div class="car-details-section">
                 <div class="detail-row">
                     <span class="detail-label">지역</span>
-                    <span class="detail-value">서울</span>
+                    <span class="detail-value" th:text="${purchase != null ? purchase.purchaseLocation : '서울'}"></span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">재고유무</span>
@@ -174,11 +179,11 @@
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">외장색상</span>
-                    <span class="detail-value">폴라 화이트</span>
+                    <span class="detail-value" th:text="${car.carColor != null ? car.carColor : '폴라 화이트'}">폴라 화이트</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">내장색상</span>
-                    <span class="detail-value">아티코 블랙 / 블랙</span>
+                    <span class="detail-value" th:text="${car.carInteriorColor != null ? car.carInteriorColor : '아티코 블랙 / 블랙'}">아티코 블랙 / 블랙</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">포함서비스</span>
@@ -216,15 +221,17 @@
             </div>
 
             <!-- 딜러 정보 -->
-            <div class="dealer-section">
-                <div class="dealer-info">
+            <div class="dealer-section" th:if="${compares != null and !compares.isEmpty()}">
+                <div th:each="compare : ${compares}" class="dealer-info">
                     <div class="dealer-profile">
                         <div class="dealer-avatar">
-                            <img src="/css/images/dealer1.png" alt="딜러" class="avatar-img">
+                            <img th:src="@{/css/images/dealer1.png}" alt="딜러" class="avatar-img">
                         </div>
                         <div class="dealer-details">
                             <div class="dealer-name">
-                                <span>벤츠박사</span>
+                                <span th:onclick="'goToProfile(\'' + ${compare.dealerNo} + '\')'" 
+                                      style="cursor: pointer;" 
+                                      th:text="${compare.dealerName}">벤츠박사</span>
                                 <div class="verified-badge">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="#235FD2">
                                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
@@ -232,8 +239,8 @@
                                 </div>
                             </div>
                             <div class="dealer-stats">
-                                <span class="rating">5.0(67)</span>
-                                <span class="quotes">매칭견적 1,416건</span>
+                                <span class="rating" th:text="${compare.rating} + '(' + ${compare.reviewCnt} + ')'">5.0(67)</span>
+                                <span class="quotes" th:text="'매칭견적 ' + ${compare.quotationCnt} + '건'">매칭견적 1,416건</span>
                             </div>
                         </div>
                     </div>
@@ -338,40 +345,68 @@
              }, 300);
          }
 
-         function confirmSelection() {
-             const checkbox = document.getElementById('confirmCheckbox');
-             if (!checkbox.checked) {
-                 alert('위 내용을 모두 확인해 주세요.');
-                 return;
-             }
-             
-             // URL에서 edpsCsn과 carSrn 파라미터 가져오기
-             const urlParams = new URLSearchParams(window.location.search);
-             const edpsCsn = urlParams.get('edpsCsn');
-             const carSrn = urlParams.get('carSrn');
-             
-             // submit_deal 페이지로 이동
-             let redirectUrl = '/quote/submit-deal';
-             if (edpsCsn) {
-                 redirectUrl += '?edpsCsn=' + edpsCsn;
-                 if (carSrn) {
-                     redirectUrl += '&carSrn=' + carSrn;
-                 }
-             }
-             
-             window.location.href = redirectUrl;
-         }
+        function confirmSelection() {
+            const checkbox = document.getElementById('confirmCheckbox');
+            if (!checkbox.checked) {
+                alert('위 내용을 모두 확인해 주세요.');
+                return;
+            }
+            
+            // URL에서 파라미터 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const edpsCsn = urlParams.get('edpsCsn');
+            const carSrn = urlParams.get('carSrn');
+            const dealerNo = urlParams.get('dealerNo');
+            
+            // Deal progress 업데이트 API 호출
+            if (carSrn && dealerNo) {
+                const formData = new FormData();
+                formData.append('carSrn', carSrn);
+                formData.append('dealerNo', dealerNo);
+                
+                fetch('/myquote/deal/confirm', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('Deal progress updated successfully');
+                    } else {
+                        console.error('Failed to update deal progress');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error updating deal progress:', error);
+                });
+            }
+            
+            // submit_deal 페이지로 이동
+            let redirectUrl = '/quote/submit-deal';
+            if (edpsCsn) {
+                redirectUrl += '?edpsCsn=' + edpsCsn;
+                if (carSrn) {
+                    redirectUrl += '&carSrn=' + carSrn;
+                }
+            }
+            
+            window.location.href = redirectUrl;
+        }
 
-         // 페이지 로드 시 모든 섹션을 펼쳐진 상태로 시작
-         document.addEventListener('DOMContentLoaded', function() {
-             const sections = ['detail', 'registration', 'purchase', 'requests'];
-             sections.forEach(sectionId => {
-                 const icon = document.getElementById(sectionId + '-icon');
-                 if (icon) {
-                     icon.style.transform = 'rotate(0deg)';
-                 }
-             });
-         });
+                 // 페이지 로드 시 모든 섹션을 펼쳐진 상태로 시작
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = ['detail', 'registration', 'purchase', 'requests'];
+            sections.forEach(sectionId => {
+                const icon = document.getElementById(sectionId + '-icon');
+                if (icon) {
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // 딜러 프로필로 이동하는 함수
+        function goToProfile(dealerNo) {
+            window.location.href = '/profile?dealerNo=' + dealerNo;
+        }
      </script>
 </body>
 </html> 

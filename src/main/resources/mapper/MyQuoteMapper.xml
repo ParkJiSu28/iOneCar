@@ -5,16 +5,20 @@
 <mapper namespace="com.ionecar.mapper.MyQuoteMapper">
 
     <select id="selectMyQuoteByEdpsCsn" parameterType="java.lang.Long" resultType="com.ionecar.domain.MyQuote">
-        select 
+        SELECT 
             a.edps_csn as edpsCsn,
             a.car_srn as carSrn, 
             a.car_class as carClass,
             a.car_sub_class as carSubClass, 
             b.purchase_method as purchaseMethod,
-            b.purchase_period as purchasePeriod 
-            from Car a
-            inner join Purchase b on a.car_srn = b.car_srn
-            where a.edps_csn = #{edpsCsn}
-            order by a.car_srn desc
+            b.purchase_period as purchasePeriod,
+            COALESCE(MAX(d.progress), '1') as progress
+        FROM Car a
+        INNER JOIN Purchase b ON a.car_srn = b.car_srn
+        LEFT JOIN Dealer c ON c.car_srn = a.car_srn
+        LEFT JOIN Deal d ON d.dealer_no = c.dealer_no AND d.car_srn = a.car_srn
+        WHERE a.edps_csn = #{edpsCsn}
+        GROUP BY a.edps_csn, a.car_srn, a.car_class, a.car_sub_class, b.purchase_method, b.purchase_period
+        ORDER BY a.car_srn DESC
     </select>
 </mapper>

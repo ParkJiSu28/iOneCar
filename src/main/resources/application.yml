@@ -15,7 +15,7 @@ spring:
     remote:
       restart:
         enabled: false
-web:
+  web:
     resources:
       cache:
         cachecontrol:

@@ -19,11 +19,11 @@
         <!-- 차량정보/이미지 -->
         <div class="car-info-row">
             <div class="car-info-text">
-                <div class="car-name" th:text="${carClass}">벤츠 A-Class</div>
+                <div class="car-name" th:text="${carClass}"></div>
                 <div class="car-desc">
-                    <span th:text="${carSubClass}">2025형 해치백 가솔린 2.0 A220</span><br/>
-                    <span th:text="${purchaseMethod}">할부</span>
-                    <span th:text="${purchasePeriod} + '개월'">48개월</span>
+                    <span th:text="${carSubClass}"></span><br/>
+                    <span th:text="${purchaseMethod}"></span>
+                    <span th:text="${purchasePeriod} + '개월'"></span>
                 </div>
             </div>
             <div class="car-img-block">
@@ -36,23 +36,25 @@
             <!-- 차량 기본가 -->
             <div class="price-detail">
                 <span class="label">차량 기본가</span>
-                <span class="value" th:text="${#numbers.formatInteger(carPrice, 0, 'COMMA')} + '원'">48,100,000원</span>
+                <span class="value" th:text="${#numbers.formatInteger(carPrice, 0, 'COMMA')} + '원'"></span>
             </div>
             <!-- 추가 옵션가 -->
             <div class="price-detail">
                 <span class="label">추가 옵션가</span>
-                <span class="value" th:text="${#numbers.formatInteger(optPrice, 0, 'COMMA')} + '원'">520,000원</span>
+                <span class="value" th:text="${#numbers.formatInteger(optPrice, 0, 'COMMA')} + '원'"></span>
             </div>
             <!-- 총 예상금액 -->
             <div class="price-detail total">
                 <span class="label">총 예상금액</span>
-                <span class="value" th:text="${#numbers.formatInteger(carPrice + optPrice, 0, 'COMMA')} + '원'">48,620,000원</span>
+                <span class="value" th:text="${#numbers.formatInteger(carPrice + optPrice, 0, 'COMMA')} + '원'"></span>
             </div>
         </div>
 
         <!-- 딜러 정보를 동적으로 표시 -->
         <div th:each="compare : ${compares}" class="dealer-label-with-card">
-            <div class="dealer-label">딜러와 상담요청전입니다.</div>
+            <div class="dealer-label" 
+                 th:text="${compare.progress == '1' ? '딜러와 상담요청 전입니다.' : (compare.progress == '2' ? '딜러와 상담이 진행중입니다.' : '딜러와 상담요청 전입니다.')}"
+                 th:style="${compare.progress == '2' ? 'color: red;' : ''}"></div>
             <div class="dealer-card">
                 <img th:src="@{/css/images/dealer1.png}" alt="딜러 프로필" class="dealer-photo" />
                 <div class="dealer-profile-info">
@@ -60,34 +62,35 @@
                     <span class="dealer-rating">
                         <img th:src="@{/css/images/star.png}" alt="별" class="star-icon" />
                         <span th:text="${compare.rating}">5.0</span>
-                        <span class="review-count" th:text="'(' + ${compare.reviewCnt} + ')'">(67)</span>
+                        <span class="review-count" th:text="'(' + ${compare.reviewCnt} + ')'"></span>
                     </span>
-                    <span class="quotation-count" th:text="${compare.quotationCnt} + '건'">1,416건</span>
+                    <span class="quotation-count" th:text="${compare.quotationCnt} + '건'"></span>
                 </div>
                 <div class="dealer-body">
                     <div class="info-col">
                         <span class="label">할인금액</span>
-                        <span class="value" th:text="${#numbers.formatInteger(compare.discount, 0, 'COMMA')} + '원'">5,000,000원</span>
+                        <span class="value" th:text="${#numbers.formatInteger(compare.discount, 0, 'COMMA')} + '원'"></span>
                     </div>
-                    <div class="info-col">
+                    <!-- 구매방법에 따른 조건부 표시 -->
+                    <div th:if="${purchase != null and purchase.purchaseMethod == 'C'}" class="info-col">
+                        <span class="label">일시납</span>
+                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'"></span>
+                    </div>
+                    <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
                         <span class="label">월납입료</span>
-                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'">805,073원</span>
+                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'"></span>
                     </div>
-                    <div class="info-col">
+                    <!-- 이용금리는 일시불('C')이 아닐 때만 표시 -->
+                    <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
                         <span class="label">이용금리</span>
-                        <span class="value" th:text="${compare.rate} + '%'">7%</span>
+                        <span class="value" th:text="${compare.rate} + '%'"></span>
                     </div>
                 </div>
-                <a th:href="@{'/detailquote/' + ${compare.dealerNo}}" class="dealer-detail-btn">상세견적</a>
+                <a th:href="@{/myquote/detail(carSrn=${carSrn}, dealerNo=${compare.dealerNo})}" class="dealer-detail-btn">상세견적</a>
             </div>
         </div>
     </div>
 </div>
 
-<script>
-    function goToProfile(dealerNo) {
-        window.location.href = '/profile?dealerNo=' + dealerNo;
-    }
-</script>
 </body>
 </html>

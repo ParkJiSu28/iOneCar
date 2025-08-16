@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 결제하기</title>
+    <link rel="stylesheet" th:href="@{/css/verification_check.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 결제하기</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 신용기관 확인서 -->
+            <div class="check-result-section">
+                <h2 class="section-title">신용기관 확인서</h2>
+                
+                <div class="section-description">
+                    고객님께서 작성하신 내용을 바탕으로<br>
+                    적합성·적정성 평가 결과를 확인해 주세요.
+                </div>
+
+                <!-- 상품설명 제공방법 섹션 -->
+                <div class="info-group">
+                    <h3 class="group-title">상품설명 제공방법</h3>
+                    <div class="info-item">
+                        <span class="info-label">상품설명 제공방법</span>
+                        <span class="info-value" th:text="${customerInfo != null ? customerInfo.email : 'abc123@naver.com'}">abc123@naver.com</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">소비자 유형</span>
+                        <span class="info-value" th:text="${customerInfo != null ? customerInfo.consumerType : '일반금융 소비자'}">일반금융 소비자</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">연령</span>
+                        <span class="info-value" th:text="${customerInfo != null ? customerInfo.age : '48세'}">48세</span>
+                    </div>
+                </div>
+
+                <!-- 대출신청 정보 섹션 -->
+                <div class="info-group">
+                    <h3 class="group-title">대출신청 정보</h3>
+                    <div class="info-item">
+                        <span class="info-label">대출용도</span>
+                        <span class="info-value" id="loanPurposeResult">가계일반자금</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">보유자산</span>
+                        <span class="info-value" id="assetsResult">1억 미만</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">현재소득</span>
+                        <span class="info-value" id="incomeResult">2천만원 미만</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">미래예상소득</span>
+                        <span class="info-value" id="futureIncomeResult">현재보다 감소</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">부채</span>
+                        <span class="info-value" id="debtResult">1억 미만</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">고정지출</span>
+                        <span class="info-value" id="fixedExpenseResult">현재소득의 10% 미만</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">연체정보</span>
+                        <span class="info-value" id="creditHistoryResult">현재 연체 중이며 연체정리가 어려움</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">신용점수</span>
+                        <span class="info-value" id="creditScoreResult">900점</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">평가기관</span>
+                        <span class="info-value" id="evaluationStandardResult">KCB신용평가</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">변제방법</span>
+                        <span class="info-value" id="repaymentMethodResult">근로소득</span>
+                    </div>
+                </div>
+
+                <!-- 적합성 여부 섹션 -->
+                <div class="info-group">
+                    <h3 class="group-title">적합성 여부</h3>
+                    <div class="info-item">
+                        <span class="info-label">대출 적합성 여부</span>
+                        <span class="info-value suitable" id="eligibilityResult">적합(대출신청가능)</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" onclick="goBack()">이전</button>
+            <button class="btn btn-primary" onclick="completeVerification()">다음</button>
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 verification에서 전달받은 데이터 처리
+        document.addEventListener('DOMContentLoaded', function() {
+            // URL 파라미터나 세션스토리지에서 데이터 가져오기
+            loadVerificationData();
+        });
+
+        function loadVerificationData() {
+            // 세션스토리지에서 verification 데이터 가져오기
+            const verificationData = sessionStorage.getItem('verificationData');
+            
+            if (verificationData) {
+                const data = JSON.parse(verificationData);
+                updateResultDisplay(data);
+            } else {
+                // 기본값으로 설정 (개발용)
+                console.log('No verification data found, using default values');
+            }
+        }
+
+        function updateResultDisplay(data) {
+            // 대출용도 매핑
+            const loanPurposeMap = {
+                'household': '가계일반자금',
+                'housing': '주택자금',
+                'rental': '임차자금',
+                'debtConsolidation': '타기관 대출금 상환',
+                'other': '기타(자동차구입)'
+            };
+
+            // 보유자산 매핑
+            const assetsMap = {
+                'under100': '1억 미만',
+                '100to1000': '1억 이상 10억 미만',
+                'over1000': '10억 이상'
+            };
+
+            // 현재소득 매핑
+            const incomeMap = {
+                'under20': '2천만원 미만',
+                '20to100': '2천만원 이상 1억 미만',
+                'over100': '1억 이상'
+            };
+
+            // 미래예상소득 매핑
+            const futureIncomeMap = {
+                'decrease': '현재보다 감소',
+                'maintain': '현재수준 유지',
+                'increase': '현재보다 증가'
+            };
+
+            // 부채 매핑
+            const debtMap = {
+                'under100': '1억 미만',
+                '100to1000': '1억 이상 10억 미만',
+                'over1000': '10억 이상'
+            };
+
+            // 고정지출 매핑
+            const fixedExpenseMap = {
+                '10percent': '현재소득의 10% 미만',
+                '10to50percent': '현재소득의 10% 이상 50% 미만',
+                'over50percent': '현재소득의 50% 이상'
+            };
+
+            // 연체정보 매핑
+            const creditHistoryMap = {
+                'currentDelay': '현재 연체 중이며 연체정리가 어려움',
+                'delayButResolving': '현재 연체 중이나 정리예정',
+                'noDelay': '현재 연체정보 없음'
+            };
+
+            // 평가기준 매핑
+            const evaluationStandardMap = {
+                'kcb': 'KCB 신용평가',
+                'nice': 'NICE 신용평가'
+            };
+
+            // 변제방법 매핑
+            const repaymentMethodMap = {
+                'salary': '근로소득',
+                'business': '사업소득',
+                'rental': '임대소득',
+                'pension': '연금소득',
+                'financial': '금융소득',
+                'other': '기타소득'
+            };
+
+            // 결과 업데이트
+            if (data.loanPurpose) {
+                document.getElementById('loanPurposeResult').textContent = loanPurposeMap[data.loanPurpose] || data.loanPurpose;
+            }
+            if (data.assets) {
+                document.getElementById('assetsResult').textContent = assetsMap[data.assets] || data.assets;
+            }
+            if (data.income) {
+                document.getElementById('incomeResult').textContent = incomeMap[data.income] || data.income;
+            }
+            if (data.futureIncome) {
+                document.getElementById('futureIncomeResult').textContent = futureIncomeMap[data.futureIncome] || data.futureIncome;
+            }
+            if (data.debt) {
+                document.getElementById('debtResult').textContent = debtMap[data.debt] || data.debt;
+            }
+            if (data.fixedExpense) {
+                document.getElementById('fixedExpenseResult').textContent = fixedExpenseMap[data.fixedExpense] || data.fixedExpense;
+            }
+            if (data.creditHistory) {
+                document.getElementById('creditHistoryResult').textContent = creditHistoryMap[data.creditHistory] || data.creditHistory;
+            }
+            if (data.creditScore) {
+                if (data.creditScore === 'input' && data.creditScoreValue) {
+                    document.getElementById('creditScoreResult').textContent = data.creditScoreValue + '점';
+                } else if (data.creditScore === 'unknown') {
+                    document.getElementById('creditScoreResult').textContent = '잘모름';
+                }
+            }
+            if (data.evaluationStandard) {
+                document.getElementById('evaluationStandardResult').textContent = evaluationStandardMap[data.evaluationStandard] || data.evaluationStandard;
+            }
+            if (data.repaymentMethod) {
+                document.getElementById('repaymentMethodResult').textContent = repaymentMethodMap[data.repaymentMethod] || data.repaymentMethod;
+            }
+
+            // 적합성 평가 결과 (간단한 로직으로 판단)
+            const isEligible = evaluateEligibility(data);
+            const eligibilityElement = document.getElementById('eligibilityResult');
+            if (isEligible) {
+                eligibilityElement.textContent = '적합(대출신청가능)';
+                eligibilityElement.className = 'info-value suitable';
+            } else {
+                eligibilityElement.textContent = '부적합(추가검토필요)';
+                eligibilityElement.className = 'info-value unsuitable';
+            }
+        }
+
+        function evaluateEligibility(data) {
+            // 간단한 적합성 평가 로직
+            // 자동차구입 목적이고 연체정보가 없으면 적합으로 판단
+            return data.loanPurpose === 'other' && data.creditHistory === 'noDelay';
+        }
+
+        function goBack() {
+            // verification 페이지로 돌아가기
+            window.location.href = '/verification';
+        }
+
+        function completeVerification() {
+            // 결과 확인 완료 - notice 페이지로 진행
+            window.location.href = '/notice';
+        }
+    </script>
+</body>
+</html>

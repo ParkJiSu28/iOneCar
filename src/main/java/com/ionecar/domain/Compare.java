@@ -22,6 +22,7 @@ public class Compare {
     // Deal 관련 필드
     private Long discount;
     private Double rate;
+    private String progress;
     
     // 계산된 필드
     private Long monthlyPayment;
