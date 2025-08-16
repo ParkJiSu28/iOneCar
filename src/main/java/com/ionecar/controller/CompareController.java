@@ -5,16 +5,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 import com.ionecar.domain.Compare;
 import com.ionecar.service.CompareSerivce;
-import com.ionecar.mapper.CompareMapper;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
-import java.util.Map;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.ResponseEntity;
-import org.springframework.http.HttpStatus;
 
 
 
@@ -51,6 +43,9 @@ public class CompareController {
             
             // 모든 Compare 객체를 모델에 추가
             model.addAttribute("compares", compares);
+            
+            // carSrn을 모델에 추가하여 템플릿에서 사용할 수 있도록 함
+            model.addAttribute("carSrn", carSrn);
             
             return "compare";
         }

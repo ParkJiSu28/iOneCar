@@ -19,7 +19,9 @@
     <!-- 여러 차량을 반복하여 표시 -->
     <div th:each="myQuote : ${myQuotes}" class="estimate-card">
         <div class="card-label-row">
-            <span class="status-label">상담전</span>
+            <span class="status-label" 
+                  th:text="${myQuote.progress == '1' ? '상담전' : (myQuote.progress == '2' ? '상담중' : '상담전')}"
+                  th:style="${myQuote.progress == '2' ? 'color: red;' : ''}"></span>
             <div class="compare-area">
                 <span class="compare-label">비교견적</span>
                 <span class="compare-badge">2</span>
@@ -46,8 +48,13 @@
             </div>
         </div>
         <div class="expire-box">
-            <span class="expire-time">31:35:27</span>
-            <span class="expire-label">견적만료까지 남은시간 입니다</span>
+            <div th:if="${myQuote.progress == '2'}">
+                <span class="expire-time" style="color: red;">상담이 진행 중입니다</span>
+            </div>
+            <div th:unless="${myQuote.progress == '2'}">
+                <span class="expire-time">31:35:27</span>
+                <span class="expire-label">견적만료까지 남은시간 입니다</span>
+            </div>
         </div>
     </div>
     

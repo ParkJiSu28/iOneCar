@@ -18,4 +18,9 @@ public class PurchaseServiceImpl implements PurchaseService{
         purchaseMapper.insertPurchase(purchase);
     }
     
+    @Override
+    public Purchase selectPurchaseByCarSrn(long carSrn){
+        return purchaseMapper.selectPurchaseByCarSrn(carSrn);
+    }
+    
 }
