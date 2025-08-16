@@ -19,6 +19,7 @@ import com.ionecar.service.DealService;
 import com.ionecar.service.PurchaseService;
 import lombok.RequiredArgsConstructor;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,10 +33,30 @@ public class DetailController {
     @GetMapping("/myquote/detail")
     public String DetailPage(@RequestParam(value = "carSrn", required = false) Long carSrn,
                            @RequestParam(value = "dealerNo", required = false) Long dealerNo,
+                           @RequestParam(value = "edpsCsn", required = false) Long edpsCsnParam,
+                           HttpSession session,
                            Model model) {
         if (carSrn == null) {
             return "myquote";
         }
+        
+        // 세션에서 edpsCsn 가져오기 (파라미터가 없으면 세션에서 조회)
+        Long edpsCsn = edpsCsnParam;
+        if (edpsCsn == null) {
+            edpsCsn = (Long) session.getAttribute("edpsCsn");
+        }
+        System.out.println("=== DetailController Debug ===");
+        System.out.println("Received edpsCsn param: " + edpsCsnParam);
+        System.out.println("Session edpsCsn: " + session.getAttribute("edpsCsn"));
+        System.out.println("Session ID: " + session.getId());
+        System.out.println("Session attributes: ");
+        java.util.Enumeration<String> attributeNames = session.getAttributeNames();
+        while (attributeNames.hasMoreElements()) {
+            String name = attributeNames.nextElement();
+            System.out.println("  " + name + " = " + session.getAttribute(name));
+        }
+        System.out.println("Final edpsCsn: " + edpsCsn);
+        System.out.println("===============================");
         
         // Car 정보 조회
         Car car = carService.selectCarByCarSrn(carSrn);
@@ -90,9 +111,11 @@ public class DetailController {
         model.addAttribute("discount", discount);
         model.addAttribute("rate", rate);
         model.addAttribute("purchase", purchase);
+        model.addAttribute("deal", deal);
         model.addAttribute("compares", compares);
         model.addAttribute("carSrn", carSrn);
         model.addAttribute("dealerNo", dealerNo);
+        model.addAttribute("edpsCsn", edpsCsn);
         
         return "detail";
     }
@@ -115,6 +138,28 @@ public class DetailController {
             }
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Error updating deal");
+        }
+    }
+
+    @PostMapping("/myquote/deal/updateProgress")
+    @ResponseBody
+    public ResponseEntity<String> updateProgress(@RequestParam("carSrn") Long carSrn,
+                                               @RequestParam("dealerNo") Long dealerNo,
+                                               @RequestParam("progress") String progress) {
+        try {
+            // Deal 정보 조회
+            Deal deal = dealService.getDealByDealerNoAndCarSrn(dealerNo, carSrn);
+            
+            if (deal != null) {
+                // progress 업데이트
+                deal.setProgress(progress);
+                dealService.updateDeal(deal);
+                return ResponseEntity.ok("SUCCESS");
+            } else {
+                return ResponseEntity.badRequest().body("Deal not found");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Error updating progress");
         }
     }
 } 

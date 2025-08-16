@@ -22,8 +22,11 @@
                 <div class="car-name" th:text="${carClass}"></div>
                 <div class="car-desc">
                     <span th:text="${carSubClass}"></span><br/>
-                    <span th:text="${purchaseMethod}"></span>
-                    <span th:text="${purchasePeriod} + '개월'"></span>
+                    <span th:if="${purchase != null and purchase.purchaseMethod == 'C'}">일시불</span>
+                    <span th:if="${purchase == null or purchase.purchaseMethod != 'C'}">
+                        <span th:text="${purchaseMethod}"></span>
+                        <span th:text="${purchasePeriod} + '개월'"></span>
+                    </span>
                 </div>
             </div>
             <div class="car-img-block">
@@ -36,25 +39,25 @@
             <!-- 차량 기본가 -->
             <div class="price-detail">
                 <span class="label">차량 기본가</span>
-                <span class="value" th:text="${#numbers.formatInteger(carPrice, 0, 'COMMA')} + '원'"></span>
+                <span class="price-value" th:text="${#numbers.formatInteger(carPrice, 0, 'COMMA')} + '원'"></span>
             </div>
             <!-- 추가 옵션가 -->
             <div class="price-detail">
                 <span class="label">추가 옵션가</span>
-                <span class="value" th:text="${#numbers.formatInteger(optPrice, 0, 'COMMA')} + '원'"></span>
+                <span class="price-value" th:text="${#numbers.formatInteger(optPrice, 0, 'COMMA')} + '원'"></span>
             </div>
             <!-- 총 예상금액 -->
             <div class="price-detail total">
                 <span class="label">총 예상금액</span>
-                <span class="value" th:text="${#numbers.formatInteger(carPrice + optPrice, 0, 'COMMA')} + '원'"></span>
+                <span class="price-value" th:text="${#numbers.formatInteger(carPrice + optPrice, 0, 'COMMA')} + '원'"></span>
             </div>
         </div>
 
         <!-- 딜러 정보를 동적으로 표시 -->
         <div th:each="compare : ${compares}" class="dealer-label-with-card">
             <div class="dealer-label" 
-                 th:text="${compare.progress == '1' ? '딜러와 상담요청 전입니다.' : (compare.progress == '2' ? '딜러와 상담이 진행중입니다.' : '딜러와 상담요청 전입니다.')}"
-                 th:style="${compare.progress == '2' ? 'color: red;' : ''}"></div>
+                 th:text="${compare.progress == '1' ? '딜러와 상담요청 전입니다.' : (compare.progress == '2' ? '딜러와 상담이 진행중입니다.' : (compare.progress == '3' ? '딜러와 상담이 완료되었습니다.' : '딜러와 상담요청 전입니다.'))}"
+                 th:style="${compare.progress == '2' ? 'color: red;' : (compare.progress == '3' ? 'color: green; font-weight: bold;' : '')}"></div>
             <div class="dealer-card">
                 <img th:src="@{/css/images/dealer1.png}" alt="딜러 프로필" class="dealer-photo" />
                 <div class="dealer-profile-info">
@@ -74,11 +77,11 @@
                     <!-- 구매방법에 따른 조건부 표시 -->
                     <div th:if="${purchase != null and purchase.purchaseMethod == 'C'}" class="info-col">
                         <span class="label">일시납</span>
-                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'"></span>
+                        <span class="value" th:text="${#numbers.formatInteger((carPrice + optPrice - compare.discount) + ((carPrice * 0.07) + (carPrice * 0.12 * 0.05)), 0, 'COMMA')} + '원'"></span>
                     </div>
                     <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
                         <span class="label">월납입료</span>
-                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'"></span>
+                        <span class="value" th:text="${purchase != null && compare.rate != null ? #numbers.formatInteger(T(java.lang.Math).round((purchase.purchaseAdvance * (1 + compare.rate/100)) / purchase.purchasePeriod), 0, 'COMMA') + '원' : #numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA') + '원'}"></span>
                     </div>
                     <!-- 이용금리는 일시불('C')이 아닐 때만 표시 -->
                     <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">

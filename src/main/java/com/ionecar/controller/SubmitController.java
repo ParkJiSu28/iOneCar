@@ -19,7 +19,10 @@ public class SubmitController {
     
     // 신청완료 페이지를 반환하는 GET 매핑
     @GetMapping
-    public String showSubmitString(@RequestParam("carSrn") Long carSrn, HttpSession session, Model model) {
+    public String showSubmitString(@RequestParam(value = "carSrn", required = false) Long carSrn, HttpSession session, Model model) {
+        if (carSrn == null) {
+            return "redirect:/myquote";
+        }
         // 세션에서 edpsCsn 가져오기
         Long edpsCsn = (Long) session.getAttribute("edpsCsn");
         if (edpsCsn != null) {

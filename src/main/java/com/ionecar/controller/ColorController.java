@@ -19,7 +19,10 @@ public class ColorController {
     
     // 색상 선택 페이지를 반환하는 GET 매핑
     @GetMapping
-    public String showColorSelection(@RequestParam("carSrn") Long carSrn, Model model) {
+    public String showColorSelection(@RequestParam(value = "carSrn", required = false) Long carSrn, Model model) {
+        if (carSrn == null) {
+            return "redirect:/myquote";
+        }
         // carSrn을 모델에 추가하여 뷰에서 사용할 수 있도록 함
         model.addAttribute("carSrn", carSrn);
         return "color";

@@ -9,6 +9,11 @@
     document.addEventListener('DOMContentLoaded', function () {
       const options = document.querySelectorAll('.option-card');
       const nextButton = document.querySelector('.next-btn');
+      const prevButton = document.querySelector('.prev-btn');
+      
+      // URL에서 carSrn 파라미터 가져오기
+      const urlParams = new URLSearchParams(window.location.search);
+      const carSrn = urlParams.get('carSrn');
 
       options.forEach(option => {
         option.addEventListener('click', function () {
@@ -139,9 +144,7 @@
 
   <div class="bottom-buttons">
     <button class="btn prev-btn">이전</button>
-    <form th:action="@{/quote/buy}" method="get" style="flex: 1.5;">
-      <button type="submit" class="btn next-btn" disabled>다음</button>
-    </form>
+    <button class="btn next-btn" disabled style="flex: 1.5;">다음</button>
   </div>
 </body>
 </html>

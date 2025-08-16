@@ -16,7 +16,13 @@ public class PaymentController {
      * @return payment.html 템플릿
      */
     @GetMapping
-    public String payment(Model model) {
+    public String payment(@RequestParam(value = "carSrn", required = false) Long carSrn,
+                         Model model) {
+        
+        // carSrn을 모델에 추가
+        if (carSrn != null) {
+            model.addAttribute("carSrn", carSrn);
+        }
         
         // 기본값으로 설정
         model.addAttribute("edpsCsn", "고객");

@@ -14,7 +14,7 @@
         <!-- 상단 헤더 -->
         <header class="main-header">
             <h1 class="header-title">i-One Car | 결제하기</h1>
-            <button class="close-btn" onclick="history.back()">
+            <button class="close-btn" onclick="goBackToPayment()">
                 <img src="/css/images/X.png" alt="닫기" class="close-icon">
             </button>
         </header>
@@ -111,6 +111,11 @@
     </div>
 
     <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Verification check page carSrn:', carSrn);
+
         // 페이지 로드 시 verification에서 전달받은 데이터 처리
         document.addEventListener('DOMContentLoaded', function() {
             // URL 파라미터나 세션스토리지에서 데이터 가져오기
@@ -253,13 +258,31 @@
         }
 
         function goBack() {
-            // verification 페이지로 돌아가기
-            window.location.href = '/verification';
+            // carSrn과 함께 verification 페이지로 돌아가기
+            if (carSrn) {
+                window.location.href = '/verification?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/verification';
+            }
         }
 
         function completeVerification() {
-            // 결과 확인 완료 - notice 페이지로 진행
-            window.location.href = '/notice';
+            // carSrn과 함께 notice 페이지로 진행
+            if (carSrn) {
+                window.location.href = '/notice?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/notice';
+            }
+        }
+
+        // 헤더 닫기 버튼용 뒤로가기 함수
+        function goBackToPayment() {
+            // payment 페이지로 carSrn과 함께 돌아가기
+            if (carSrn) {
+                window.location.href = '/payment?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
         }
     </script>
 </body>

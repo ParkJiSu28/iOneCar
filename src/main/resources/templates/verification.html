@@ -14,7 +14,7 @@
         <!-- 상단 헤더 -->
         <header class="main-header">
             <h1 class="header-title">i-One Car | 결제하기</h1>
-            <button class="close-btn" onclick="history.back()">
+            <button class="close-btn" onclick="goBackWithCarSrn()">
                 <img src="/css/images/X.png" alt="닫기" class="close-icon">
             </button>
         </header>
@@ -367,6 +367,11 @@
     </div>
 
     <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Verification page carSrn:', carSrn);
+
         // 모든 질문 그룹 (후견인 확인 포함)
         const questionGroups = document.querySelectorAll('.question-group');
         const guardianCheckbox = document.getElementById('guardianCheckbox');
@@ -508,8 +513,12 @@
             // 모든 항목이 선택되었으면 verification check 페이지로 이동
             // 선택된 데이터를 세션스토리지에 저장
             saveVerificationData();
-            // verification check 페이지로 이동
-            window.location.href = '/verification/check';
+            // carSrn과 함께 verification check 페이지로 이동
+            if (carSrn) {
+                window.location.href = '/verification/check?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/verification/check';
+            }
         }
         
         // 신용점수 입력 관련
@@ -605,6 +614,16 @@
             sessionStorage.setItem('verificationData', JSON.stringify(data));
         }
         
+        // 뒤로가기 함수
+        function goBackWithCarSrn() {
+            // payment 페이지로 carSrn과 함께 돌아가기
+            if (carSrn) {
+                window.location.href = '/payment?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
+        }
+
         // 초기 상태 설정
         updateNextButton();
     </script>

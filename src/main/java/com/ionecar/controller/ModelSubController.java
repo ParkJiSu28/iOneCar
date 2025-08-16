@@ -21,7 +21,10 @@ public class ModelSubController {
 
     // 모델 서브 페이지를 반환하는 GET 매핑
     @GetMapping
-    public String showModelSub(@RequestParam("carSrn") Long carSrn, Model model) {
+    public String showModelSub(@RequestParam(value = "carSrn", required = false) Long carSrn, Model model) {
+        if (carSrn == null) {
+            return "redirect:/myquote";
+        }
         // carSrn을 모델에 추가하여 뷰에서 사용할 수 있도록 함
         model.addAttribute("carSrn", carSrn);
         return "model_sub";

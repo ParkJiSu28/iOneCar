@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/notice")
@@ -15,7 +16,13 @@ public class NoticeController {
      * @return notice.html 템플릿
      */
     @GetMapping
-    public String notice(Model model) {
+    public String notice(@RequestParam(value = "carSrn", required = false) Long carSrn,
+                        Model model) {
+        // carSrn을 모델에 추가
+        if (carSrn != null) {
+            model.addAttribute("carSrn", carSrn);
+        }
+        
         return "notice";
     }
 }

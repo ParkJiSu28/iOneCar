@@ -21,7 +21,10 @@ public class ModelController {
 
     // 모델 선택 페이지를 반환하는 GET 매핑
     @GetMapping
-    public String showModelSelection(@RequestParam("carSrn") Long carSrn, Model model) {
+    public String showModelSelection(@RequestParam(value = "carSrn", required = false) Long carSrn, Model model) {
+        if (carSrn == null) {
+            return "redirect:/myquote";
+        }
         // carSrn을 모델에 추가하여 뷰에서 사용할 수 있도록 함
         model.addAttribute("carSrn", carSrn);
         return "model";

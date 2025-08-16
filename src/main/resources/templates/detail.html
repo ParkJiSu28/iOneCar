@@ -132,33 +132,44 @@
                         <span class="method-value" th:text="${purchase != null ? (purchase.purchaseMethod == 'I' ? '할부' : (purchase.purchaseMethod == 'C' ? '일시불' : '할부')) : '할부'}">할부</span>
                     </div>
                     <div class="purchase-details">
-                        <div class="detail-row">
-                            <span class="detail-label">금융사</span>
-                            <span class="detail-value">IBK 카드</span>
+                        <!-- 일시불일 경우 -->
+                        <div th:if="${purchase != null and purchase.purchaseMethod == 'C'}">
+                            <div class="detail-row">
+                                <span class="detail-label">출고전 납입금액</span>
+                                <span class="detail-value" th:text="${#numbers.formatInteger((car.carPrice + optPrice - discount) + ((car.carPrice * 0.07) + (car.carPrice * 0.12 * 0.05)), 0, 'COMMA')} + '원'">출고전 납입금액</span>
+                            </div>
                         </div>
-                        <div class="detail-row">
-                            <span class="detail-label">할부신청금</span>
-                            <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger(purchase.purchaseAdvance, 0, 'COMMA') + '원' : '33,620,000원'}">33,620,000원</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">할부기간</span>
-                            <span class="detail-value" th:text="${purchase != null ? purchase.purchasePeriod + '개월' : '48개월'}">48개월</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">선납금</span>
-                            <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}">10,000,000원</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">금리(연)</span>
-                            <span class="detail-value" th:text="${rate != null ? rate + '%' : '7%'}"></span>
-                        </div>
-                        <div class="detail-row highlight">
-                            <span class="detail-label">월 납입금</span>
-                            <span class="detail-value highlight" th:text="${purchase != null && rate != null ? #numbers.formatInteger(T(java.lang.Math).round((purchase.purchaseAdvance * (1 + rate/100)) / purchase.purchasePeriod), 0, 'COMMA') + '원' : '805,073원'}">805,073원</span>
-                        </div>
-                        <div class="detail-row">
-                            <span class="detail-label">출고전 납입금액</span>
-                            <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) + (car.carPrice * 0.07) + (car.carPrice * 0.12 * 0.05) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}">10,000,000원</span>
+                        
+                        <!-- 할부일 경우 -->
+                        <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}">
+                            <div class="detail-row">
+                                <span class="detail-label">금융사</span>
+                                <span class="detail-value">IBK 카드</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">할부신청금</span>
+                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger(purchase.purchaseAdvance, 0, 'COMMA') + '원' : '33,620,000원'}">33,620,000원</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">할부기간</span>
+                                <span class="detail-value" th:text="${purchase != null ? purchase.purchasePeriod + '개월' : '48개월'}">48개월</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">선납금</span>
+                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}">10,000,000원</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">금리(연)</span>
+                                <span class="detail-value" th:text="${rate != null ? rate + '%' : '7%'}"></span>
+                            </div>
+                            <div class="detail-row highlight">
+                                <span class="detail-label">월 납입금</span>
+                                <span class="detail-value highlight" th:text="${purchase != null && rate != null ? #numbers.formatInteger(T(java.lang.Math).round((purchase.purchaseAdvance * (1 + rate/100)) / purchase.purchasePeriod), 0, 'COMMA') + '원' : '805,073원'}"></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">출고전 납입금액</span>
+                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) + (car.carPrice * 0.07) + (car.carPrice * 0.12 * 0.05) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}"></span>
+                            </div>
                         </div>
                         <div class="detail-note" style="font-size: 12px; color: #666; margin-top: 5px;">
                             차량등록금액이 포함된 금액입니다.
@@ -250,7 +261,9 @@
 
                  <!-- 하단 버튼 -->
          <div class="bottom-button">
-             <button class="btn btn-primary" onclick="showModal()">상담 신청하기</button>
+             <button class="btn btn-primary" 
+                     th:onclick="${deal != null and deal.progress == '3'} ? 'handlePayment()' : 'showModal()'"
+                     th:text="${deal != null and deal.progress == '3'} ? '결제 하러가기' : '상담 신청하기'">상담 신청하기</button>
          </div>
      </div>
 
@@ -306,7 +319,57 @@
          </div>
      </div>
 
-     <script>
+     <!-- 할부 약관 팝업 (할부인 경우에만 렌더링) -->
+     <div th:if="${purchase != null and purchase.purchaseMethod == 'I'}" class="installment-popup-overlay" id="installmentPopupOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 1000; justify-content: center; align-items: flex-end;">
+         <div class="installment-popup" style="background: white; width: 100%; max-width: 375px; border-radius: 20px 20px 0 0; max-height: 80vh; display: flex; flex-direction: column;">
+             <div class="popup-header" style="padding: 20px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                 <h3 style="margin: 0; font-size: 18px; font-weight: 600;">자동차 결제 진행 안내사항 (할부)</h3>
+                 <button class="popup-close" onclick="closeInstallmentPopup()" style="background: none; border: none; font-size: 24px; cursor: pointer; color: #666;">×</button>
+             </div>
+             <div class="popup-content" style="flex: 1; overflow-y: auto; padding: 20px;">
+                 <div class="checkbox-wrapper" style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                     <input type="checkbox" id="agreeTerms" style="width: 18px; height: 18px;" />
+                     <label for="agreeTerms" style="font-size: 14px; color: #333; cursor: pointer;">위 내용을 모두 확인했습니다.</label>
+                 </div>
+                 <div class="terms-content" style="font-size: 12px; line-height: 1.6; color: #666;">
+                     <p style="margin-bottom: 8px;">· 자동차 카드할부는 철회가 불가능 합니다.</p>
+                     <p style="margin-bottom: 8px;">· 자동차 카드할부 이용중 2개월 이상 연체하거나 임의적으로 차량 명의 이전시 진행하신 할부금액에 대해 일시청구 가능합니다.</p>
+                     <p style="margin-bottom: 8px;">· 고객님의 신용도에 따라 대출은 제한될 수 있으며 금리 및 이용조건은 카드사의 사정에 따라 변경,중단될 수 있습니다.</p>
+                     <p style="margin-bottom: 8px;">· 계약 체결 전 카드상품별 연회비, 이용조건 등에 관한 상세사항은 금융상품설명서, 약관 및 홈페이지 참조바랍니다.</p>
+                     <p style="margin-bottom: 8px;">· 금융소비자는 금융소비자보호법 제19조 제1항에 따라 해당 금융상품 또는 서비스에 대하여 설명 받을 권리가 있습니다.</p>
+                     <p style="margin-bottom: 8px;">· 연체이자율은 회원별, 이용상품별 약정금리+최대 연 3% 법정최고금리(연 20%)이내 단, 연체 발생 시점에 약정금리가 없는 경우 아래와 같이 적용합니다.</p>
+                     <p style="margin-bottom: 8px;">일시불 거래 연체 시 : 거래 발생 시점의 최소기간(2개월) 유이자 할부금리</p>
+                     <p style="margin-bottom: 8px;">무이자 할부 거래 연체 시: 거래 발생 시점의 동일한 할부 계약기간의 유이자 할부금리</p>
+                     <p style="margin-bottom: 8px;">그외의 경우 : 약정금리는 상법상 상사법정이율과 상호금융가계자금대출금*중 높음 금리적용</p>
+                     <p style="margin-bottom: 8px;">*한국은행에서 매월 발표하는 가장 최근의 비은행 금융기관 가중평균대출금리(신규대출 기준)</p>
+                     <p style="margin-bottom: 8px;">신용카드 발급이 부적정한 경우(개인신용평점 낮음, 연체(단기 포함) 사유 발생 등), 카드발급이 제한될 수 있습니다.</p>
+                     <p style="margin-bottom: 8px;">상환능력에 비해 신용카드 사용액이 과도할 경우, 귀하의 개인신용평점이 하락할 수 있습니다.</p>
+                     <p style="margin-bottom: 8px;">개인신용평점 하락 시 금융거래와 관련된 불이익이 발생할 수 있습니다.</p>
+                     <p style="margin-bottom: 8px;">일정기간 신용카드 이용대금을 연체할 경우, 결제일이 도래하지 않은 모든 신용카드 이용대금을 변제할 의무가 발생할 수 있습니다.</p>
+                     <p style="margin-bottom: 8px;">카드 이용대금과 이에 수반되는 모든 수수료는 고객님께서 지정하신 결제일에 상환하여야 합니다.</p>
+                 </div>
+             </div>
+             <div class="popup-buttons" style="padding: 20px; border-top: 1px solid #eee; display: flex; gap: 10px;">
+                 <button class="btn-cancel" onclick="closeInstallmentPopup()" style="flex: 1; padding: 12px; background: #f5f5f5; border: none; border-radius: 8px; font-size: 14px; cursor: pointer;">취소</button>
+                 <button class="btn-confirm" id="confirmBtn" onclick="confirmInstallment()" disabled style="flex: 1; padding: 12px; background: #235FD2; color: white; border: none; border-radius: 8px; font-size: 14px; cursor: pointer; opacity: 0.5;">확인</button>
+             </div>
+         </div>
+     </div>
+
+     <script th:inline="javascript">
+         // 서버 데이터를 JavaScript 변수로 안전하게 전달
+         var carSrn = /*[[${carSrn}]]*/ null;
+         var dealerNo = /*[[${deal != null ? deal.dealerNo : null}]]*/ null;
+         var edpsCsn = /*[[${edpsCsn}]]*/ null;
+         var purchaseMethod = /*[[${purchase != null ? purchase.purchaseMethod : null}]]*/ null;
+         
+         console.log('=== 서버에서 전달된 데이터 ===');
+         console.log('carSrn:', carSrn);
+         console.log('dealerNo:', dealerNo);
+         console.log('edpsCsn:', edpsCsn);
+         console.log('purchaseMethod:', purchaseMethod);
+         console.log('purchaseMethod type:', typeof purchaseMethod);
+
          function toggleSection(sectionId) {
              const content = document.getElementById(sectionId + '-content');
              const icon = document.getElementById(sectionId + '-icon');
@@ -406,6 +469,174 @@
         // 딜러 프로필로 이동하는 함수
         function goToProfile(dealerNo) {
             window.location.href = '/profile?dealerNo=' + dealerNo;
+        }
+
+        // 결제 처리 함수
+        function handlePayment() {
+            console.log('=== 결제 처리 함수 실행 ===');
+            console.log('carSrn:', carSrn);
+            console.log('dealerNo:', dealerNo);
+            console.log('purchaseMethod:', purchaseMethod);
+            console.log('purchaseMethod type:', typeof purchaseMethod);
+            console.log('purchaseMethod === "C":', purchaseMethod === 'C');
+            console.log('purchaseMethod === "I":', purchaseMethod === 'I');
+            
+            // 데이터 유효성 검사
+            if (!carSrn || !dealerNo) {
+                console.error('❌ 필수 데이터가 누락되었습니다:', { carSrn, dealerNo });
+                alert('필수 정보가 누락되었습니다. 페이지를 새로고침해주세요.');
+                return;
+            }
+            
+            // 구매방법에 따른 처리
+            if (purchaseMethod === 'C') {
+                console.log('✅ 일시불 처리 확인됨 - progress 5로 업데이트 후 myquote로 이동');
+                updateProgressToFive(carSrn, dealerNo);
+            } else if (purchaseMethod === 'I') {
+                console.log('✅ 할부 처리 확인됨 - 약관 팝업 표시');
+                showInstallmentPopup();
+            } else {
+                console.log('❌ 알 수 없는 구매방법:', purchaseMethod);
+                console.log('기본 할부 처리로 약관 팝업 표시');
+                showInstallmentPopup();
+            }
+        }
+
+        // 할부 약관 팝업 표시
+        function showInstallmentPopup() {
+            const popup = document.getElementById('installmentPopupOverlay');
+            if (popup) {
+                popup.style.display = 'flex';
+            } else {
+                console.error('할부 약관 팝업을 찾을 수 없습니다. 일시불인 경우 팝업이 렌더링되지 않습니다.');
+                // 팝업이 없으면 바로 결제 페이지로 이동
+                window.location.href = '/payment?carSrn=' + carSrn;
+            }
+        }
+
+        // 할부 약관 팝업 닫기
+        function closeInstallmentPopup() {
+            const popup = document.getElementById('installmentPopupOverlay');
+            const agreeCheckbox = document.getElementById('agreeTerms');
+            const confirmBtn = document.getElementById('confirmBtn');
+            
+            if (popup) popup.style.display = 'none';
+            if (agreeCheckbox) agreeCheckbox.checked = false;
+            if (confirmBtn) confirmBtn.disabled = true;
+        }
+
+        // 약관 동의 체크박스 이벤트
+        document.addEventListener('DOMContentLoaded', function() {
+            const agreeCheckbox = document.getElementById('agreeTerms');
+            const confirmBtn = document.getElementById('confirmBtn');
+            
+            if (agreeCheckbox && confirmBtn) {
+                agreeCheckbox.addEventListener('change', function() {
+                    confirmBtn.disabled = !this.checked;
+                    confirmBtn.style.opacity = this.checked ? '1' : '0.5';
+                });
+            }
+        });
+
+        // 일시불 전용 progress 업데이트 함수
+        function updateProgressToFive(carSrnParam, dealerNoParam) {
+            const formData = new FormData();
+            formData.append('carSrn', carSrnParam);
+            formData.append('dealerNo', dealerNoParam);
+            formData.append('progress', '5');
+
+            console.log('일시불 progress 업데이트 - carSrn:', carSrnParam, 'dealerNo:', dealerNoParam, 'progress: 5');
+            console.log('EdpsCsn:', edpsCsn);
+
+            fetch('/myquote/deal/updateProgress', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log('Progress 업데이트 응답 상태:', response.status);
+                if (response.ok) {
+                    console.log('✅ Progress 5 업데이트 성공 - myquote로 이동');
+                    const myquoteUrl = edpsCsn ? '/myquote?edpsCsn=' + edpsCsn : '/myquote';
+                    console.log('이동할 URL:', myquoteUrl);
+                    window.location.href = myquoteUrl;
+                } else {
+                    console.error('❌ Progress 업데이트 실패 - 그래도 myquote로 이동');
+                    const myquoteUrl = edpsCsn ? '/myquote?edpsCsn=' + edpsCsn : '/myquote';
+                    window.location.href = myquoteUrl;
+                }
+            })
+            .catch(error => {
+                console.error('❌ Progress 업데이트 에러:', error);
+                console.log('에러 발생 - 그래도 myquote로 이동');
+                const myquoteUrl = edpsCsn ? '/myquote?edpsCsn=' + edpsCsn : '/myquote';
+                window.location.href = myquoteUrl;
+            });
+        }
+
+        // 할부 약관 확인 버튼
+        function confirmInstallment() {
+            console.log('✅ 할부 약관 확인 - payment 페이지로 이동');
+            console.log('carSrn:', carSrn);
+            
+            if (!carSrn) {
+                console.error('❌ carSrn이 누락되었습니다.');
+                alert('필수 정보가 누락되었습니다. 페이지를 새로고침해주세요.');
+                return;
+            }
+            
+            closeInstallmentPopup();
+            // 할부인 경우 progress 업데이트 없이 바로 payment로 이동
+            window.location.href = '/payment?carSrn=' + carSrn;
+        }
+
+        // Progress 업데이트 후 페이지 이동
+        function updateProgressAndRedirect(carSrnParam, dealerNoParam, progressValue) {
+            const formData = new FormData();
+            formData.append('carSrn', carSrnParam);
+            formData.append('dealerNo', dealerNoParam);
+            formData.append('progress', progressValue);
+
+            console.log('Updating progress to:', progressValue, 'for carSrn:', carSrnParam, 'dealerNo:', dealerNoParam);
+            console.log('EdpsCsn:', edpsCsn);
+
+            fetch('/myquote/deal/updateProgress', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                console.log('Update response status:', response.status);
+                if (response.ok) {
+                    // 일시불(progress 5)인 경우 myquote로, 할부(progress 4)인 경우 payment로 이동
+                    if (progressValue === '5') {
+                        console.log('일시불 완료 - myquote로 이동');
+                        const myquoteUrl = edpsCsn ? '/myquote?edpsCsn=' + edpsCsn : '/myquote';
+                        console.log('이동할 URL:', myquoteUrl);
+                        window.location.href = myquoteUrl;
+                    } else {
+                        console.log('할부 진행 - payment로 이동');
+                        window.location.href = '/payment?carSrn=' + carSrnParam;
+                    }
+                } else {
+                    console.error('Failed to update progress');
+                    // 에러가 발생해도 이동
+                    if (progressValue === '5') {
+                        const myquoteUrl = edpsCsn ? '/myquote?edpsCsn=' + edpsCsn : '/myquote';
+                        window.location.href = myquoteUrl;
+                    } else {
+                        window.location.href = '/payment?carSrn=' + carSrnParam;
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error updating progress:', error);
+                // 에러가 발생해도 이동
+                if (progressValue === '5') {
+                    const myquoteUrl = edpsCsn ? '/myquote?edpsCsn=' + edpsCsn : '/myquote';
+                    window.location.href = myquoteUrl;
+                } else {
+                    window.location.href = '/payment?carSrn=' + carSrnParam;
+                }
+            });
         }
      </script>
 </body>
