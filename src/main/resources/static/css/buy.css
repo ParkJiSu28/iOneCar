@@ -595,7 +595,17 @@ header {
     transform: scale(0.98);
   }
   
-
+  .banner-next-button:hover {
+    background-color: #007bff;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .banner-next-button:active {
+    background-color: #0056b3;
+    transform: scale(0.98);
+    box-shadow: none;
+  }
 }
 
 /* 바텀 슬라이드 배너 */
@@ -739,5 +749,35 @@ header {
   font-size: 18px;
   font-weight: 700;
   color: #007bff;
+}
+
+/* 배너 액션 버튼 */
+.banner-action {
+  margin-top: 30px;
+  padding: 0 20px 20px;
+}
+
+.banner-next-button {
+  width: 100%;
+  padding: 18px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.banner-next-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.banner-next-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
 }
   
