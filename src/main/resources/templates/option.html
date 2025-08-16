@@ -5,15 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>옵션 선택</title>
   <link rel="stylesheet" th:href="@{/css/option.css}">
-  <script th:inline="javascript">
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const options = document.querySelectorAll('.option-card');
-      const nextButton = document.querySelector('.next-button');
-      const prevButton = document.querySelector('.prev-button');
-
-      // URL에서 carSrn 가져오기
-      const urlParams = new URLSearchParams(window.location.search);
-      const carSrn = urlParams.get('carSrn');
+      const nextButton = document.querySelector('.next-btn');
 
       options.forEach(option => {
         option.addEventListener('click', function () {
@@ -142,10 +137,10 @@
     </div>
   </div>
 
-  <div class="button-group">
-    <button class="prev-button">이전</button>
-    <form th:action="@{/quote/buy}" method="get">
-      <button type="submit" class="next-button" disabled>다음</button>
+  <div class="bottom-buttons">
+    <button class="btn prev-btn">이전</button>
+    <form th:action="@{/quote/buy}" method="get" style="flex: 1.5;">
+      <button type="submit" class="btn next-btn" disabled>다음</button>
     </form>
   </div>
 </body>

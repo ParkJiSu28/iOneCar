@@ -14,14 +14,13 @@ body {
 
 h1 {
   font-size: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 100px;
   color: #000;
 }
 
 label {
   display: block;
   margin-bottom: 8px;
-  font-weight: bold;
 }
 
 .input-box {
@@ -36,6 +35,7 @@ input[type="text"] {
   border-radius: 10px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  margin-bottom: 50px;
 }
 
 .login-button {
