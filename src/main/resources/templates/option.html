@@ -5,15 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>옵션 선택</title>
   <link rel="stylesheet" th:href="@{/css/option.css}">
-  <script th:inline="javascript">
+  <script>
     document.addEventListener('DOMContentLoaded', function () {
       const options = document.querySelectorAll('.option-card');
-      const nextButton = document.querySelector('.next-button');
-      const prevButton = document.querySelector('.prev-button');
-
-      // URL에서 carSrn 가져오기
-      const urlParams = new URLSearchParams(window.location.search);
-      const carSrn = urlParams.get('carSrn');
+      const nextButton = document.querySelector('.next-btn');
 
       options.forEach(option => {
         option.addEventListener('click', function () {
@@ -32,61 +27,6 @@
           nextButton.disabled = true;
         }
       }
-
-      // 가격 텍스트에서 숫자만 추출해 long 값으로 변환
-      function parsePriceToLong(priceText) {
-        // 예: '+ 1,650,000원' -> '1650000' -> 1650000
-        const digits = (priceText || '').toString().replace(/[^0-9]/g, '');
-        return digits ? parseInt(digits, 10) : 0;
-      }
-
-      // 이전 버튼: 직전 페이지로 이동
-      prevButton.addEventListener('click', function () {
-        window.history.back();
-      });
-
-      // 다음 버튼: 선택된 옵션들을 POST로 전송
-      nextButton.addEventListener('click', function (e) {
-        if (nextButton.disabled) return;
-        e.preventDefault();
-
-        const selected = document.querySelectorAll('.option-card.selected');
-        if (!selected.length || !carSrn) return;
-
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '/quote/option';
-
-        // carSrn 추가
-        const carSrnInput = document.createElement('input');
-        carSrnInput.type = 'hidden';
-        carSrnInput.name = 'carSrn';
-        carSrnInput.value = carSrn;
-        form.appendChild(carSrnInput);
-
-        // 선택된 옵션들 추가 (다중 전송)
-        selected.forEach(card => {
-          const labelText = card.querySelector('.label')?.textContent?.trim() || '';
-          const priceText = card.querySelector('.price')?.textContent?.trim() || '';
-          const priceLong = parsePriceToLong(priceText);
-
-          const labelInput = document.createElement('input');
-          labelInput.type = 'hidden';
-          labelInput.name = 'optionLabel';
-          labelInput.value = labelText;
-
-          const priceInput = document.createElement('input');
-          priceInput.type = 'hidden';
-          priceInput.name = 'optionPrice';
-          priceInput.value = String(priceLong);
-
-          form.appendChild(labelInput);
-          form.appendChild(priceInput);
-        });
-
-        document.body.appendChild(form);
-        form.submit();
-      });
 
       // 초기 상태 설정
       updateNextButton();
@@ -137,10 +77,10 @@
     </div>
   </div>
 
-  <div class="button-group">
-    <button class="prev-button">이전</button>
-    <form th:action="@{/quote/buy}" method="get">
-      <button type="submit" class="next-button" disabled>다음</button>
+  <div class="bottom-buttons">
+    <button class="btn prev-btn">이전</button>
+    <form th:action="@{/quote/buy}" method="get" style="flex: 1.5;">
+      <button type="submit" class="btn next-btn" disabled>다음</button>
     </form>
   </div>
 </body>

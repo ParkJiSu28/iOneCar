@@ -21,7 +21,7 @@
 
     <!-- 견적 배너 -->
     <section class="quote-card">
-      <p class="quote-title">신차 구매 예정이신가요?</p>
+      <p class="quote-title">신차 구매 <br> 예정이신가요?</p>
       <p class="quote-subtitle">최저가 견적을 무료로 받아보세요</p>
       <a th:href="@{/quote/brand}" class="quote-btn">비교견적 신청하기</a>
     </section>
@@ -33,13 +33,14 @@
     th:style="${hasQuote} ? 'cursor:pointer;' : 'cursor:default;'" 
     style="margin:16px 16px 0 16px;">
     <div class="menu-item">
-      <p class="menu-title">견적 확인하기</p>
-      <p class="menu-desc">나의 신차 견적을 빠르게 확인하세요.</p>
+      <p class="menu-title">내 견적함</p>
+      <p class="menu-desc">설명란</p>
     </div>
   </section>
 
     <!-- 기타 메뉴 카드 -->
     <!-- 아래 메뉴 카드(각각 분리) -->
+     <!--
   <section class="menu-list" style="margin: 0 16px 12px 16px;">
     <div class="menu-item black-card">
       <p class="menu-title">번호판 등록</p>
@@ -58,14 +59,28 @@
       <p class="menu-desc">다양한 보험 상품을 한 번에 비교할 수 있습니다.</p>
     </div>
   </section>
+-->
 
     <!-- 하단 네비게이션 -->
-    <footer class="bottom-nav">
-      <div class="nav-item">마이</div>
-      <div class="nav-item">포인트</div>
-      <div class="nav-item">혜택</div>
-      <div class="nav-item">전체메뉴</div>
-    </footer>
+  <!-- 하단 네비게이션 -->
+  <nav class="bottom-nav">
+    <a href="#" class="nav-item">
+      <img src="/css/images/my.png" alt="마이">
+      <span>마이</span>
+    </a>
+    <a href="#" class="nav-item">
+      <img src="/css/images/point.png" alt="포인트">
+      <span>포인트</span>
+    </a>
+    <a href="#" class="nav-item">
+      <img src="/css/images/benefit.png" alt="혜택">
+      <span>혜택</span>
+    </a>
+    <a href="#" class="nav-item">
+      <img src="/css/images/menu.png" alt="전체메뉴">
+      <span>전체메뉴</span>
+    </a>
+  </nav>
   </div>
 </body>
 </html>
