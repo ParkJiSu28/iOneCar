@@ -21,7 +21,13 @@ public class VerificationController {
      * @return verification.html 템플릿
      */
     @GetMapping
-    public String verification(Model model) {
+    public String verification(@RequestParam(value = "carSrn", required = false) Long carSrn,
+                             Model model) {
+        // carSrn을 모델에 추가
+        if (carSrn != null) {
+            model.addAttribute("carSrn", carSrn);
+        }
+        
         // 고객 정보 (실제로는 세션이나 데이터베이스에서 가져와야 함)
         Map<String, String> customerInfo = new HashMap<>();
         customerInfo.put("email", "ibk1234@gmail.com");
@@ -38,7 +44,13 @@ public class VerificationController {
      * @return verification_check.html 템플릿
      */
     @GetMapping("/check")
-    public String verificationCheck(Model model) {
+    public String verificationCheck(@RequestParam(value = "carSrn", required = false) Long carSrn,
+                                  Model model) {
+        // carSrn을 모델에 추가
+        if (carSrn != null) {
+            model.addAttribute("carSrn", carSrn);
+        }
+        
         // 고객 정보 (실제로는 세션이나 데이터베이스에서 가져와야 함)
         Map<String, String> customerInfo = new HashMap<>();
         customerInfo.put("email", "abc123@naver.com");

@@ -26,7 +26,11 @@ public class ApplyController {
     
     // 견적확인 페이지를 반환하는 GET 매핑
     @GetMapping
-    public String showApplyString(@RequestParam("carSrn") Long carSrn, Model model) {
+    public String showApplyString(@RequestParam(value = "carSrn", required = false) Long carSrn, Model model) {
+        if (carSrn == null) {
+            // carSrn이 없으면 이전 페이지로 리다이렉트 또는 에러 페이지로 이동
+            return "redirect:/myquote";
+        }
         // Car 정보 조회
         Car car = carService.selectCarByCarSrn(carSrn);
         if (car != null) {

@@ -14,7 +14,7 @@
         <!-- 상단 헤더 -->
         <header class="main-header">
             <h1 class="header-title">i-One Car | 결제하기</h1>
-            <button class="close-btn" onclick="history.back()">
+            <button class="close-btn" onclick="goBackToPayment()">
                 <img src="/css/images/X.png" alt="닫기" class="close-icon">
             </button>
         </header>
@@ -155,6 +155,11 @@
     </div>
 
     <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Notice page carSrn:', carSrn);
+
         const confirmCheckbox = document.getElementById('confirmCheckbox');
         const nextBtn = document.getElementById('nextBtn');
 
@@ -196,13 +201,32 @@
                 return;
             }
             
-            // consent 페이지로 진행
-            window.location.href = '/consent';
+            // carSrn과 함께 consent 페이지로 진행
+            if (carSrn) {
+                window.location.href = '/consent?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/consent';
+            }
         }
 
         // 이전 버튼 클릭
         function goBack() {
-            window.location.href = '/verification/check';
+            // carSrn과 함께 verification/check 페이지로 돌아가기
+            if (carSrn) {
+                window.location.href = '/verification/check?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/verification/check';
+            }
+        }
+
+        // 헤더 닫기 버튼용 뒤로가기 함수
+        function goBackToPayment() {
+            // payment 페이지로 carSrn과 함께 돌아가기
+            if (carSrn) {
+                window.location.href = '/payment?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
         }
 
         // 초기 상태 설정

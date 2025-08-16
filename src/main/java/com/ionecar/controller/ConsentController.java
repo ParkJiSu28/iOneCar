@@ -21,7 +21,13 @@ public class ConsentController {
      * @return consent.html 템플릿
      */
     @GetMapping
-    public String consent(Model model) {
+    public String consent(@RequestParam(value = "carSrn", required = false) Long carSrn,
+                         Model model) {
+        // carSrn을 모델에 추가
+        if (carSrn != null) {
+            model.addAttribute("carSrn", carSrn);
+        }
+        
         return "consent";
     }
 

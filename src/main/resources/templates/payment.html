@@ -14,7 +14,7 @@
         <!-- 상단 헤더 -->
         <header class="main-header">
             <h1 class="header-title">i-One Car 할부절차</h1>
-            <button class="close-btn" onclick="history.back()">
+            <button class="close-btn" onclick="goBackWithCarSrn()">
                 <img src="/css/images/X.png" alt="닫기" class="close-icon">
             </button>
         </header>
@@ -104,6 +104,11 @@
     </div>
 
     <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Payment page carSrn:', carSrn);
+
         const confirmCheckbox = document.getElementById('confirmCheckbox');
         const applyBtn = document.getElementById('applyBtn');
 
@@ -130,8 +135,22 @@
                 return;
             }
             
-            // verification 페이지로 이동
-            window.location.href = '/verification';
+            // carSrn과 함께 verification 페이지로 이동
+            if (carSrn) {
+                window.location.href = '/verification?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/verification';
+            }
+        }
+
+        // 뒤로가기 함수
+        function goBackWithCarSrn() {
+            // detail 페이지로 carSrn과 함께 돌아가기
+            if (carSrn) {
+                window.location.href = '/myquote/detail?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
         }
 
         // 초기 상태 설정
