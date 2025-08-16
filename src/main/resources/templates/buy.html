@@ -26,9 +26,8 @@
 
     <div class="model-info">
       <div class="model-details">
-        <div class="model-name">A-Class</div>
-        <div class="model-sub">2025년형 해치백 가솔린 2.0</div>
-        <div class="model-trim">A220</div>
+        <div class="model-name" th:text="${car?.carClass}">A-Class</div>
+        <div class="model-sub" th:text="${car?.carSubClass}">2025년형 해치백 가솔린 2.0</div>
       </div>
       <img src="/css/images/a-class.png" alt="차량 이미지" class="car-image" />
     </div>
@@ -56,93 +55,105 @@
       <img src="/css/images/info-icon.png" alt="정보" class="info-icon" id="infoToggle" />
     </div>
 
-    <div class="method-select">
-      <button class="method-btn active" id="installmentBtn">할부</button>
-      <button class="method-btn" id="lumpBtn">일시불</button>
-    </div>
+    <!-- 구매 정보 폼 -->
+    <form id="purchaseForm" method="post" th:action="@{/quote/buy}">
+      <input type="hidden" name="carSrn" th:value="${carSrn}" />
+      <input type="hidden" name="purchaseMethod" id="purchaseMethodInput" value="I" />
 
-    <!-- 할부 선택 시 보이는 필드들 -->
-    <div class="installment-fields" id="installmentFields">
+      <div class="method-select">
+        <button type="button" class="method-btn active" id="installmentBtn">할부</button>
+        <button type="button" class="method-btn" id="lumpBtn">일시불</button>
+      </div>
+
+      <!-- 할부 선택 시 보이는 필드들 -->
+      <div class="installment-fields" id="installmentFields">
+        <div class="form-group">
+          <label>할부기간</label>
+          <div class="underline-select">
+            <select id="installmentPeriod" name="installmentPeriod">
+              <option value="12">12개월</option>
+              <option value="24">24개월</option>
+              <option value="36">36개월</option>
+              <option value="48" selected>48개월</option>
+              <option value="60">60개월</option>
+            </select>
+            <div class="underline"></div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>선수금</label>
+          <div class="underline-input-with-checkbox">
+            <input type="text" placeholder="선수금 입력" id="downPayment" name="downPayment" />
+            <div class="underline"></div>
+            <label class="checkbox-label">
+              <input type="checkbox" id="includeTax" checked />
+              <span class="checkmark"></span>
+              취득세 포함
+            </label>
+          </div>
+          <div class="validation-message" id="downPaymentValidationMessage" style="display: none; color: #ff4757; font-size: 12px; margin-top: 5px;">
+            선수금을 입력해주세요.
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
-        <label>할부기간</label>
+        <label>인수지역</label>
         <div class="underline-select">
-          <select id="installmentPeriod">
-            <option value="12">12개월</option>
-            <option value="24">24개월</option>
-            <option value="36">36개월</option>
-            <option value="48" selected>48개월</option>
-            <option value="60">60개월</option>
+          <select id="pickupRegion" name="pickupRegion" required>
+            <option value="">지역 선택</option>
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="대구">대구</option>
+            <option value="인천">인천</option>
+            <option value="광주">광주</option>
+            <option value="대전">대전</option>
+            <option value="울산">울산</option>
+            <option value="세종">세종</option>
+            <option value="경기도">경기도</option>
+            <option value="강원도">강원도</option>
+            <option value="충청북도">충청북도</option>
+            <option value="충청남도">충청남도</option>
+            <option value="전라북도">전라북도</option>
+            <option value="전라남도">전라남도</option>
+            <option value="경상북도">경상북도</option>
+            <option value="경상남도">경상남도</option>
+            <option value="제주도">제주도</option>
+          </select>
+          <div class="underline"></div>
+        </div>
+        <div class="validation-message" id="regionValidationMessage" style="display: none; color: #ff4757; font-size: 12px; margin-top: 5px;">
+          인수지역을 선택해주세요.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>면세조건</label>
+        <div class="underline-select">
+          <select id="taxExemption" name="taxExemption">
+            <option value="general" selected>일반인(해당없음)</option>
+            <option value="disabled">장애인</option>
+            <option value="veteran">국가유공자</option>
+            <option value="farmer">농업인</option>
+            <option value="fisherman">어업인</option>
           </select>
           <div class="underline"></div>
         </div>
       </div>
-
-      <div class="form-group">
-        <label>선수금</label>
-        <div class="underline-input-with-checkbox">
-          <input type="text" placeholder="선수금 입력" id="downPayment" />
-          <div class="underline"></div>
-          <label class="checkbox-label">
-            <input type="checkbox" id="includeTax" checked />
-            <span class="checkmark"></span>
-            취득세 포함
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>인수지역</label>
-      <div class="underline-select">
-        <select id="pickupRegion">
-          <option value="">지역 선택</option>
-          <option value="seoul">서울</option>
-          <option value="busan">부산</option>
-          <option value="daegu">대구</option>
-          <option value="incheon">인천</option>
-          <option value="gwangju">광주</option>
-          <option value="daejeon">대전</option>
-          <option value="ulsan">울산</option>
-          <option value="sejong">세종</option>
-          <option value="gyeonggi">경기도</option>
-          <option value="gangwon">강원도</option>
-          <option value="chungbuk">충청북도</option>
-          <option value="chungnam">충청남도</option>
-          <option value="jeonbuk">전라북도</option>
-          <option value="jeonnam">전라남도</option>
-          <option value="gyeongbuk">경상북도</option>
-          <option value="gyeongnam">경상남도</option>
-          <option value="jeju">제주도</option>
-        </select>
-        <div class="underline"></div>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label>면세조건</label>
-      <div class="underline-select">
-        <select id="taxExemption">
-          <option value="general" selected>일반인(해당없음)</option>
-          <option value="disabled">장애인</option>
-          <option value="veteran">국가유공자</option>
-          <option value="farmer">농업인</option>
-          <option value="fisherman">어업인</option>
-        </select>
-        <div class="underline"></div>
-      </div>
-    </div>
+    </form>
 
     <div class="price-summary">
       <div class="price-content">
         <span class="label">총 예상금액</span>
         <div class="price-details">
-          <span class="price" id="totalPrice">48,620,000원</span>
+          <span class="price" id="totalPrice" th:text="${formattedTotalPrice + '원'}"></span>
           <img src="/css/images/search-icon.png" alt="상세보기" class="search-icon" id="detailBtn" />
         </div>
       </div>
       <div class="underline"></div>
       <div class="cashback-info" id="cashbackInfo" style="display: none;">
-        <span class="cashback-text">(예상 캐시백 500,000원)</span>
+        <span class="cashback-text" th:text="'(예상 캐시백 ' + ${formattedCashback} + '원)'"></span>
       </div>
     </div>
   </section>
@@ -166,8 +177,8 @@
           <div class="section-title">신청모델</div>
           <div class="section-content">
             <div class="model-item">
-              <span class="item-name">2025형 해치백 가솔린 2.0 A220</span>
-              <span class="item-price">48,100,000원</span>
+              <span class="item-name" th:text="${car?.carSubClass}"></span>
+              <span class="item-price" th:text="${formattedCarPrice + '원'}"></span>
             </div>
           </div>
           <div class="section-underline"></div>
@@ -178,11 +189,11 @@
           <div class="section-title">색상</div>
           <div class="section-content">
             <div class="color-item">
-              <span class="item-name">외장-폴라화이트</span>
+              <span class="item-name" th:text="'외장-' + ${car?.carColor}"></span>
               <span class="item-price">+0원</span>
             </div>
             <div class="color-item">
-              <span class="item-name">내장-아티코 블랙/블랙</span>
+              <span class="item-name" th:text="'내장-' + ${car?.carInteriorColor}"></span>
               <span class="item-price">+0원</span>
             </div>
           </div>
@@ -190,14 +201,15 @@
         </div>
 
         <!-- 추가옵션 -->
-        <div class="banner-section">
+        <div class="banner-section" th:if="${options != null and !options.isEmpty()}">
           <div class="section-title">추가옵션</div>
           <div class="section-content">
-            <div class="option-item">
-              <span class="item-name">버튼시동 Pack</span>
-              <span class="item-price">+520,000원</span>
+            <div class="option-item" th:each="option : ${options}">
+              <span class="item-name" th:text="${option.optDef}"></span>
+              <span class="item-price" th:text="'+' + ${#numbers.formatInteger(option.optPrice, 0, 'COMMA')} + '원'"></span>
             </div>
           </div>
+          <div class="section-underline"></div>
         </div>
 
         <!-- 총 예상금액 -->
@@ -205,21 +217,32 @@
           <div class="section-content">
             <div class="total-item">
               <span class="item-name">총 예상금액</span>
-              <span class="item-price total-price">48,620,000원</span>
+              <span class="item-price total-price" th:text="${formattedTotalPrice + '원'}"></span>
             </div>
           </div>
         </div>
 
         <!-- 다음 버튼 -->
         <div class="banner-action">
-          <button class="banner-next-button">다음</button>
+          <button class="banner-next-button" type="button">다음</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script>
-    // DOM 요소들
+  <script th:inline="javascript">
+    // 서버에서 전달받은 데이터 (가변적인 값들)
+    let totalPriceValue = /*[[${totalPrice}]]*/ 48620000;
+    let cashbackValue = /*[[${cashback}]]*/ 972400;
+    let formattedTotalPrice = /*[[${formattedTotalPrice}]]*/ '48,620,000';
+    let formattedCashback = /*[[${formattedCashback}]]*/ '972,400';
+    
+    // 숫자 포맷팅 함수 (변하지 않는 유틸리티 함수)
+    const formatNumber = (num) => {
+      return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+    
+    // DOM 요소들 (변하지 않는 참조)
     const installmentBtn = document.getElementById('installmentBtn');
     const lumpBtn = document.getElementById('lumpBtn');
     const installmentFields = document.getElementById('installmentFields');
@@ -233,6 +256,27 @@
     const totalPrice = document.getElementById('totalPrice');
     const bottomSlideBanner = document.getElementById('bottomSlideBanner');
     const slideBannerClose = document.getElementById('slideBannerClose');
+    const purchaseMethodInput = document.getElementById('purchaseMethodInput');
+    const downPaymentInput = document.getElementById('downPayment');
+    const bannerNextButton = document.querySelector('.banner-next-button');
+    const purchaseForm = document.getElementById('purchaseForm');
+    const regionValidationMessage = document.getElementById('regionValidationMessage');
+    const downPaymentValidationMessage = document.getElementById('downPaymentValidationMessage');
+
+    // 선수금 입력 포맷팅 함수 (변하지 않는 유틸리티 함수)
+    const formatInputNumber = (value) => {
+      // 숫자만 추출
+      const numericValue = value.replace(/[^0-9]/g, '');
+      // 천단위 콤마 추가
+      return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    };
+
+    // 선수금 입력 이벤트
+    downPaymentInput.addEventListener('input', function(e) {
+      const formatted = formatInputNumber(e.target.value);
+      e.target.value = formatted;
+      validateForm();
+    });
 
     // 할부 버튼 클릭 이벤트
     installmentBtn.addEventListener('click', () => {
@@ -240,8 +284,9 @@
       lumpBtn.classList.remove('active');
       installmentFields.style.display = 'block';
       cashbackInfo.style.display = 'none';
-      totalPrice.textContent = '48,620,000원';
-      nextButton.disabled = false;
+      totalPrice.textContent = formattedTotalPrice + '원';
+      purchaseMethodInput.value = 'I';
+      validateForm();
     });
 
     // 일시불 버튼 클릭 이벤트
@@ -250,8 +295,13 @@
       installmentBtn.classList.remove('active');
       installmentFields.style.display = 'none';
       cashbackInfo.style.display = 'block';
-      totalPrice.textContent = '48,120,000원';
-      nextButton.disabled = false;
+      // 일시불 가격 계산 (총 가격 그대로)
+      const lumpSumPrice = totalPriceValue;
+      totalPrice.textContent = formatNumber(lumpSumPrice) + '원';
+      purchaseMethodInput.value = 'C';
+      // 일시불 선택 시 선수금 유효성 메시지 숨김
+      downPaymentValidationMessage.style.display = 'none';
+      validateForm();
     });
 
     // 정보 팝업 토글
@@ -288,16 +338,49 @@
       overlay.classList.remove('show');
     });
 
+    // 배너의 다음 버튼 클릭 시 폼 제출
+    bannerNextButton.addEventListener('click', () => {
+      if (validateForm()) {
+        purchaseForm.submit();
+      }
+    });
+
     // 폼 유효성 검사 및 다음 버튼 활성화
     function validateForm() {
       const pickupRegion = document.getElementById('pickupRegion').value;
       const downPayment = document.getElementById('downPayment').value;
+      const isInstallment = installmentBtn.classList.contains('active');
       
-      if (pickupRegion && (installmentBtn.classList.contains('active') ? downPayment : true)) {
-        nextButton.disabled = false;
-      } else {
-        nextButton.disabled = true;
+      let isValid = false;
+      
+      if (pickupRegion) {
+        if (isInstallment) {
+          // 할부의 경우 선수금 입력 필요
+          isValid = downPayment && downPayment.trim() !== '';
+        } else {
+          // 일시불의 경우 선수금 입력 불필요
+          isValid = true;
+        }
       }
+      
+      nextButton.disabled = !isValid;
+      bannerNextButton.disabled = !isValid;
+
+      // 인수지역 유효성 검사 메시지 표시/숨김
+      if (!pickupRegion) {
+        regionValidationMessage.style.display = 'block';
+      } else {
+        regionValidationMessage.style.display = 'none';
+      }
+
+      // 선수금 유효성 검사 메시지 표시/숨김 (할부 선택 시에만)
+      if (isInstallment && (!downPayment || downPayment.trim() === '')) {
+        downPaymentValidationMessage.style.display = 'block';
+      } else {
+        downPaymentValidationMessage.style.display = 'none';
+      }
+      
+      return isValid;
     }
 
     // 폼 필드 변경 감지
