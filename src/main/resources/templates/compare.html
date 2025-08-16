@@ -71,11 +71,17 @@
                         <span class="label">할인금액</span>
                         <span class="value" th:text="${#numbers.formatInteger(compare.discount, 0, 'COMMA')} + '원'"></span>
                     </div>
-                    <div class="info-col">
+                    <!-- 구매방법에 따른 조건부 표시 -->
+                    <div th:if="${purchase != null and purchase.purchaseMethod == 'C'}" class="info-col">
+                        <span class="label">일시납</span>
+                        <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'"></span>
+                    </div>
+                    <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
                         <span class="label">월납입료</span>
                         <span class="value" th:text="${#numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA')} + '원'"></span>
                     </div>
-                    <div class="info-col">
+                    <!-- 이용금리는 일시불('C')이 아닐 때만 표시 -->
+                    <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
                         <span class="label">이용금리</span>
                         <span class="value" th:text="${compare.rate} + '%'"></span>
                     </div>
