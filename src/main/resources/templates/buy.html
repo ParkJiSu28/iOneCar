@@ -152,33 +152,62 @@
     <button class="next-button" id="nextButton" disabled>다음</button>
   </div>
 
-  <!-- 가격 상세 팝업 -->
-  <div class="price-popup" id="pricePopup">
-    <div class="popup-content">
-      <div class="popup-header">
-        <span>상세 금액 안내</span>
-        <button class="popup-close" id="closePopup">✕</button>
+  <!-- 상세금액 바텀 슬라이드 -->
+  <div class="bottom-slide-banner" id="bottomSlideBanner">
+    <div class="slide-banner-content">
+      <div class="slide-banner-header">
+        <div class="slide-indicator"></div>
+        <span class="banner-title">상세금액</span>
+        <button class="slide-banner-close" id="slideBannerClose">✕</button>
       </div>
-      <div class="popup-body">
-        <div class="price-item">
-          <span>차량 가격</span>
-          <span>47,800,000원</span>
+      <div class="slide-banner-body">
+        <!-- 신청모델 -->
+        <div class="banner-section">
+          <div class="section-title">신청모델</div>
+          <div class="section-content">
+            <div class="model-item">
+              <span class="item-name">2025형 해치백 가솔린 2.0 A220</span>
+              <span class="item-price">48,100,000원</span>
+            </div>
+          </div>
+          <div class="section-underline"></div>
         </div>
-        <div class="price-item">
-          <span>옵션 가격</span>
-          <span>820,000원</span>
+
+        <!-- 색상 -->
+        <div class="banner-section">
+          <div class="section-title">색상</div>
+          <div class="section-content">
+            <div class="color-item">
+              <span class="item-name">외장-폴라화이트</span>
+              <span class="item-price">+0원</span>
+            </div>
+            <div class="color-item">
+              <span class="item-name">내장-아티코 블랙/블랙</span>
+              <span class="item-price">+0원</span>
+            </div>
+          </div>
+          <div class="section-underline"></div>
         </div>
-        <div class="price-item">
-          <span>할인</span>
-          <span class="discount">-0원</span>
+
+        <!-- 추가옵션 -->
+        <div class="banner-section">
+          <div class="section-title">추가옵션</div>
+          <div class="section-content">
+            <div class="option-item">
+              <span class="item-name">버튼시동 Pack</span>
+              <span class="item-price">+520,000원</span>
+            </div>
+          </div>
         </div>
-        <div class="price-item">
-          <span>세금 및 기타</span>
-          <span>0원</span>
-        </div>
-        <div class="price-item total">
-          <span>총 예상금액</span>
-          <span>48,620,000원</span>
+
+        <!-- 총 예상금액 -->
+        <div class="banner-section total-section">
+          <div class="section-content">
+            <div class="total-item">
+              <span class="item-name">총 예상금액</span>
+              <span class="item-price total-price">48,620,000원</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -190,15 +219,15 @@
     const lumpBtn = document.getElementById('lumpBtn');
     const installmentFields = document.getElementById('installmentFields');
     const detailBtn = document.getElementById('detailBtn');
-    const popup = document.getElementById('pricePopup');
     const overlay = document.getElementById('overlay');
-    const closePopup = document.getElementById('closePopup');
     const infoToggle = document.getElementById('infoToggle');
     const purchaseMethodInfo = document.getElementById('purchaseMethodInfo');
     const infoClose = document.getElementById('infoClose');
     const nextButton = document.getElementById('nextButton');
     const cashbackInfo = document.getElementById('cashbackInfo');
     const totalPrice = document.getElementById('totalPrice');
+    const bottomSlideBanner = document.getElementById('bottomSlideBanner');
+    const slideBannerClose = document.getElementById('slideBannerClose');
 
     // 할부 버튼 클릭 이벤트
     installmentBtn.addEventListener('click', () => {
@@ -230,21 +259,27 @@
       purchaseMethodInfo.classList.remove('show');
     });
 
-    // 가격 상세 팝업 열기
+    // 상세금액 팝업 열기
     detailBtn.addEventListener('click', () => {
-      popup.classList.add('show');
+      bottomSlideBanner.classList.add('show');
       overlay.classList.add('show');
     });
 
-    // 가격 상세 팝업 닫기
-    closePopup.addEventListener('click', () => {
-      popup.classList.remove('show');
+    // 다음 버튼 클릭 시 상세금액 팝업 열기
+    nextButton.addEventListener('click', () => {
+      bottomSlideBanner.classList.add('show');
+      overlay.classList.add('show');
+    });
+
+    // 상세금액 팝업 닫기
+    slideBannerClose.addEventListener('click', () => {
+      bottomSlideBanner.classList.remove('show');
       overlay.classList.remove('show');
     });
 
     // 오버레이 클릭 시 팝업 닫기
     overlay.addEventListener('click', () => {
-      popup.classList.remove('show');
+      bottomSlideBanner.classList.remove('show');
       overlay.classList.remove('show');
     });
 

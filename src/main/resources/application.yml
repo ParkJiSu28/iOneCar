@@ -6,6 +6,25 @@ spring:
     password: 1234
   thymeleaf:
     cache: false
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+      additional-paths: src/main/resources/static/**,src/main/resources/templates/**
+    remote:
+      restart:
+        enabled: false
+  web:
+    resources:
+      cache:
+        cachecontrol:
+          no-cache: true
+          no-store: true
+          must-revalidate: true
+        static-locations: classpath:/static/
+      chain:
+        cache: false
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
