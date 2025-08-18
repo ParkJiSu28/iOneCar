@@ -148,15 +148,15 @@
                             </div>
                             <div class="detail-row">
                                 <span class="detail-label">할부신청금</span>
-                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger(purchase.purchaseAdvance, 0, 'COMMA') + '원' : '33,620,000원'}">33,620,000원</span>
+                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger( (car.carPrice + optPrice - discount) -purchase.purchaseAdvance, 0, 'COMMA') + '원' : '33,620,000원'}"></span>
                             </div>
                             <div class="detail-row">
                                 <span class="detail-label">할부기간</span>
-                                <span class="detail-value" th:text="${purchase != null ? purchase.purchasePeriod + '개월' : '48개월'}">48개월</span>
+                                <span class="detail-value" th:text="${purchase != null ? purchase.purchasePeriod + '개월' : '48개월'}"></span>
                             </div>
                             <div class="detail-row">
                                 <span class="detail-label">선납금</span>
-                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger((car.carPrice + optPrice - discount) - purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}">10,000,000원</span>
+                                <span class="detail-value" th:text="${purchase != null ? #numbers.formatInteger(purchase.purchaseAdvance, 0, 'COMMA') + '원' : '10,000,000원'}"></span>
                             </div>
                             <div class="detail-row">
                                 <span class="detail-label">금리(연)</span>
@@ -164,7 +164,7 @@
                             </div>
                             <div class="detail-row highlight">
                                 <span class="detail-label">월 납입금</span>
-                                <span class="detail-value highlight" th:text="${purchase != null && rate != null ? #numbers.formatInteger(T(java.lang.Math).round((purchase.purchaseAdvance * (1 + rate/100)) / purchase.purchasePeriod), 0, 'COMMA') + '원' : '805,073원'}"></span>
+                                <span class="detail-value highlight" th:text="${purchase != null && rate != null ? #numbers.formatInteger(T(java.lang.Math).round((car.carPrice + optPrice - discount - purchase.purchaseAdvance ) * (1 + rate/100) / purchase.purchasePeriod), 0, 'COMMA') + '원' : '805,073원'}"></span>
                             </div>
                             <div class="detail-row">
                                 <span class="detail-label">출고전 납입금액</span>

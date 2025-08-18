@@ -81,7 +81,12 @@
                     </div>
                     <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
                         <span class="label">월납입료</span>
-                        <span class="value" th:text="${purchase != null && compare.rate != null ? #numbers.formatInteger(T(java.lang.Math).round((purchase.purchaseAdvance * (1 + compare.rate/100)) / purchase.purchasePeriod), 0, 'COMMA') + '원' : #numbers.formatInteger(compare.monthlyPayment, 0, 'COMMA') + '원'}"></span>
+                        <span class="value" 
+                              th:if="${purchase != null and compare.rate != null and purchase.purchaseAdvance != null and purchase.purchasePeriod != null}" 
+                              th:text="${#numbers.formatInteger(T(java.lang.Math).round((carPrice + optPrice - compare.discount - purchase.purchaseAdvance ) * (1 + compare.rate/100) / purchase.purchasePeriod), 0, 'COMMA')} + '원'"></span>
+                        <span class="value" 
+                              th:unless="${purchase != null and compare.rate != null and purchase.purchaseAdvance != null and purchase.purchasePeriod != null}" 
+                              th:text="${#numbers.formatInteger(compare.monthlyPayment != null ? compare.monthlyPayment : 0, 0, 'COMMA')} + '원'"></span>
                     </div>
                     <!-- 이용금리는 일시불('C')이 아닐 때만 표시 -->
                     <div th:if="${purchase == null or purchase.purchaseMethod != 'C'}" class="info-col">
