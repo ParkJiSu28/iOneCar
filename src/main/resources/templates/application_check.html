@@ -239,11 +239,11 @@
             // 확인 정보 저장
             saveConfirmationData();
             
-            // verification 페이지로 이동
+            // contract 페이지로 이동
             if (carSrn) {
-                window.location.href = '/verification?carSrn=' + carSrn;
+                window.location.href = '/contract?carSrn=' + carSrn;
             } else {
-                window.location.href = '/verification';
+                window.location.href = '/contract';
             }
         }
 

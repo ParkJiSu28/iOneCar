@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 할부약정</title>
+    <link rel="stylesheet" th:href="@{/css/submit_contract.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 할부약정</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 성공 아이콘 -->
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#235FD2"/>
+                    <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- 메인 제목 -->
+            <h2 class="main-title">할부약정이 완료됐어요!</h2>
+
+            <!-- 설명 텍스트 -->
+            <div class="description">
+                <p>신청하신 i-One Car 할부약정이 완료되었어요</p>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-buttons">
+            <button class="btn btn-secondary" onclick="goToHome()">홈으로</button>
+            <button class="btn btn-primary" onclick="goToApplication()">보험 견적 신청</button>
+        </div>
+    </div>
+
+    <script>
+        function goToHome() {
+            // carSrn 정보를 홈으로 전달
+            const urlParams = new URLSearchParams(window.location.search);
+            const carSrn = urlParams.get('carSrn');
+            
+            if (carSrn) {
+                window.location.href = '/home?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/home';
+            }
+        }
+
+        function goToApplication() {
+            // carSrn 정보를 보험 견적 페이지로 전달
+            const urlParams = new URLSearchParams(window.location.search);
+            const carSrn = urlParams.get('carSrn');
+            
+            if (carSrn) {
+                window.location.href = '/insurance?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/insurance';
+            }
+        }
+    </script>
+</body>
+</html>

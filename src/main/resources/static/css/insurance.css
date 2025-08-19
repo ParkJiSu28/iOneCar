@@ -1,0 +1,550 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 48px;
+    padding: 24px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 제목 섹션 */
+.title-section {
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.main-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.sub-title {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 자동차 섹션 */
+.car-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.car-container {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 할인 아이콘 */
+.discount-icon {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    width: 40px;
+    height: 40px;
+    background: #235FD2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: bounce 2s infinite;
+}
+
+.discount-text {
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+/* 차량 일러스트 */
+.car-illustration {
+    position: relative;
+    z-index: 5;
+}
+
+.car-body {
+    position: relative;
+    width: 180px;
+    height: 120px;
+}
+
+/* 차량 하단 (본체) */
+.car-bottom {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    width: 180px;
+    height: 60px;
+    background: #9E9E9E;
+    border-radius: 30px 30px 15px 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* 차량 상단 (캐빈) */
+.car-top {
+    position: absolute;
+    top: 10px;
+    left: 30px;
+    width: 120px;
+    height: 70px;
+    background: #BDBDBD;
+    border-radius: 40px 40px 20px 20px;
+    position: relative;
+}
+
+/* 앞유리 */
+.windshield {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 110px;
+    height: 40px;
+    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+    border-radius: 35px 35px 15px 15px;
+    opacity: 0.8;
+}
+
+/* 운전자 */
+.car-top .driver {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+}
+
+.car-top .driver .head {
+    width: 20px;
+    height: 20px;
+    background: #FFCC80;
+    border-radius: 50%;
+    margin-bottom: 2px;
+}
+
+.car-top .driver .body {
+    width: 24px;
+    height: 30px;
+    background: #FF7043;
+    border-radius: 12px 12px 8px 8px;
+}
+
+/* 승객 */
+.car-top .passenger {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.car-top .passenger .head {
+    width: 20px;
+    height: 20px;
+    background: #FFCC80;
+    border-radius: 50%;
+    margin-bottom: 2px;
+}
+
+.car-top .passenger .body {
+    width: 24px;
+    height: 30px;
+    background: #8BC34A;
+    border-radius: 12px 12px 8px 8px;
+}
+
+/* 바퀴들 */
+.wheels {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.wheel {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #424242;
+    border-radius: 50%;
+    border: 4px solid #757575;
+    bottom: -10px;
+}
+
+.wheel::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: #BDBDBD;
+    border-radius: 50%;
+}
+
+.wheel-left {
+    left: 20px;
+}
+
+.wheel-right {
+    right: 20px;
+}
+
+/* 주변 아이콘들 */
+.icon {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: float 3s ease-in-out infinite;
+}
+
+.bubble-icon {
+    top: 50px;
+    left: 20px;
+    animation-delay: 0s;
+}
+
+.wrench-icon {
+    top: 30px;
+    right: 30px;
+    animation-delay: 0.5s;
+}
+
+.shield-icon {
+    bottom: 80px;
+    left: 30px;
+    animation-delay: 1s;
+}
+
+.camera-icon {
+    bottom: 60px;
+    right: 20px;
+    animation-delay: 1.5s;
+}
+
+/* 하단 버튼 */
+.bottom-buttons {
+    padding: 16px;
+    background: #fff;
+    border-top: 1px solid #E5E7EB;
+}
+
+.btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 모달 백그라운드 */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 슬라이드 모달 */
+.slide-modal {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 375px;
+    transform: translateX(-50%) translateY(100%);
+    background: white;
+    border-radius: 20px 20px 0 0;
+    z-index: 1001;
+    transition: transform 0.3s ease;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.slide-modal.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* 모달 헤더 */
+.modal-header {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 20px 8px 20px;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 모달 컨텐츠 */
+.modal-content {
+    padding: 0 20px 24px 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 24px 0;
+    line-height: 1.4;
+}
+
+/* 동의 섹션 */
+.agreement-section {
+    margin-bottom: 32px;
+}
+
+.agreement-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: #F8F9FA;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.agreement-item:hover {
+    background: #F1F3F4;
+}
+
+.agreement-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+.arrow-icon {
+    flex-shrink: 0;
+}
+
+/* 모달 버튼 */
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.modal-buttons .btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.modal-buttons .btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.modal-buttons .btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.modal-buttons .btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.modal-buttons .btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 애니메이션 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 20px 12px;
+    }
+    
+    .main-title {
+        font-size: 22px;
+    }
+    
+    .sub-title {
+        font-size: 15px;
+    }
+    
+    .car-container {
+        width: 240px;
+        height: 240px;
+    }
+    
+    .car-body {
+        width: 150px;
+        height: 100px;
+    }
+    
+    .car-bottom {
+        width: 150px;
+        height: 50px;
+    }
+    
+    .car-top {
+        width: 100px;
+        height: 60px;
+        left: 25px;
+    }
+    
+    .windshield {
+        width: 90px;
+        height: 35px;
+    }
+    
+    .icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .discount-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    .discount-text {
+        font-size: 16px;
+    }
+    
+    .bottom-buttons {
+        padding: 12px;
+    }
+    
+    .btn {
+        font-size: 15px;
+    }
+}

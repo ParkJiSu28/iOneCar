@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 할부약정</title>
+    <link rel="stylesheet" th:href="@{/css/contract.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 할부약정</h1>
+            <button class="close-btn" onclick="goBackWithCarSrn()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 전체동의 섹션 -->
+            <div class="consent-section unified-box">
+                <!-- 전체동의 -->
+                <div class="consent-group main-consent">
+                    <label class="consent-item">
+                        <input type="checkbox" id="allConsent" name="allConsent">
+                        <span class="check-icon main-check">✓</span>
+                        <span class="consent-text">전체동의</span>
+                        <span class="arrow">></span>
+                    </label>
+                </div>
+
+                <!-- 상세 동의 항목들 -->
+                <div class="consent-details">
+                    <!-- 가계대출상품설명서 -->
+                    <div class="consent-group detail-item">
+                        <label class="consent-item">
+                            <input type="checkbox" name="loanProductGuide" class="detail-consent">
+                            <span class="check-icon detail-check">✓</span>
+                            <span class="consent-text">가계대출상품설명서</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+
+                    <!-- 은행여신거래기본약관(가계용) -->
+                    <div class="consent-group detail-item">
+                        <label class="consent-item">
+                            <input type="checkbox" name="basicTerms" class="detail-consent">
+                            <span class="check-icon detail-check">✓</span>
+                            <span class="consent-text">은행여신거래기본약관(가계용)</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+
+                    <!-- 할부거래약정서 -->
+                    <div class="consent-group detail-item">
+                        <label class="consent-item">
+                            <input type="checkbox" name="installmentAgreement" class="detail-consent">
+                            <span class="check-icon detail-check">✓</span>
+                            <span class="consent-text">할부거래약정서</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+
+                    <!-- 계좌자동이체약관 -->
+                    <div class="consent-group detail-item">
+                        <label class="consent-item">
+                            <input type="checkbox" name="accountAutoTransfer" class="detail-consent">
+                            <span class="check-icon detail-check">✓</span>
+                            <span class="consent-text">계좌자동이체약관</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+
+                    <!-- 금리인하요구권 안내 확인서 -->
+                    <div class="consent-group detail-item">
+                        <label class="consent-item">
+                            <input type="checkbox" name="interestRateReduction" class="detail-consent">
+                            <span class="check-icon detail-check">✓</span>
+                            <span class="consent-text">금리인하요구권 안내 확인서</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 상품설명서 확인사항 섹션 -->
+            <div class="confirmation-section">
+                <h2 class="section-title">상품설명서 확인사항</h2>
+                
+                <div class="question-group">
+                    <p class="question-text">
+                        01. 대출계약의 체결일로부터 <span class="highlight">고객님의 신용평점이 하락할 수 있습니다.</span> 관련 내용을 안내 받고 확인하셨습니까?
+                    </p>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm1" value="yes">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">예</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm1" value="no">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">아니오</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <p class="question-text">
+                        02. 대출계약이 성립한 날로부터 3년 이내의 기간 동안에는 약정하신 대출금을 조기상환하는 경우 <span class="highlight">위약금이 발생할 수 있습니다.</span> 관련 내용을 안내 받고 확인하셨습니까?
+                    </p>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm2" value="yes">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">예</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm2" value="no">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">아니오</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <p class="question-text">
+                        03. 대출금 연체 시 대출잔금에 대하여 연체이자율이 적용되며, 연체이자율 일정 날짜하는 경우에도 연체 이자 적용을 남겨하기 어려하지 대출잔금에 연체이자율이 적용됩니다. 확인하셨습니까?(전액변근일물대출은 적용 배재)
+                    </p>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm3" value="yes">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">예</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm3" value="no">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">아니오</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="question-group">
+                    <p class="question-text">
+                        04. 대출금 연체 등으로 연체원금과 놓놓되는 경우 IBK 신용관계 상품 등의 이용이 제한될 수 있습니다. 연체금액을 상환하여 등록사유가 해제되는 경우에도 등록기간 및 금액에 따라 해제되을 수 있습니다. 확인하셨습니까?
+                    </p>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm4" value="yes">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">예</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="productConfirm4" value="no">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">아니오</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 가입전 동의사항 섹션 -->
+            <div class="pre-consent-section">
+                <h2 class="section-title">가입전 동의사항</h2>
+                
+                <div class="pre-consent-text">
+                    금리인하요구권이란 금융소비자가 본인의 신용상태가 개선되었다고 판단되는 경우(취업·승진·소득증대·저산신용정보 부착 등) 금융기관에 자신의 신용상태 조회를 요구하고 이용하는 금리(증여담보부대출의 경우 담보가치 상승 시 제외)의 하향 조정을 받을 수 있는 권리입니다.
+                </div>
+
+                <div class="consent-item-box">
+                    <div class="consent-check-item">
+                        <label class="check-item">
+                            <input type="checkbox" name="preConsentTerms" class="pre-consent-checkbox">
+                            <span class="checkmark blue"></span>
+                            <span class="check-text">본인은 IBK기업은행과 대출거래를 함에 있어 은행으로부터 취하여 설명한 내용을 모두하여 대출거래의 주요내용 등을 충분히 설명을 받고 이해하였음을 확인합니다.</span>
+                        </label>
+                    </div>
+
+                    <div class="consent-check-item">
+                        <label class="check-item">
+                            <input type="checkbox" name="accountTerms" class="pre-consent-checkbox">
+                            <span class="checkmark blue"></span>
+                            <span class="check-text">본인은 은행으로부터 금융소비자의 권리와 의무에 대하여 충분한 설명을 받고 이해하였음을 확인합니다.</span>
+                        </label>
+                    </div>
+
+                    <div class="consent-check-item">
+                        <label class="check-item">
+                            <input type="checkbox" name="interestTerms" class="pre-consent-checkbox">
+                            <span class="checkmark blue"></span>
+                            <span class="check-text">할부거래약정서</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+
+                    <div class="consent-check-item">
+                        <label class="check-item">
+                            <input type="checkbox" name="accountAutoTransferTerms" class="pre-consent-checkbox">
+                            <span class="checkmark blue"></span>
+                            <span class="check-text">계좌자동이체약관</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+
+                    <div class="consent-check-item">
+                        <label class="check-item">
+                            <input type="checkbox" name="interestReductionTerms" class="pre-consent-checkbox">
+                            <span class="checkmark blue"></span>
+                            <span class="check-text">금리인하요구권 안내 확인서</span>
+                            <span class="arrow">></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" onclick="goToPreviousPage()">이전</button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="handleNext()">다음</button>
+        </div>
+    </div>
+
+    <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Contract page carSrn:', carSrn);
+
+        // 폼 요소들
+        const allConsentCheckbox = document.getElementById('allConsent');
+        const detailConsentCheckboxes = document.querySelectorAll('.detail-consent');
+        const productConfirmRadios = document.querySelectorAll('input[name^="productConfirm"]');
+        const preConsentCheckboxes = document.querySelectorAll('.pre-consent-checkbox');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // 전체동의 체크박스 변경 감지
+        allConsentCheckbox.addEventListener('change', function() {
+            const isChecked = this.checked;
+            
+            // 상세 동의 항목들 모두 체크/해제
+            detailConsentCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+                updateCheckmarkColor(checkbox);
+            });
+            
+            updateCheckmarkColor(this);
+            updateNextButton();
+        });
+
+        // 개별 상세 동의 체크박스 변경 감지
+        detailConsentCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateCheckmarkColor(this);
+                
+                // 모든 상세 동의 항목이 체크되었는지 확인
+                const allDetailChecked = Array.from(detailConsentCheckboxes).every(cb => cb.checked);
+                
+                // 전체동의 체크박스 상태 업데이트
+                allConsentCheckbox.checked = allDetailChecked;
+                updateCheckmarkColor(allConsentCheckbox);
+                
+                updateNextButton();
+            });
+        });
+
+        // 상품설명서 확인사항 라디오 버튼 변경 감지
+        productConfirmRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateNextButton();
+            });
+        });
+
+        // 가입전 동의사항 체크박스 변경 감지
+        preConsentCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                updateCheckmarkColor(this);
+                updateNextButton();
+            });
+        });
+
+        // 체크 아이콘 업데이트
+        function updateCheckmarkColor(checkbox) {
+            const checkIcon = checkbox.nextElementSibling;
+            if (checkbox.checked) {
+                checkIcon.classList.add('checked');
+            } else {
+                checkIcon.classList.remove('checked');
+            }
+        }
+
+        // 다음 버튼 상태 업데이트
+        function updateNextButton() {
+            // 모든 상세 동의 항목 확인
+            const allDetailChecked = Array.from(detailConsentCheckboxes).every(cb => cb.checked);
+            
+            // 모든 상품설명서 확인사항에서 "예" 선택 확인
+            const productConfirmGroups = ['productConfirm1', 'productConfirm2', 'productConfirm3', 'productConfirm4'];
+            const allProductConfirmed = productConfirmGroups.every(group => {
+                const selectedRadio = document.querySelector(`input[name="${group}"]:checked`);
+                return selectedRadio && selectedRadio.value === 'yes';
+            });
+            
+            // 모든 가입전 동의사항 확인
+            const allPreConsentChecked = Array.from(preConsentCheckboxes).every(cb => cb.checked);
+            
+            const allValid = allDetailChecked && allProductConfirmed && allPreConsentChecked;
+            
+            if (allValid) {
+                nextBtn.classList.remove('btn-secondary');
+                nextBtn.classList.add('btn-primary');
+            } else {
+                nextBtn.classList.remove('btn-primary');
+                nextBtn.classList.add('btn-secondary');
+            }
+        }
+
+        // 다음 버튼 클릭 처리
+        function handleNext() {
+            // 모든 상세 동의 항목 확인
+            const allDetailChecked = Array.from(detailConsentCheckboxes).every(cb => cb.checked);
+            if (!allDetailChecked) {
+                alert('모든 동의 항목을 체크해주세요.');
+                return;
+            }
+            
+            // 모든 상품설명서 확인사항에서 "예" 선택 확인
+            const productConfirmGroups = ['productConfirm1', 'productConfirm2', 'productConfirm3', 'productConfirm4'];
+            const allProductConfirmed = productConfirmGroups.every(group => {
+                const selectedRadio = document.querySelector(`input[name="${group}"]:checked`);
+                return selectedRadio && selectedRadio.value === 'yes';
+            });
+            
+            if (!allProductConfirmed) {
+                alert('상품설명서 확인사항에서 모두 "예"를 선택해주세요.');
+                return;
+            }
+            
+            // 모든 가입전 동의사항 확인
+            const allPreConsentChecked = Array.from(preConsentCheckboxes).every(cb => cb.checked);
+            if (!allPreConsentChecked) {
+                alert('가입전 동의사항을 모두 체크해주세요.');
+                return;
+            }
+            
+            // 계약 정보 저장
+            saveContractData();
+            
+            // 다음 단계로 진행
+            if (carSrn) {
+                window.location.href = '/submit_contract?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/submit_contract';
+            }
+        }
+
+        // 계약 정보 저장
+        function saveContractData() {
+            const contractData = {
+                carSrn: carSrn,
+                allConsent: allConsentCheckbox.checked,
+                loanProductGuide: document.querySelector('input[name="loanProductGuide"]').checked,
+                basicTerms: document.querySelector('input[name="basicTerms"]').checked,
+                installmentAgreement: document.querySelector('input[name="installmentAgreement"]').checked,
+                accountAutoTransfer: document.querySelector('input[name="accountAutoTransfer"]').checked,
+                interestRateReduction: document.querySelector('input[name="interestRateReduction"]').checked,
+                productConfirm1: document.querySelector('input[name="productConfirm1"]:checked')?.value,
+                productConfirm2: document.querySelector('input[name="productConfirm2"]:checked')?.value,
+                productConfirm3: document.querySelector('input[name="productConfirm3"]:checked')?.value,
+                productConfirm4: document.querySelector('input[name="productConfirm4"]:checked')?.value,
+                preConsentTerms: document.querySelector('input[name="preConsentTerms"]').checked,
+                accountTerms: document.querySelector('input[name="accountTerms"]').checked,
+                interestTerms: document.querySelector('input[name="interestTerms"]').checked,
+                accountAutoTransferTerms: document.querySelector('input[name="accountAutoTransferTerms"]').checked,
+                interestReductionTerms: document.querySelector('input[name="interestReductionTerms"]').checked
+            };
+            
+            // 세션스토리지에 저장
+            sessionStorage.setItem('contractData', JSON.stringify(contractData));
+        }
+
+        // 이전 페이지로 이동
+        function goToPreviousPage() {
+            if (carSrn) {
+                window.location.href = '/application/check?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/application/check';
+            }
+        }
+
+        // 뒤로가기 함수
+        function goBackWithCarSrn() {
+            if (carSrn) {
+                window.location.href = '/application/check?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
+        }
+
+        // 초기 상태 설정
+        updateNextButton();
+    </script>
+</body>
+</html>
