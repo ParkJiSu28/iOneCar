@@ -113,193 +113,67 @@ body {
     justify-content: center;
 }
 
-/* 할인 아이콘 */
-.discount-icon {
-    position: absolute;
-    top: 20px;
-    left: 50px;
-    width: 40px;
-    height: 40px;
-    background: #235FD2;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    animation: bounce 2s infinite;
-}
 
-.discount-text {
-    color: white;
-    font-size: 20px;
-    font-weight: 700;
-}
 
 /* 차량 일러스트 */
 .car-illustration {
     position: relative;
     z-index: 5;
-}
-
-.car-body {
-    position: relative;
-    width: 180px;
-    height: 120px;
-}
-
-/* 차량 하단 (본체) */
-.car-bottom {
-    position: absolute;
-    bottom: 20px;
-    left: 0;
-    width: 180px;
-    height: 60px;
-    background: #9E9E9E;
-    border-radius: 30px 30px 15px 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* 차량 상단 (캐빈) */
-.car-top {
-    position: absolute;
-    top: 10px;
-    left: 30px;
-    width: 120px;
-    height: 70px;
-    background: #BDBDBD;
-    border-radius: 40px 40px 20px 20px;
-    position: relative;
-}
-
-/* 앞유리 */
-.windshield {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 110px;
-    height: 40px;
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
-    border-radius: 35px 35px 15px 15px;
-    opacity: 0.8;
-}
-
-/* 운전자 */
-.car-top .driver {
-    position: absolute;
-    top: 15px;
-    left: 20px;
-}
-
-.car-top .driver .head {
-    width: 20px;
-    height: 20px;
-    background: #FFCC80;
-    border-radius: 50%;
-    margin-bottom: 2px;
-}
-
-.car-top .driver .body {
-    width: 24px;
-    height: 30px;
-    background: #FF7043;
-    border-radius: 12px 12px 8px 8px;
-}
-
-/* 승객 */
-.car-top .passenger {
-    position: absolute;
-    top: 15px;
-    right: 20px;
-}
-
-.car-top .passenger .head {
-    width: 20px;
-    height: 20px;
-    background: #FFCC80;
-    border-radius: 50%;
-    margin-bottom: 2px;
-}
-
-.car-top .passenger .body {
-    width: 24px;
-    height: 30px;
-    background: #8BC34A;
-    border-radius: 12px 12px 8px 8px;
-}
-
-/* 바퀴들 */
-.wheels {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.wheel {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background: #424242;
-    border-radius: 50%;
-    border: 4px solid #757575;
-    bottom: -10px;
-}
-
-.wheel::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 12px;
-    height: 12px;
-    background: #BDBDBD;
-    border-radius: 50%;
-}
-
-.wheel-left {
-    left: 20px;
-}
-
-.wheel-right {
-    right: 20px;
-}
-
-/* 주변 아이콘들 */
-.icon {
-    position: absolute;
-    width: 48px;
-    height: 48px;
-    background: white;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    animation: float 3s ease-in-out infinite;
 }
 
-.bubble-icon {
-    top: 50px;
-    left: 20px;
+.car-image {
+    width: 220px;
+    height: auto;
+    display: block;
+}
+
+/* 자동차 부품 아이콘들 - 원형 회전 */
+.part-icon {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0 0;
+    animation: rotateAroundCar 12s linear infinite;
+}
+
+.part-image {
+    width: 40px;
+    height: 40px;
+    display: block;
+}
+
+/* 6개 부품을 60도씩 떨어뜨려 원형 배치 */
+.wheel-icon {
     animation-delay: 0s;
 }
 
-.wrench-icon {
-    top: 30px;
-    right: 30px;
-    animation-delay: 0.5s;
+.battery-icon {
+    animation-delay: -2s;
 }
 
-.shield-icon {
-    bottom: 80px;
-    left: 30px;
-    animation-delay: 1s;
+.cylinder-icon {
+    animation-delay: -4s;
 }
 
-.camera-icon {
-    bottom: 60px;
-    right: 20px;
-    animation-delay: 1.5s;
+.engine-icon {
+    animation-delay: -6s;
+}
+
+.oilfilter-icon {
+    animation-delay: -8s;
+}
+
+.suspension-icon {
+    animation-delay: -10s;
 }
 
 /* 하단 버튼 */
@@ -486,6 +360,16 @@ body {
     }
 }
 
+/* 원형 회전 애니메이션 */
+@keyframes rotateAroundCar {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg) translateX(120px) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg) translateX(120px) rotate(-360deg);
+    }
+}
+
 /* 반응형 디자인 */
 @media (max-width: 375px) {
     .main-content {
@@ -505,40 +389,31 @@ body {
         height: 240px;
     }
     
-    .car-body {
-        width: 150px;
-        height: 100px;
+    .car-image {
+        width: 180px;
     }
     
-    .car-bottom {
-        width: 150px;
-        height: 50px;
+    .part-icon {
+        width: 44px;
+        height: 44px;
     }
     
-    .car-top {
-        width: 100px;
-        height: 60px;
-        left: 25px;
-    }
-    
-    .windshield {
-        width: 90px;
-        height: 35px;
-    }
-    
-    .icon {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .discount-icon {
+    .part-image {
         width: 32px;
         height: 32px;
     }
     
-    .discount-text {
-        font-size: 16px;
+    /* 작은 화면에서 회전 반지름 축소 */
+    @keyframes rotateAroundCar {
+        0% {
+            transform: translate(-50%, -50%) rotate(0deg) translateX(90px) rotate(0deg);
+        }
+        100% {
+            transform: translate(-50%, -50%) rotate(360deg) translateX(90px) rotate(-360deg);
+        }
     }
+    
+
     
     .bottom-buttons {
         padding: 12px;

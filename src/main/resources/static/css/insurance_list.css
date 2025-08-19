@@ -1,0 +1,245 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 48px;
+    padding: 24px 16px 16px 16px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* 제목 섹션 */
+.title-section {
+    margin-bottom: 24px;
+}
+
+.main-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.sub-title {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* 보험사 목록 */
+.insurance-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.insurance-item {
+    background: white;
+    border-radius: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #F0F0F0;
+}
+
+.insurance-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2px;
+    min-height: 60px;
+}
+
+.company-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    padding-left: 0;
+}
+
+.company-logo-img {
+    height: 40px;
+    width: auto;
+    max-width: calc(100% - 90px);
+    object-fit: contain;
+    display: block;
+}
+
+.company-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.company-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    line-height: 1.2;
+}
+
+.product-type {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.2;
+}
+
+.quote-btn {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.quote-btn:hover {
+    background: #F8F9FA;
+}
+
+.quote-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #0EA5E9;
+}
+
+.arrow-icon {
+    flex-shrink: 0;
+}
+
+.insurance-detail {
+    padding-top: 2px;
+}
+
+.detail-text {
+    font-size: 12px;
+    color: #0EA5E9;
+    line-height: 1.3;
+    background: #F0F8FF;
+    padding: 4px 6px;
+    border-radius: 4px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: calc(100% - 16px);
+    max-width: calc(100% - 16px);
+    margin: 0;
+    margin-left: 0;
+    margin-right: 8px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 20px 12px 12px 12px;
+    }
+    
+    .main-title {
+        font-size: 22px;
+    }
+    
+    .sub-title {
+        font-size: 15px;
+    }
+    
+    .insurance-item {
+        padding: 6px;
+    }
+    
+    .company-logo-img {
+        height: 35px;
+        width: auto;
+        max-width: calc(100% - 75px);
+    }
+    
+    .insurance-header {
+        min-height: 50px;
+        margin-bottom: 1px;
+    }
+    
+    .company-name {
+        font-size: 15px;
+    }
+    
+    .product-type {
+        font-size: 11px;
+    }
+    
+    .quote-text {
+        font-size: 13px;
+    }
+    
+    .detail-text {
+        font-size: 11px;
+    }
+}

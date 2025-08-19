@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 내 견적함</title>
+    <link rel="stylesheet" th:href="@{/css/insurance_list.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 내 견적함</h1>
+            <button class="close-btn" onclick="history.back()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 제목 섹션 -->
+            <div class="title-section">
+                <h2 class="main-title">자동차 보험 견적 내역</h2>
+                <p class="sub-title">견적 조회가 완료되었어요!</p>
+            </div>
+
+            <!-- 보험사 목록 -->
+            <div class="insurance-list">
+                <!-- KB손해보험 -->
+                <div class="insurance-item">
+                    <div class="insurance-header">
+                        <div class="company-info">
+                            <img src="/css/images/insurance_KB.png" alt="KB손해보험" class="company-logo-img">
+                        </div>
+                        <button class="quote-btn">
+                            <span class="quote-text">확인하기</span>
+                            <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 4L10 8L6 12" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="insurance-detail">
+                        <span class="detail-text">자동차보험 30대남 이상 카드 결제시 30만 원례 혜택</span>
+                    </div>
+                </div>
+
+                <!-- 현대해상 다이렉트 -->
+                <div class="insurance-item">
+                    <div class="insurance-header">
+                        <div class="company-info">
+                            <img src="/css/images/insurance_HD.png" alt="현대해상" class="company-logo-img">
+                        </div>
+                        <button class="quote-btn">
+                            <span class="quote-text">확인하기</span>
+                            <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 4L10 8L6 12" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="insurance-detail">
+                        <span class="detail-text">자동차 보험 신규 가입시 최대 30만원 카드결제혜택</span>
+                    </div>
+                </div>
+
+                <!-- DB손해보험 1 -->
+                <div class="insurance-item">
+                    <div class="insurance-header">
+                        <div class="company-info">
+                            <img src="/css/images/insurance_DB.png" alt="DB손해보험" class="company-logo-img">
+                        </div>
+                        <button class="quote-btn">
+                            <span class="quote-text">확인하기</span>
+                            <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 4L10 8L6 12" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="insurance-detail">
+                        <span class="detail-text">30대남성 카드 결제시 최대30만원혜택</span>
+                    </div>
+                </div>
+
+                <!-- 하나손해보험 -->
+                <div class="insurance-item">
+                    <div class="insurance-header">
+                        <div class="company-info">
+                            <img src="/css/images/insurance_HN.png" alt="하나손해보험" class="company-logo-img">
+                        </div>
+                        <button class="quote-btn">
+                            <span class="quote-text">확인하기</span>
+                            <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 4L10 8L6 12" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="insurance-detail">
+                        <span class="detail-text">30대남성 가격 기준 최대 30만원 네이버페이 상품권 증정</span>
+                    </div>
+                </div>
+
+                <!-- DB손해보험 2 -->
+                <div class="insurance-item">
+                    <div class="insurance-header">
+                        <div class="company-info">
+                            <img src="/css/images/insurance_DB.png" alt="DB손해보험" class="company-logo-img">
+                        </div>
+                        <button class="quote-btn">
+                            <span class="quote-text">확인하기</span>
+                            <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                <path d="M6 4L10 8L6 12" stroke="#0EA5E9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="insurance-detail">
+                        <span class="detail-text">30대남성 카드 결제시 최대30만원혜택</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 보험 견적 확인 버튼 클릭 처리
+        document.querySelectorAll('.quote-btn').forEach((btn, index) => {
+            btn.addEventListener('click', function() {
+                const companies = ['KB손해보험', '현대해상', 'DB손해보험', '하나손해보험', 'DB손해보험'];
+                const companyName = companies[index];
+                alert(`${companyName} 보험 견적을 확인합니다.`);
+                
+                // carSrn 정보 전달
+                const urlParams = new URLSearchParams(window.location.search);
+                const carSrn = urlParams.get('carSrn');
+                
+                if (carSrn) {
+                    console.log('보험 견적 확인 - carSrn:', carSrn, 'company:', companyName);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
