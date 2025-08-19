@@ -25,7 +25,7 @@
             <section class="dealer-profile">
                 <!-- 프로필 이미지와 인증 마크 -->
                 <div class="profile-image-container">
-                    <img th:src="@{/css/images/dealer1.png}" alt="딜러 프로필" class="profile-image">
+                    <img th:src="@{${dealerName == '벤츠박사' ? '/css/images/dealer1.png' : '/css/images/dealer2.png'}}" alt="딜러 프로필" class="profile-image">
                     <!-- 인증 마크 (조건부 표시) -->
                     <div class="verification-badge" th:if="${isVerified == 'Y'}">
                         <div class="verification-icon">
@@ -62,7 +62,7 @@
                 </div>
                 
                 <!-- 채팅 버튼 -->
-                <button class="chat-button">
+                <button class="chat-button" onclick="goToChat()">
                     딜러와 채팅하기
                 </button>
             </section>
@@ -91,7 +91,7 @@
                             정말 친절하고 추천해주신 차량이 마음에 들어서 구매하게 되었습니다. 
                             딜러님이 정말 열심히 도와주셨는데 물 한 잔도 못 대접해서 죄송하네요.
                         </p>
-                        <img th:src="@{/css/images/a-class.png}" alt="GLE-Class" class="review-car-image">
+                        <img th:src="@{'/css/images/gle.png'}" alt="GLE-Class" class="review-car-image">
                     </div>
                 </div>
                 
@@ -115,11 +115,29 @@
                             처음 차를 구매하는데 친절하게 설명해주시고 차량 상태도 정말 좋았습니다. 
                             믿고 구매할 수 있는 딜러라고 생각합니다.
                         </p>
-                        <img th:src="@{/css/images/a-class.png}" alt="S-Class" class="review-car-image">
+                        <img th:src="@{'/css/images/sclass.png'}" alt="S-Class" class="review-car-image">
                     </div>
                 </div>
             </section>
         </main>
     </div>
+
+<script th:inline="javascript">
+    // 채팅하기 버튼 클릭 시 호출되는 함수
+    function goToChat() {
+        // carSrn 파라미터를 URL에서 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        
+        if (carSrn) {
+            // carSrn이 있을 경우 파라미터와 함께 이동
+            window.location.href = '/myquote/chat?carSrn=' + carSrn;
+        } else {
+            // carSrn이 없을 경우 그냥 이동
+            window.location.href = '/myquote/chat';
+        }
+    }
+</script>
+
 </body>
 </html> 

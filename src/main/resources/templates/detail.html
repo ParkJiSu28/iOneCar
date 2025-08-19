@@ -40,7 +40,7 @@
                             <p class="car-spec" th:text="${car.carSubClass}"></p>
                         </div>
                         <div class="car-image">
-                            <img src="/css/images/a-class.png" alt="A-Class" class="car-img">
+                            <img th:src="@{${car.carClass == 'A-Class' ? '/css/images/a-class.png' : '/css/images/bmwx1.png'}}" alt="A-Class" class="car-img">
                         </div>
                     </div>
 
@@ -236,13 +236,13 @@
                 <div th:each="compare : ${compares}" class="dealer-info">
                     <div class="dealer-profile">
                         <div class="dealer-avatar">
-                            <img th:src="@{/css/images/dealer1.png}" alt="딜러" class="avatar-img">
+                            <img th:src="@{${compare.dealerName == '벤츠박사' ? '/css/images/dealer1.png' : '/css/images/dealer2.png'}}" alt="딜러" class="avatar-img">
                         </div>
                         <div class="dealer-details">
                             <div class="dealer-name">
                                 <span th:onclick="'goToProfile(\'' + ${compare.dealerNo} + '\')'" 
                                       style="cursor: pointer;" 
-                                      th:text="${compare.dealerName}">벤츠박사</span>
+                                      th:text="${compare.dealerName}"></span>
                                 <div class="verified-badge">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="#235FD2">
                                         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
@@ -250,8 +250,8 @@
                                 </div>
                             </div>
                             <div class="dealer-stats">
-                                <span class="rating" th:text="${compare.rating} + '(' + ${compare.reviewCnt} + ')'">5.0(67)</span>
-                                <span class="quotes" th:text="'매칭견적 ' + ${compare.quotationCnt} + '건'">매칭견적 1,416건</span>
+                                <span class="rating" th:text="${compare.rating} + '(' + ${compare.reviewCnt} + ')'"></span>
+                                <span class="quotes" th:text="'매칭견적 ' + ${compare.quotationCnt} + '건'"></span>
                             </div>
                         </div>
                     </div>

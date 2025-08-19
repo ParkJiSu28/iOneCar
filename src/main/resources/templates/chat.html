@@ -15,7 +15,7 @@
         <span class="separator">|</span>
         <span class="page-title">내 견적함</span>
       </div>
-      <span class="close-btn">X</span>
+      <span class="close-btn" onclick="goBack()" style="cursor: pointer;">X</span>
     </div>
 
     <!-- 네비게이션 -->
@@ -119,6 +119,11 @@
         window.history.back();
       });
     });
+
+    // X 버튼 클릭 시 뒤로가기 함수
+    function goBack() {
+      window.history.back();
+    }
   </script>
 </body>
 </html> 
