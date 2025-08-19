@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 결제 정보 확인</title>
+    <link rel="stylesheet" th:href="@{/css/application_check.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 결제 정보 확인</h1>
+            <button class="close-btn" onclick="goBackWithCarSrn()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 신청 정보 확인 섹션 -->
+            <div class="check-result-section">
+                <h2 class="section-title">결제 정보 확인</h2>
+                
+                <!-- 전체 정보를 하나의 박스에 표시 -->
+                <div class="info-group single-box">
+                    <div class="info-item">
+                        <span class="info-label">자금 용도</span>
+                        <span class="info-value">자동차 매입</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">신청일자</span>
+                        <span class="info-value" id="applicationDate">2025-10-31</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">성명</span>
+                        <span class="info-value" th:text="${customerInfo != null ? customerInfo.name : '김기은'}">김기은</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">상품명</span>
+                        <span class="info-value">IBK 자동차 장기카드할부</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">취등록세 납부</span>
+                        <span class="info-value" id="registrationTaxResult">별도납부</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">선수금</span>
+                        <span class="info-value" id="amountResult">10,000,000원</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">월부금액</span>
+                        <span class="info-value" id="monthlyPaymentResult">33,620,000원</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">할부기간</span>
+                        <span class="info-value" id="installmentPeriodResult">48개월</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">할부이율</span>
+                        <span class="info-value">7%</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">할부상환일</span>
+                        <span class="info-value" id="paymentDayResult">10일</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">할부상환 통지방법</span>
+                        <span class="info-value" id="notificationMethodResult">문자메시지</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">카드번호</span>
+                        <span class="info-value card-number" th:text="${customerInfo != null ? customerInfo.cardNumber : '9440-0323-5454-1112'}">9440-0323-5454-1112</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">카드명</span>
+                        <span class="info-value">IBK 일상의 기쁨카드(신용)</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">권유직원</span>
+                        <span class="info-value" id="employeeResult">없음</span>
+                    </div>
+                </div>
+
+                <!-- 확인 체크박스 섹션 -->
+                <div class="confirmation-section">
+                    <label class="confirmation-item">
+                        <input type="checkbox" id="confirmCheckbox" name="confirmCheckbox">
+                        <span class="checkmark"></span>
+                        <span class="confirmation-text">위 내용을 확인했습니다.</span>
+                    </label>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" onclick="goToPreviousPage()">이전</button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="handleNext()">다음</button>
+        </div>
+    </div>
+
+    <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Application check page carSrn:', carSrn);
+
+        const confirmCheckbox = document.getElementById('confirmCheckbox');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // 페이지 로드 시 실행
+        document.addEventListener('DOMContentLoaded', function() {
+            // 현재 날짜를 신청일자로 설정
+            setCurrentDate();
+            // application에서 전달받은 데이터 로드
+            loadApplicationData();
+        });
+
+        // 현재 날짜 설정
+        function setCurrentDate() {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = String(today.getMonth() + 1).padStart(2, '0');
+            const day = String(today.getDate()).padStart(2, '0');
+            const formattedDate = `${year}-${month}-${day}`;
+            
+            document.getElementById('applicationDate').textContent = formattedDate;
+        }
+
+        // application에서 저장된 데이터 로드
+        function loadApplicationData() {
+            const applicationData = sessionStorage.getItem('applicationData');
+            
+            if (applicationData) {
+                const data = JSON.parse(applicationData);
+                updateResultDisplay(data);
+            } else {
+                console.log('No application data found, using default values');
+            }
+        }
+
+        // 결과 화면에 데이터 업데이트
+        function updateResultDisplay(data) {
+            // 취등록세 납부 매핑
+            const registrationTaxMap = {
+                'auto': '자동납부',
+                'manual': '별도납부'
+            };
+
+            // 통지방법 매핑
+            const notificationMethodMap = {
+                'sms': '문자메시지',
+                'mail': '우편물',
+                'email': '이메일',
+                'none': '통지생략(거부)'
+            };
+
+            // 결과 업데이트
+            if (data.amount) {
+                // 콤마가 이미 포함된 금액을 그대로 사용
+                document.getElementById('amountResult').textContent = data.amount + '원';
+                
+                // 월부금액 계산 (간단한 예시 - 실제로는 더 복잡한 계산)
+                const amount = parseInt(data.amount.replace(/,/g, ''));
+                const period = parseInt(data.installmentPeriod) || 48;
+                const monthlyPayment = Math.floor(amount / period);
+                document.getElementById('monthlyPaymentResult').textContent = monthlyPayment.toLocaleString() + '원';
+            }
+
+            if (data.installmentPeriod) {
+                document.getElementById('installmentPeriodResult').textContent = data.installmentPeriod + '개월';
+            }
+
+            if (data.paymentDay) {
+                document.getElementById('paymentDayResult').textContent = data.paymentDay + '일';
+            }
+
+            if (data.notificationMethod) {
+                const mappedValue = notificationMethodMap[data.notificationMethod] || data.notificationMethod;
+                document.getElementById('notificationMethodResult').textContent = mappedValue;
+            }
+
+            // 권유직원 정보 처리
+            const employeeElement = document.getElementById('employeeResult');
+            if (data.employeeRecommendation && data.employeeName && data.employeeName.trim() !== '') {
+                employeeElement.textContent = data.employeeName;
+            } else {
+                employeeElement.textContent = '없음';
+            }
+
+            // 취등록세 납부는 기본값 사용 (라디오 버튼 데이터가 저장되지 않은 경우)
+            const registrationTaxRadio = document.querySelector('input[name="registrationTax"]:checked');
+            if (registrationTaxRadio) {
+                const mappedValue = registrationTaxMap[registrationTaxRadio.value] || '별도납부';
+                document.getElementById('registrationTaxResult').textContent = mappedValue;
+            }
+        }
+
+        // 체크박스 상태 변경 감지
+        confirmCheckbox.addEventListener('change', function() {
+            updateNextButton();
+        });
+
+        // 다음 버튼 상태 업데이트
+        function updateNextButton() {
+            if (confirmCheckbox.checked) {
+                nextBtn.classList.remove('btn-secondary');
+                nextBtn.classList.add('btn-primary');
+            } else {
+                nextBtn.classList.remove('btn-primary');
+                nextBtn.classList.add('btn-secondary');
+            }
+        }
+
+        // 다음 버튼 클릭 처리
+        function handleNext() {
+            if (!confirmCheckbox.checked) {
+                alert('위 내용을 확인했다는 체크박스를 선택해주세요.');
+                return;
+            }
+            
+            // 확인 정보 저장
+            saveConfirmationData();
+            
+            // verification 페이지로 이동
+            if (carSrn) {
+                window.location.href = '/verification?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/verification';
+            }
+        }
+
+        // 확인 정보 저장
+        function saveConfirmationData() {
+            const confirmationData = {
+                confirmed: confirmCheckbox.checked,
+                confirmedAt: new Date().toISOString()
+            };
+            
+            // 세션스토리지에 저장
+            sessionStorage.setItem('applicationConfirmationData', JSON.stringify(confirmationData));
+        }
+
+        // 이전 페이지로 이동
+        function goToPreviousPage() {
+            if (carSrn) {
+                window.location.href = '/application?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/application';
+            }
+        }
+
+        // 뒤로가기 함수
+        function goBackWithCarSrn() {
+            if (carSrn) {
+                window.location.href = '/application?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
+        }
+
+        // 초기 상태 설정
+        updateNextButton();
+    </script>
+</body>
+</html>

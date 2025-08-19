@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i-One Car | 결제 정보 입력</title>
+    <link rel="stylesheet" th:href="@{/css/application.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 상단 헤더 -->
+        <header class="main-header">
+            <h1 class="header-title">i-One Car | 결제 정보 입력</h1>
+            <button class="close-btn" onclick="goBackWithCarSrn()">
+                <img src="/css/images/X.png" alt="닫기" class="close-icon">
+            </button>
+        </header>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 차량 정보 섹션 -->
+            <div class="vehicle-info-section">
+                <div class="vehicle-header">
+                    <div class="vehicle-details">
+                        <h2 class="vehicle-name">벤츠 A-Class</h2>
+                        <p class="vehicle-spec">2025형 해치백 가솔린</p>
+                        <p class="vehicle-spec">2.0 우신</p>
+                    </div>
+                    <div class="vehicle-image">
+                        <img src="/css/images/a-class.png" alt="벤츠 A-Class" class="car-image">
+                    </div>
+                </div>
+                
+                <div class="price-section">
+                    <div class="price-item">
+                        <span class="price-label">차량 기본가</span>
+                        <span class="price-value">48,100,000원</span>
+                    </div>
+                    
+                    <div class="price-item expandable" id="optionPriceItem">
+                        <div class="price-left">
+                            <span class="price-label">추가 옵션가</span>
+                            <button class="expand-btn" id="expandBtn">
+                                <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1L6 6L11 1" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="price-value">+520,000원</span>
+                    </div>
+                    
+                    <!-- 취등록세 항목 (자동납부 선택 시에만 표시) -->
+                    <div class="price-item" id="registrationTaxItem" style="display: none;">
+                        <span class="price-label">취등록세</span>
+                        <span class="price-value" id="registrationTaxPrice">+3,403,400원</span>
+                    </div>
+                    
+                    <!-- 옵션 상세 내역 (처음에는 숨김) -->
+                    <div class="option-details" id="optionDetails" style="display: none;">
+                        <div class="option-item">
+                            <span class="option-name">프리미엄 패키지</span>
+                            <span class="option-price">+300,000원</span>
+                        </div>
+                        <div class="option-item">
+                            <span class="option-name">LED 헤드라이트</span>
+                            <span class="option-price">+150,000원</span>
+                        </div>
+                        <div class="option-item">
+                            <span class="option-name">선루프</span>
+                            <span class="option-price">+70,000원</span>
+                        </div>
+                    </div>
+                    
+                    <div class="total-price">
+                        <span class="total-label">총 예상금액</span>
+                        <span class="total-value" id="totalPrice">48,620,000원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 신청 폼 -->
+            <div class="application-form">
+                <!-- 자금 용도 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">자금 용도</span>
+                        <span class="customer-info">자동차 매입</span>
+                    </div>
+                </div>
+
+                <!-- 취등록세 납부 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">취등록세 납부</span>
+                    </div>
+                    <div class="radio-group registration-tax">
+                        <label class="radio-item">
+                            <input type="radio" name="registrationTax" value="auto">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">자동납부</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="registrationTax" value="manual">
+                            <span class="radio-custom"></span>
+                            <span class="radio-text">별도납부</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 선수금 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">선수금</span>
+                    </div>
+                    <div class="amount-input-section">
+                        <input type="text" class="amount-input" placeholder="금액 입력" maxlength="10">
+                        <span class="amount-unit">원</span>
+                    </div>
+                    <div class="amount-notice">
+                        (할부 가능 한도 : 58,500,000원)
+                    </div>
+                </div>
+
+                <!-- 카드 선택 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">카드 선택</span>
+                    </div>
+                    <div class="dropdown-section">
+                        <select class="dropdown-select" id="cardSelect" name="cardType">
+                            <option value="">IBK 일상의 기쁨카드(신용)</option>
+                            <option value="check-plus">IBK 체크카드 PLUS</option>
+                            <option value="corporate">IBK 기업우대카드(신용)</option>
+                            <option value="freedom">IBK 자유로이카드(신용)</option>
+                            <option value="dadam">IBK 다담카드(신용)</option>
+                            <option value="travel">IBK 여행가는날카드(신용)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 할부 기간 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">할부 기간</span>
+                    </div>
+                    <div class="dropdown-section">
+                        <select class="dropdown-select" id="installmentPeriod" name="installmentPeriod">
+                            <option value="">기간 선택</option>
+                            <option value="3">3개월</option>
+                            <option value="6">6개월</option>
+                            <option value="9">9개월</option>
+                            <option value="12">12개월</option>
+                            <option value="18">18개월</option>
+                            <option value="24">24개월</option>
+                            <option value="36">36개월</option>
+                            <option value="48">48개월</option>
+                            <option value="60">60개월</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 할부 상환일 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">할부 상환일</span>
+                    </div>
+                    <div class="dropdown-section">
+                        <select class="dropdown-select" id="paymentDay" name="paymentDay">
+                            <option value="">일자 선택</option>
+                            <option value="1">1일</option>
+                            <option value="2">2일</option>
+                            <option value="3">3일</option>
+                            <option value="4">4일</option>
+                            <option value="5">5일</option>
+                            <option value="6">6일</option>
+                            <option value="7">7일</option>
+                            <option value="8">8일</option>
+                            <option value="9">9일</option>
+                            <option value="10">10일</option>
+                            <option value="11">11일</option>
+                            <option value="12">12일</option>
+                            <option value="13">13일</option>
+                            <option value="14">14일</option>
+                            <option value="15">15일</option>
+                            <option value="16">16일</option>
+                            <option value="17">17일</option>
+                            <option value="18">18일</option>
+                            <option value="19">19일</option>
+                            <option value="20">20일</option>
+                            <option value="21">21일</option>
+                            <option value="22">22일</option>
+                            <option value="23">23일</option>
+                            <option value="24">24일</option>
+                            <option value="25">25일</option>
+                            <option value="26">26일</option>
+                            <option value="27">27일</option>
+                            <option value="28">28일</option>
+                            <option value="29">29일</option>
+                            <option value="30">30일</option>
+                            <option value="31">31일</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 할부 상환 통지방법 -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <span class="section-title">할부 상환 통지방법</span>
+                    </div>
+                    <div class="radio-group notification-method">
+                        <div class="radio-row">
+                            <label class="radio-item">
+                                <input type="radio" name="notificationMethod" value="sms">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">문자메시지</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="notificationMethod" value="mail">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">우편물</span>
+                            </label>
+                        </div>
+                        <div class="radio-row">
+                            <label class="radio-item">
+                                <input type="radio" name="notificationMethod" value="email">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">이메일</span>
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="notificationMethod" value="none">
+                                <span class="radio-custom"></span>
+                                <span class="radio-text">통지생략(거부)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 권유직원 선택 -->
+                <div class="form-section">
+                    <div class="employee-checkbox">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="employeeRecommendation" name="employeeRecommendation">
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">권유직원 선택</span>
+                        </label>
+                    </div>
+                    <div class="employee-input-section" id="employeeInputSection" style="display: none;">
+                        <input type="text" class="employee-input" id="employeeName" name="employeeName" placeholder="지점or직원명 입력" maxlength="50">
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 하단 버튼 -->
+        <div class="bottom-button">
+            <button class="btn btn-secondary" onclick="goToPreviousPage()">이전</button>
+            <button class="btn btn-secondary" id="nextBtn" onclick="handleNext()">다음</button>
+        </div>
+    </div>
+
+    <script>
+        // URL에서 carSrn 파라미터 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const carSrn = urlParams.get('carSrn');
+        console.log('Application page carSrn:', carSrn);
+
+        // 폼 요소들
+        const cardSelect = document.getElementById('cardSelect');
+        const installmentPeriod = document.getElementById('installmentPeriod');
+        const paymentDay = document.getElementById('paymentDay');
+        const notificationRadios = document.querySelectorAll('input[name="notificationMethod"]');
+        const employeeCheckbox = document.getElementById('employeeRecommendation');
+        const employeeInputSection = document.getElementById('employeeInputSection');
+        const employeeName = document.getElementById('employeeName');
+        const nextBtn = document.getElementById('nextBtn');
+        const amountInput = document.querySelector('.amount-input');
+        const registrationTaxRadios = document.querySelectorAll('input[name="registrationTax"]');
+        
+        // 가격 관련 요소들
+        const registrationTaxItem = document.getElementById('registrationTaxItem');
+        const registrationTaxPrice = document.getElementById('registrationTaxPrice');
+        const totalPriceElement = document.getElementById('totalPrice');
+        
+        // 기본 가격 정보
+        const basePrice = 48100000; // 차량 기본가
+        const optionPrice = 520000;  // 추가 옵션가
+        const registrationTaxRate = 0.07; // 취등록세율 7%
+
+        // 숫자 입력 포맷팅 (금액 입력)
+        amountInput.addEventListener('input', function() {
+            // 숫자가 아닌 문자 제거
+            let value = this.value.replace(/[^0-9]/g, '');
+            
+            // 숫자 포맷팅 (3자리마다 콤마)
+            if (value) {
+                value = parseInt(value).toLocaleString();
+            }
+            
+            this.value = value;
+            updateNextButton();
+        });
+
+        // 권유직원 체크박스 변경 감지
+        employeeCheckbox.addEventListener('change', function() {
+            if (this.checked) {
+                employeeInputSection.style.display = 'block';
+                employeeName.focus();
+            } else {
+                employeeInputSection.style.display = 'none';
+                employeeName.value = '';
+            }
+            updateNextButton();
+        });
+
+        // 직원명 입력 변경 감지
+        employeeName.addEventListener('input', function() {
+            updateNextButton();
+        });
+
+        // 카드 선택 변경 감지
+        cardSelect.addEventListener('change', function() {
+            updateNextButton();
+        });
+
+        // 할부 기간 변경 감지
+        installmentPeriod.addEventListener('change', function() {
+            updateNextButton();
+        });
+
+        // 할부 상환일 변경 감지
+        paymentDay.addEventListener('change', function() {
+            updateNextButton();
+        });
+
+        // 통지방법 라디오 버튼 변경 감지
+        notificationRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateNextButton();
+            });
+        });
+
+        // 취등록세 납부 라디오 버튼 변경 감지
+        registrationTaxRadios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                updateRegistrationTaxDisplay();
+                updateNextButton();
+            });
+        });
+
+        // 취등록세 표시 업데이트 함수
+        function updateRegistrationTaxDisplay() {
+            const isAutoTax = Array.from(registrationTaxRadios).find(radio => radio.checked && radio.value === 'auto');
+            
+            if (isAutoTax) {
+                // 자동납부 선택 시 취등록세 항목 표시
+                const taxAmount = Math.floor((basePrice + optionPrice) * registrationTaxRate);
+                registrationTaxPrice.textContent = '+' + taxAmount.toLocaleString() + '원';
+                registrationTaxItem.style.display = 'flex';
+                
+                // 총 예상금액 업데이트
+                const totalAmount = basePrice + optionPrice + taxAmount;
+                totalPriceElement.textContent = totalAmount.toLocaleString() + '원';
+            } else {
+                // 별도납부 선택 시 취등록세 항목 숨김
+                registrationTaxItem.style.display = 'none';
+                
+                // 총 예상금액을 원래대로 복원
+                const totalAmount = basePrice + optionPrice;
+                totalPriceElement.textContent = totalAmount.toLocaleString() + '원';
+            }
+        }
+
+        // 다음 버튼 상태 업데이트
+        function updateNextButton() {
+            const isCardSelected = cardSelect.value !== '';
+            const isInstallmentSelected = installmentPeriod.value !== '';
+            const isPaymentDaySelected = paymentDay.value !== '';
+            const isNotificationSelected = Array.from(notificationRadios).some(radio => radio.checked);
+            const isAmountEntered = amountInput.value.trim() !== '';
+            const isRegistrationTaxSelected = Array.from(registrationTaxRadios).some(radio => radio.checked);
+            
+            // 권유직원 체크 시 직원명 입력 검증
+            let isEmployeeValid = true;
+            if (employeeCheckbox.checked) {
+                isEmployeeValid = employeeName.value.trim() !== '';
+            }
+            
+            const allValid = isCardSelected && isInstallmentSelected && isPaymentDaySelected && 
+                           isNotificationSelected && isAmountEntered && isEmployeeValid && isRegistrationTaxSelected;
+            
+            if (allValid) {
+                nextBtn.classList.remove('btn-secondary');
+                nextBtn.classList.add('btn-primary');
+            } else {
+                nextBtn.classList.remove('btn-primary');
+                nextBtn.classList.add('btn-secondary');
+            }
+        }
+
+        // 다음 버튼 클릭 처리
+        function handleNext() {
+            const isCardSelected = cardSelect.value !== '';
+            const isInstallmentSelected = installmentPeriod.value !== '';
+            const isPaymentDaySelected = paymentDay.value !== '';
+            const isNotificationSelected = Array.from(notificationRadios).some(radio => radio.checked);
+            const isAmountEntered = amountInput.value.trim() !== '';
+            const isRegistrationTaxSelected = Array.from(registrationTaxRadios).some(radio => radio.checked);
+            
+            // 권유직원 체크 시 직원명 입력 검증
+            let isEmployeeValid = true;
+            if (employeeCheckbox.checked) {
+                isEmployeeValid = employeeName.value.trim() !== '';
+            }
+            
+            // 필수 항목 검증
+            if (!isRegistrationTaxSelected) {
+                alert('취등록세 납부를 선택해주세요.');
+                registrationTaxRadios[0].focus();
+                return;
+            }
+            
+            if (!isAmountEntered) {
+                alert('선수금을 입력해주세요.');
+                amountInput.focus();
+                return;
+            }
+            
+            if (!isCardSelected) {
+                alert('카드를 선택해주세요.');
+                cardSelect.focus();
+                return;
+            }
+            
+            if (!isInstallmentSelected) {
+                alert('할부 기간을 선택해주세요.');
+                installmentPeriod.focus();
+                return;
+            }
+            
+            if (!isPaymentDaySelected) {
+                alert('할부 상환일을 선택해주세요.');
+                paymentDay.focus();
+                return;
+            }
+            
+            if (!isNotificationSelected) {
+                alert('할부 상환 통지방법을 선택해주세요.');
+                notificationRadios[0].focus();
+                return;
+            }
+            
+            if (!isEmployeeValid) {
+                alert('권유직원을 선택하신 경우 지점 또는 직원명을 입력해주세요.');
+                employeeName.focus();
+                return;
+            }
+            
+            // 신청 정보 저장
+            saveApplicationData();
+            
+            // 다음 단계로 진행 (application_check 페이지로)
+            if (carSrn) {
+                window.location.href = '/application/check?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/application/check';
+            }
+        }
+
+        // 신청 정보 저장
+        function saveApplicationData() {
+            const data = {
+                carSrn: carSrn,
+                amount: amountInput.value.replace(/,/g, ''), // 콤마 제거
+                cardType: cardSelect.value,
+                installmentPeriod: installmentPeriod.value,
+                paymentDay: paymentDay.value,
+                notificationMethod: Array.from(notificationRadios).find(radio => radio.checked)?.value,
+                registrationTax: Array.from(registrationTaxRadios).find(radio => radio.checked)?.value,
+                employeeRecommendation: employeeCheckbox.checked,
+                employeeName: employeeCheckbox.checked ? employeeName.value : ''
+            };
+            
+            // 세션스토리지에 저장
+            sessionStorage.setItem('applicationData', JSON.stringify(data));
+        }
+
+        // 이전 페이지로 이동
+        function goToPreviousPage() {
+            if (carSrn) {
+                window.location.href = '/consent?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/consent';
+            }
+        }
+
+        // 뒤로가기 함수
+        function goBackWithCarSrn() {
+            if (carSrn) {
+                window.location.href = '/consent?carSrn=' + carSrn;
+            } else {
+                history.back();
+            }
+        }
+
+        // 옵션 상세 토글 기능
+        const expandBtn = document.getElementById('expandBtn');
+        const optionDetails = document.getElementById('optionDetails');
+        
+        expandBtn.addEventListener('click', function() {
+            const isExpanded = optionDetails.style.display !== 'none';
+            
+            if (isExpanded) {
+                optionDetails.style.display = 'none';
+                expandBtn.style.transform = 'rotate(0deg)';
+            } else {
+                optionDetails.style.display = 'block';
+                expandBtn.style.transform = 'rotate(180deg)';
+            }
+        });
+
+        // 초기 상태 설정
+        updateNextButton();
+        
+        // 기본 카드 선택
+        cardSelect.selectedIndex = 0;
+        updateNextButton();
+    </script>
+</body>
+</html>

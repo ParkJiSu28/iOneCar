@@ -201,10 +201,16 @@
             // 동의 정보 저장
             saveConsentData();
             
-            // 다음 단계로 진행
-            alert('동의가 완료되었습니다. 다음 단계로 진행합니다.');
-            // 실제로는 다음 페이지로 리다이렉트
-            // window.location.href = '/next-step';
+            // URL에서 carSrn 파라미터 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const carSrn = urlParams.get('carSrn');
+            
+            // application 페이지로 이동
+            if (carSrn) {
+                window.location.href = '/application?carSrn=' + carSrn;
+            } else {
+                window.location.href = '/application';
+            }
         }
 
         // 동의 정보 저장
