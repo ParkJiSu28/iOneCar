@@ -94,7 +94,34 @@
                         <span class="value" th:text="${compare.rate} + '%'"></span>
                     </div>
                 </div>
-                <a th:href="@{/myquote/detail(carSrn=${carSrn}, dealerNo=${compare.dealerNo})}" class="dealer-detail-btn">상세견적</a>
+                <!-- 기존 단일 버튼 (progress가 2가 아닌 경우) -->
+                <a th:if="${compare.progress != '2'}" th:href="@{/myquote/detail(carSrn=${carSrn}, dealerNo=${compare.dealerNo})}" class="dealer-detail-btn">상세견적</a>
+
+                <!-- progress가 2인 경우 3개 버튼 -->
+                <div th:if="${compare.progress == '2'}" class="triple-button-container">
+                    <a th:href="@{/myquote/detail(carSrn=${carSrn}, dealerNo=${compare.dealerNo})}" class="triple-btn detail-btn">상세견적</a>
+                    <button class="triple-btn chat-btn" th:data-dealer-no="${compare.dealerNo}" onclick="startChat(this.getAttribute('data-dealer-no'))">채팅하기</button>
+                    <button class="triple-btn phone-btn" th:data-dealer-no="${compare.dealerNo}" onclick="makeCall(this.getAttribute('data-dealer-no'))">
+                        <img th:src="@{/css/images/phone-icon.png}" alt="전화" class="phone-icon" />
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 전화 모달 -->
+<div id="phoneModal" class="phone-modal-overlay" style="display: none;">
+    <div class="phone-modal">
+        <div class="phone-modal-content">
+            <div class="phone-icon-large">📞</div>
+            <div class="phone-number" id="phoneNumber">통화 070-5854-8997</div>
+            <div class="phone-buttons">
+                <button class="phone-call-btn" onclick="actualCall()">
+                    <span class="phone-btn-icon">📞</span>
+                    통화
+                </button>
+                <button class="phone-cancel-btn" onclick="closePhoneModal()">취소</button>
             </div>
         </div>
     </div>
@@ -105,6 +132,52 @@
     function goToProfile(dealerNo) {
         window.location.href = '/profile?dealerNo=' + dealerNo;
     }
+
+    // 채팅 시작 함수
+    function startChat(dealerNo) {
+        console.log('startChat 함수 호출됨, dealerNo:', dealerNo);
+        // 채팅 기능 구현 또는 채팅 페이지로 이동
+        window.location.href = '/myquote/chat';
+    }
+
+    // 전화 모달 표시 함수  
+    function makeCall(dealerNo) {
+        // 딜러별 전화번호 설정 (실제로는 서버에서 가져와야 함)
+        const phoneNumbers = {
+            'dealer1': '070-5854-8997',
+            'dealer2': '070-1234-5678'
+        };
+        
+        const phoneNumber = phoneNumbers[dealerNo] || '070-5854-8997';
+        document.getElementById('phoneNumber').textContent = '통화 ' + phoneNumber;
+        document.getElementById('phoneModal').style.display = 'flex';
+        
+        // 배경 스크롤 방지
+        document.body.style.overflow = 'hidden';
+    }
+
+    // 실제 전화 걸기
+    function actualCall() {
+        const phoneNumber = document.getElementById('phoneNumber').textContent.replace('통화 ', '');
+        window.location.href = 'tel:' + phoneNumber;
+        closePhoneModal();
+    }
+
+    // 전화 모달 닫기
+    function closePhoneModal() {
+        document.getElementById('phoneModal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    // 모달 배경 클릭시 닫기
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('phoneModal');
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closePhoneModal();
+            }
+        });
+    });
 </script>
 
 </body>
