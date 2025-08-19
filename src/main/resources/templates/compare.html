@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="car-img-block">
-                <img th:src="@{/css/images/a-class.png}" alt="차 이미지" class="car-img" />
+                <img th:src="@{${carClass == 'A-Class' ? '/css/images/a-class.png' : '/css/images/bmwx1.png'}}" alt="차 이미지" class="car-img" />
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                  th:text="${compare.progress == '1' ? '딜러와 상담요청 전입니다.' : (compare.progress == '2' ? '딜러와 상담이 진행중입니다.' : (compare.progress == '3' ? '딜러와 상담이 완료되었습니다.' : '딜러와 상담요청 전입니다.'))}"
                  th:style="${compare.progress == '2' ? 'color: red;' : (compare.progress == '3' ? 'color: green; font-weight: bold;' : '')}"></div>
             <div class="dealer-card">
-                <img th:src="@{/css/images/dealer1.png}" alt="딜러 프로필" class="dealer-photo" />
+                <img th:src="@{${compare.dealerName == '벤츠박사' ? '/css/images/dealer1.png' : '/css/images/dealer2.png'}}" alt="딜러 프로필" class="dealer-photo" />
                 <div class="dealer-profile-info">
                     <span class="dealer-name" th:onclick="'goToProfile(\'' + ${compare.dealerNo} + '\')'" style="cursor: pointer;" th:text="${compare.dealerName}">딜러명</span>
                     <span class="dealer-rating">
@@ -99,6 +99,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    // 딜러 프로필로 이동하는 함수
+    function goToProfile(dealerNo) {
+        window.location.href = '/profile?dealerNo=' + dealerNo;
+    }
+</script>
 
 </body>
 </html>

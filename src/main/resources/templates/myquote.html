@@ -47,7 +47,7 @@
             </div>
             <div class="car-img-block">
                 <!-- 실제 DB에서 이미지 경로를 갖고 있다면 carImgUrl 속성을 추가해 처리 가능 -->
-                <img th:src="@{/css/images/a-class.png}" alt="차 이미지" class="car-img" />
+                <img th:src="@{${myQuote.carClass == 'A-Class' ? '/css/images/a-class.png' : '/css/images/bmwx1.png'}}" alt="차 이미지" class="car-img" />
             </div>
         </div>
         <div class="expire-box">
