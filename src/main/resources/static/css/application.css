@@ -1,0 +1,676 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 상단 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    margin-top: 48px;
+    padding: 16px;
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px; /* 하단 버튼 공간 확보 */
+}
+
+/* 차량 정보 섹션 */
+.vehicle-info-section {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+}
+
+.vehicle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.vehicle-details {
+    flex: 1;
+}
+
+.vehicle-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #000;
+    margin: 0 0 8px 0;
+}
+
+.vehicle-spec {
+    font-size: 14px;
+    color: #666;
+    margin: 2px 0;
+}
+
+.vehicle-image {
+    flex-shrink: 0;
+    margin-left: 16px;
+}
+
+.car-image {
+    width: 120px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* 가격 섹션 */
+.price-section {
+    background: #F8F9FA;
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.price-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.price-item:last-child {
+    border-bottom: none;
+}
+
+.price-item.expandable {
+    cursor: pointer;
+}
+
+.price-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+}
+
+.price-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000;
+}
+
+.price-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.expand-btn {
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.expand-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+}
+
+/* 금액 정렬을 위한 스타일 */
+.price-value {
+    min-width: 120px;
+    text-align: right;
+}
+
+/* 옵션 상세 내역 */
+.option-details {
+    background: #fff;
+    border-radius: 6px;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid #E5E7EB;
+}
+
+.option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.option-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.option-name {
+    font-size: 13px;
+    color: #666;
+}
+
+.option-price {
+    font-size: 13px;
+    font-weight: 500;
+    color: #235FD2;
+}
+
+/* 총 예상금액 */
+.total-price {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 12px;
+    border: 2px solid #235FD2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.total-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: #235FD2;
+}
+
+/* 신청 폼 */
+.application-form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+}
+
+/* 폼 섹션 */
+.form-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #F0F0F0;
+}
+
+.form-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+}
+
+.customer-info {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+}
+
+/* 라디오 버튼 그룹 */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 취등록세 납부 - 한 줄 배치 */
+.radio-group.registration-tax {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+/* 통지방법 - 2줄 배치 */
+.radio-group.notification-method {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.radio-group.notification-method .radio-row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+/* 통지방법 라디오 버튼들의 너비를 동일하게 설정 */
+.radio-group.notification-method .radio-item {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 통지방법 라디오 버튼 텍스트 줄바꿈 방지 */
+.radio-group.notification-method .radio-text {
+    white-space: nowrap;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.2s ease;
+}
+
+/* 한 줄 배치된 라디오 버튼들의 패딩 조정 */
+.radio-group.registration-tax .radio-item,
+.radio-group.notification-method .radio-item {
+    padding: 8px 12px;
+}
+
+.radio-item:hover {
+    background: #F8F9FA;
+}
+
+.radio-item input[type="radio"] {
+    display: none;
+}
+
+.radio-custom {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #E5E7EB;
+    border-radius: 50%;
+    margin-right: 12px;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.radio-item input[type="radio"]:checked + .radio-custom {
+    border-color: #235FD2;
+    background: #235FD2;
+}
+
+.radio-item input[type="radio"]:checked + .radio-custom::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.radio-text {
+    font-size: 14px;
+    color: #000;
+    line-height: 1.4;
+    flex: 1;
+}
+
+/* 금액 입력 섹션 */
+.amount-input-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.amount-input {
+    flex: 1;
+    height: 48px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    text-align: right;
+    margin-right: 12px;
+}
+
+.amount-input:focus {
+    outline: none;
+    border-color: #235FD2;
+}
+
+.amount-input::placeholder {
+    color: #9CA3AF;
+    font-weight: 400;
+}
+
+.amount-unit {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    min-width: 20px;
+}
+
+.amount-notice {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+/* 드롭다운 섹션 */
+.dropdown-section {
+    margin-bottom: 8px;
+}
+
+.dropdown-select {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #000;
+    background: #fff;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 16px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-select:focus {
+    outline: none;
+    border-color: #235FD2;
+}
+
+.dropdown-select option {
+    font-size: 16px;
+    color: #000;
+    padding: 8px;
+}
+
+.card-info {
+    font-size: 12px;
+    color: #666;
+    text-align: center;
+}
+
+/* 체크박스 섹션 */
+.employee-checkbox {
+    margin-bottom: 16px;
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    display: none;
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border: 2px solid #E5E7EB;
+    border-radius: 4px;
+    margin-right: 12px;
+    margin-top: 2px;
+    position: relative;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark {
+    background: #235FD2;
+    border-color: #235FD2;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #000;
+    line-height: 1.4;
+}
+
+/* 직원명 입력 섹션 */
+.employee-input-section {
+    transition: all 0.3s ease;
+}
+
+.employee-input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 16px;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.employee-input:focus {
+    outline: none;
+    border-color: #235FD2;
+}
+
+.employee-input::placeholder {
+    color: #9CA3AF;
+}
+
+/* 하단 버튼 */
+.bottom-button {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 375px;
+    margin: 0 auto;
+    background: #fff;
+    border-top: 1px solid #E5E7EB;
+    padding: 16px;
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 12px;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+.btn {
+    flex: 1;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary {
+    background: #E5E7EB;
+    color: #666;
+}
+
+.btn-secondary:hover {
+    background: #D1D5DB;
+}
+
+.btn-primary {
+    background: #235FD2;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #1E40AF;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 375px) {
+    .main-content {
+        padding: 12px;
+    }
+    
+    .application-form {
+        padding: 16px;
+    }
+    
+    .section-title {
+        font-size: 15px;
+    }
+    
+    .amount-input,
+    .dropdown-select,
+    .employee-input {
+        height: 44px;
+        font-size: 15px;
+    }
+    
+    .bottom-button {
+        padding: 12px;
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 10px;
+    }
+    
+    .btn {
+        height: 44px;
+        font-size: 15px;
+        flex: 1;
+    }
+}
+
+/* 스크롤바 스타일 */
+.main-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #D1D5DB;
+    border-radius: 2px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #9CA3AF;
+}
+
+/* 포커스 및 활성 상태 */
+.radio-item:focus-within,
+.checkbox-item:focus-within {
+    background: #F8F9FA;
+}
+
+/* 애니메이션 */
+.employee-input-section {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.employee-input-section[style*="block"] {
+    opacity: 1;
+    max-height: 60px;
+}
+
+/* 입력 필드 포커스 스타일 */
+.amount-input:focus,
+.dropdown-select:focus,
+.employee-input:focus {
+    box-shadow: 0 0 0 3px rgba(35, 95, 210, 0.1);
+}
+
+/* 선택된 상태 강조 */
+.radio-item input[type="radio"]:checked + .radio-custom + .radio-text {
+    color: #235FD2;
+    font-weight: 600;
+}
+
+.checkbox-item input[type="checkbox"]:checked + .checkmark + .checkbox-text {
+    color: #235FD2;
+}
