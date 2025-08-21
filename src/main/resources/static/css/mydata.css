@@ -1,0 +1,175 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+/* 상단 고정 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+/* 헤더 타이틀 */
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin-left: 6px;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+/* 닫기버튼 */
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 차량 정보 카드 */
+.vehicle-card {
+    margin: 72px auto 20px auto;
+    width: 100%;
+    max-width: 337px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    box-sizing: border-box;
+    padding: 25px 18px 20px 18px;
+    overflow: hidden;
+}
+
+/* 차량 정보 섹션 */
+.car-info-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.car-info-text {
+    flex: 1 1 0%;
+    min-width: 0;
+}
+
+.car-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #101116;
+    margin-bottom: 8px;
+}
+
+.car-desc {
+    font-size: 14px;
+    color: #666;
+    font-weight: 400;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+.car-img-block {
+    width: 120px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.car-img {
+    width: 120px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: none;
+    box-shadow: none;
+}
+
+/* 주행거리 섹션 */
+.mileage-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.mileage-label {
+    font-size: 14px;
+    color: #101116;
+    font-weight: 400;
+    margin-right: 8px;
+}
+
+.mileage-value {
+    font-size: 14px;
+    color: #101116;
+    font-weight: 700;
+}
+
+/* 액션 섹션 */
+.action-section {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.manage-btn {
+    width: 100%;
+    max-width: 280px;
+    height: 48px;
+    background: #E3F2FD;
+    border: none;
+    border-radius: 12px;
+    color: #1976D2;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.manage-btn:hover {
+    background: #BBDEFB;
+}
+
+.manage-btn:active {
+    background: #90CAF9;
+}
