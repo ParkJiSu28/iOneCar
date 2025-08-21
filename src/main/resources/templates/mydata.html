@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>i-One Car | 차량 관리</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" th:href="@{/css/mydata.css}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+</head>
+<body>
+<div class="container">
+    <div class="main-header">
+        <span class="header-title">i-One Car ㅣ 차량 관리</span>
+        <button class="close-btn" onclick="window.close()">
+            <img th:src="@{/css/images/X.png}" alt="닫기" class="close-icon" />
+        </button>
+    </div>
+    
+    <!-- 차량 정보 카드 -->
+    <div class="vehicle-card">
+        <div class="car-info-section">
+            <div class="car-info-text">
+                <div class="car-name">벤츠 A-Class</div>
+                <div class="car-desc">
+                    <span>2025형 해치백 가솔린</span><br/>
+                    <span>2.0 A 220</span>
+                </div>
+            </div>
+            <div class="car-img-block">
+                <img th:src="@{/css/images/a-class-white.png}" alt="차 이미지" class="car-img" />
+            </div>
+        </div>
+        
+        <div class="mileage-section">
+            <span class="mileage-label">주행거리</span>
+            <span class="mileage-value">44,546 km</span>
+        </div>
+        
+        <div class="action-section">
+            <button class="manage-btn" onclick="goToManage()">
+                내 차 관리하러 가기
+            </button>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    function goToManage() {
+        // 차량 관리 상세 페이지로 이동
+        window.location.href = '/mydata/detail';
+    }
+</script>
+</body>
+</html>

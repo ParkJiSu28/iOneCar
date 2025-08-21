@@ -1,0 +1,301 @@
+body {
+    margin: 0;
+    background: #F2F5FC;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 모바일 컨테이너 */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 375px;
+    height: 100vh;
+    max-height: 812px;
+    margin: 0 auto;
+    background: #F2F5FC;
+    box-sizing: border-box;
+    padding: 0 10px;
+    overflow-y: auto;
+}
+
+/* 상단 고정 헤더 */
+.main-header {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F5F5F5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 0px 1px 0px #E5E7EB;
+    z-index: 1000;
+    padding: 0 15px;
+}
+
+/* 헤더 타이틀 */
+.header-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #000;
+    margin-left: 6px;
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+/* 닫기버튼 */
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.close-icon {
+    width: 13px;
+    height: 13px;
+    display: block;
+}
+
+/* 차량 정보 섹션 */
+.car-info-section {
+    margin: 72px auto 20px auto;
+    width: 100%;
+    max-width: 337px;
+    padding: 25px 18px 20px 18px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-sizing: border-box;
+}
+
+.car-info-left {
+    flex: 1;
+}
+
+.car-name {
+    font-size: 18px;
+    font-weight: 700;
+    color: #101116;
+    margin-bottom: 8px;
+}
+
+.management-status {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.mileage-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mileage-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #101116;
+}
+
+.edit-btn {
+    background: #F5F5F5;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: #101116;
+    cursor: pointer;
+}
+
+.car-img-block {
+    width: 120px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 16px;
+}
+
+.car-img {
+    width: 120px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* 구분선 */
+.divider {
+    width: 100%;
+    height: 1px;
+    background: #E5E7EB;
+    margin: 20px 0;
+}
+
+/* 관리 중인 항목 섹션 */
+.managed-items-section {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 25px 18px 20px 18px;
+    margin: 0 auto 20px auto;
+    width: 100%;
+    max-width: 337px;
+    box-sizing: border-box;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #101116;
+}
+
+.edit-option {
+    font-size: 14px;
+    color: #101116;
+    cursor: pointer;
+}
+
+/* 관리 항목 */
+.managed-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 0;
+    background: transparent;
+    border: none;
+}
+
+.managed-item:last-child {
+    margin-bottom: 0;
+}
+
+.item-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.item-info {
+    flex: 1;
+}
+
+.item-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #101116;
+    margin-bottom: 8px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #E5E7EB;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #1976D2;
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.item-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.last-replacement {
+    font-size: 12px;
+    color: #666;
+}
+
+.recommended-distance {
+    font-size: 12px;
+    color: #1976D2;
+    font-weight: 600;
+}
+
+/* 정비소 예약 섹션 */
+.service-reservation-section {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 25px 18px 20px 18px;
+    margin: 0 auto 20px auto;
+    width: 100%;
+    max-width: 337px;
+    box-sizing: border-box;
+}
+
+.service-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    padding: 0 10px;
+}
+
+.service-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+    flex: 1;
+    max-width: 50px;
+}
+
+.service-option:hover {
+    background: #F8F9FA;
+}
+
+.service-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+.service-icon img {
+    width: 28px;
+    height: 28px;
+}
+
+.service-label {
+    font-size: 12px;
+    color: #101116;
+    text-align: center;
+    font-weight: 500;
+}
