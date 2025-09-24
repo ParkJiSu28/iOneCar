@@ -13,7 +13,8 @@ body {
 
 .container {
   width: 100%;
-  max-width: 375px;
+  /*max-width: 375px;*/
+  min-width: 320px;
   background-color: #FFFFFF;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -22,6 +23,169 @@ body {
   padding-bottom: 80px;
   box-sizing: border-box;
   overflow-y: auto;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    min-width: 320px;
+    box-shadow: none;
+  }
+  
+  .status-bar {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  
+  .status-icons .icon {
+    width: 14px;
+    height: 14px;
+  }
+  
+  .header {
+    padding: 10px 12px;
+  }
+  
+  .header-left {
+    font-size: 16px;
+  }
+  
+  .close-btn {
+    font-size: 18px;
+  }
+  
+  .model-selection-section {
+    padding: 16px 12px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .model-list {
+    gap: 10px;
+  }
+  
+  .model-item {
+    padding: 14px;
+  }
+  
+  .model-item .manufacturer {
+    font-size: 12px;
+  }
+  
+  .model-item .model-name {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  
+  .model-item .price-range {
+    font-size: 14px;
+  }
+  
+  .bottom-buttons {
+    padding: 16px 12px;
+  }
+  
+  .btn {
+    padding: 12px 0;
+    font-size: 15px;
+  }
+  
+  .bottom-nav {
+    height: 60px;
+  }
+  
+  .nav-item {
+    font-size: 11px;
+  }
+  
+  .nav-icon {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    min-width: 320px;
+  }
+  
+  .status-bar {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  
+  .status-icons .icon {
+    width: 12px;
+    height: 12px;
+  }
+  
+  .header {
+    padding: 8px 10px;
+  }
+  
+  .header-left {
+    font-size: 15px;
+  }
+  
+  .close-btn {
+    font-size: 16px;
+  }
+  
+  .model-selection-section {
+    padding: 14px 10px;
+  }
+  
+  .section-title {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  
+  .model-list {
+    gap: 8px;
+  }
+  
+  .model-item {
+    padding: 12px;
+  }
+  
+  .model-item .manufacturer {
+    font-size: 11px;
+  }
+  
+  .model-item .model-name {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .model-item .price-range {
+    font-size: 13px;
+  }
+  
+  .bottom-buttons {
+    padding: 14px 10px;
+  }
+  
+  .btn {
+    padding: 10px 0;
+    font-size: 14px;
+  }
+  
+  .bottom-nav {
+    height: 55px;
+  }
+  
+  .nav-item {
+    font-size: 10px;
+  }
+  
+  .nav-icon {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 /* Status Bar */
@@ -261,8 +425,12 @@ body {
 }
 
 .btn.prev-btn {
-  background-color: #E0EBFD;
-  color: #0C5BEF;
+  background-color: #E4F2FF !important;
+  color: #235FD2 !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  flex: 0.6;
 }
 
 .btn.prev-btn:hover {
@@ -272,9 +440,34 @@ body {
 }
 
 .btn.next-btn {
-  background-color: #0C5BEF;
-  color: #FFFFFF;
-  flex: 1.5;
+  background-color: #CCCCCC !important;
+  color: white !important;
+  cursor: not-allowed !important;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  flex: 1.4;
+}
+
+.btn.next-btn.active {
+  background-color: #2684ff !important;
+  cursor: pointer !important;
+  color: white !important;
+  animation: buttonActivate 0.3s ease;
+}
+
+@keyframes buttonActivate {
+  0% {
+    background: #CCCCCC;
+    transform: scale(1);
+  }
+  50% {
+    background: #2684ff;
+    transform: scale(1.05);
+  }
+  100% {
+    background: #2684ff;
+    transform: scale(1);
+  }
 }
 
 .btn.next-btn:hover {
@@ -289,7 +482,7 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  max-width: 375px;
+  /*max-width: 375px;*/
   height: 70px;
   background-color: #FFFFFF;
   border-top: 1px solid #eee;

@@ -3,24 +3,33 @@ body {
   padding: 0;
   font-family: 'Apple SD Gothic Neo', sans-serif;
   background-color: #f3f6fc;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-container {
   width: 90%;
   max-width: 360px;
-  margin: 60px auto;
+  min-width: 320px;
+  margin: 0 auto;
   padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
   font-size: 24px;
   margin-bottom: 100px;
   color: #000;
+  text-align: center;
 }
 
 label {
   display: block;
   margin-bottom: 8px;
+  font-weight: 500;
+  color: #333;
 }
 
 .input-box {
@@ -36,6 +45,12 @@ input[type="text"] {
   border: 1px solid #ccc;
   box-sizing: border-box;
   margin-bottom: 50px;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #297eff;
 }
 
 .login-button {
@@ -47,5 +62,57 @@ input[type="text"] {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #1e6bff;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .login-container {
+    width: 95%;
+    padding: 15px;
+  }
+  
+  h1 {
+    font-size: 22px;
+    margin-bottom: 80px;
+  }
+  
+  input[type="text"] {
+    padding: 12px;
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+  
+  .login-button {
+    font-size: 15px;
+    padding: 12px 0;
+  }
+}
+
+@media (max-width: 360px) {
+  .login-container {
+    width: 98%;
+    padding: 12px;
+  }
+  
+  h1 {
+    font-size: 20px;
+    margin-bottom: 60px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 30px;
+  }
+  
+  .login-button {
+    font-size: 14px;
+    padding: 10px 0;
+  }
 }
 

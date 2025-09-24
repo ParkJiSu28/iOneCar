@@ -17,7 +17,7 @@ html, body {
   
   .container {
     width: 100%;
-    max-width: 375px;
+    /*max-width: 375px;*/
     min-width: 320px;
     min-height: 100vh;
     background: #fff;
@@ -27,6 +27,184 @@ html, body {
     flex-direction: column;
     position: relative;
     padding-bottom: 80px;
+  }
+
+  /* 반응형 디자인 */
+  @media (max-width: 480px) {
+    .container {
+      max-width: 100%;
+      min-width: 320px;
+    }
+    
+    .status-bar {
+      padding: 0 10px;
+      font-size: 13px;
+    }
+    
+    .status-bar .icon {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .header {
+      padding: 10px 12px;
+    }
+    
+    .header-content {
+      font-size: 16px;
+    }
+    
+    .close-btn {
+      font-size: 18px;
+    }
+    
+    .content {
+      padding: 16px 12px;
+    }
+    
+    .section-title {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    
+    .car-image-container {
+      margin-bottom: 20px;
+    }
+    
+    .car-image-container img {
+      max-width: 450px;
+    }
+    
+    .color-section {
+      margin-bottom: 20px;
+    }
+    
+    .color-title {
+      font-size: 15px;
+    }
+    
+    .selected-color {
+      font-size: 13px;
+    }
+    
+    .color-swatches {
+      gap: 10px;
+    }
+    
+    .color-swatch {
+      width: 55px;
+      height: 55px;
+    }
+    
+    .bottom-buttons {
+      padding: 14px 12px;
+    }
+    
+    .btn {
+      height: 40px;
+      font-size: 15px;
+    }
+    
+    .bottom-nav {
+      height: 55px;
+    }
+    
+    .nav-item {
+      font-size: 11px;
+    }
+    
+    .nav-icon {
+      width: 22px;
+      height: 22px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .container {
+      min-width: 320px;
+    }
+    
+    .status-bar {
+      padding: 0 8px;
+      font-size: 12px;
+    }
+    
+    .status-bar .icon {
+      width: 14px;
+      height: 14px;
+    }
+    
+    .header {
+      padding: 8px 10px;
+    }
+    
+    .header-content {
+      font-size: 15px;
+    }
+    
+    .close-btn {
+      font-size: 16px;
+    }
+    
+    .content {
+      padding: 14px 10px;
+    }
+    
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+    
+    .car-image-container {
+      margin-bottom: 18px;
+    }
+    
+    .car-image-container img {
+      max-width: 400px;
+    }
+    
+    .color-section {
+      margin-bottom: 18px;
+    }
+    
+    .color-title {
+      font-size: 14px;
+    }
+    
+    .selected-color {
+      font-size: 12px;
+    }
+    
+    .color-swatches {
+      gap: 8px;
+    }
+    
+    .color-swatch {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .bottom-buttons {
+      padding: 12px 10px;
+    }
+    
+    .btn {
+      height: 38px;
+      font-size: 14px;
+    }
+    
+    .bottom-nav {
+      height: 50px;
+    }
+    
+    .nav-item {
+      font-size: 10px;
+    }
+    
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+    }
   }
   
   .status-bar {
@@ -134,7 +312,7 @@ html, body {
     margin-bottom: 24px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /*justify-content: center;*/
   }
   
   .car-image-container img {
@@ -267,7 +445,7 @@ html, body {
     bottom: 0;
     transform: translateX(-50%);
     width: 100%;
-    max-width: 375px;
+    /*max-width: 375px;*/
     background: #fff;
     border-top: 1px solid #e5e5e5;
     display: flex;

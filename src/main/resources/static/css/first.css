@@ -12,14 +12,14 @@ html, body {
 
 body {
   display: flex;
-  align-items: center;
+  /*align-items: center;*/
   justify-content: center;
   min-height: 100vh;
 }
 
 .container {
   width: 100%;
-  max-width: 375px;
+  /*max-width: 375px;*/
   min-width: 320px;
   min-height: 95vh;
   background: linear-gradient(180deg, #0C5BEF 0%, #3386F5 100%);
@@ -30,8 +30,114 @@ body {
   align-items: center;
   justify-content: flex-start;
   box-shadow: 0 0 24px 0 rgba(0,0,0,0.08);
-  border-radius: 16px;
+  /*border-radius: 16px;*/
   overflow: hidden;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .container {
+    max-width: 100%;
+    min-width: 320px;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+  
+  .logo-area {
+    margin-top: 150px;
+    margin-bottom: 30px;
+  }
+  
+  .logo {
+    font-size: 32px;
+  }
+  
+  .logo-i {
+    width: 24px;
+    height: 32px;
+  }
+  
+  .dot {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .i-char {
+    font-size: 32px;
+  }
+  
+  .logo-text-rest {
+    font-size: 32px;
+  }
+  
+  .slogan {
+    font-size: 16px;
+  }
+  
+  .award-list {
+    margin-top: 200px;
+    gap: 20px;
+  }
+  
+  .award {
+    gap: 10px;
+  }
+  
+  .award img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .award-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-area {
+    margin-top: 120px;
+    margin-bottom: 25px;
+  }
+  
+  .logo {
+    font-size: 28px;
+  }
+  
+  .logo-i {
+    width: 22px;
+    height: 28px;
+  }
+  
+  .dot {
+    width: 7px;
+    height: 7px;
+  }
+  
+  .i-char {
+    font-size: 28px;
+  }
+  
+  .logo-text-rest {
+    font-size: 28px;
+  }
+  
+  .slogan {
+    font-size: 15px;
+  }
+  
+  .award-list {
+    margin-top: 180px;
+    gap: 18px;
+  }
+  
+  .award img {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .award-text {
+    font-size: 13px;
+  }
 }
 
 .logo-area {

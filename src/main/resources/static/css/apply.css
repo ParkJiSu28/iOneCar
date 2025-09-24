@@ -2,21 +2,278 @@ body {
     margin: 0;
     background: #F2F5FC;
     font-family: 'Pretendard', sans-serif;
-}
-
-/* 모바일 컨테이너 */
-.container {
+    min-height: 100vh;
+  }
+  
+  /* 모바일 컨테이너 */
+  .container {
     position: relative;
     width: 100%;
     max-width: 375px;
-    height: 100vh;
-    max-height: 812px;
+    min-width: 320px;
+    min-height: 100vh;
     margin: 0 auto;
     background: #F2F5FC;
     box-sizing: border-box;
     padding: 0 10px;
     overflow-y: auto;
-}
+  }
+
+  /* 반응형 디자인 */
+  @media (max-width: 480px) {
+    .container {
+      max-width: 100%;
+      min-width: 320px;
+      padding: 0 8px;
+    }
+    
+    .main-header {
+      height: 44px;
+      padding: 0 12px;
+    }
+    
+    .header-title {
+      font-size: 18px;
+    }
+    
+    .close-btn {
+      right: 12px;
+      width: 22px;
+      height: 22px;
+    }
+    
+    .close-icon {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .progress-bar {
+      top: 44px;
+    }
+    
+    .main-content {
+      margin-top: 68px;
+      padding: 16px 0;
+    }
+    
+    .car-info-section {
+      padding: 20px 16px;
+      margin-bottom: 14px;
+    }
+    
+    .car-name {
+      font-size: 24px;
+    }
+    
+    .car-desc {
+      font-size: 15px;
+    }
+    
+    .car-model {
+      font-size: 16px;
+    }
+    
+    .car-img {
+      width: 180px;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      margin-bottom: 14px;
+    }
+    
+    .price-section {
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    
+    .price-label {
+      font-size: 15px;
+    }
+    
+    .price-value {
+      font-size: 15px;
+    }
+    
+    .price-value.total {
+      font-size: 16px;
+    }
+    
+    .service-section {
+      padding: 18px;
+      margin-bottom: 14px;
+    }
+    
+    .service-item {
+      padding: 6px 14px;
+      font-size: 13px;
+    }
+    
+    .request-section {
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+    
+    .checkbox-item {
+      gap: 10px;
+    }
+    
+    .checkmark {
+      width: 18px;
+      height: 18px;
+    }
+    
+    .checkbox-text {
+      font-size: 15px;
+    }
+    
+    .content-title {
+      font-size: 15px;
+    }
+    
+    .content-textarea {
+      min-height: 80px;
+      padding: 14px;
+      font-size: 13px;
+    }
+    
+    .button-group {
+      gap: 10px;
+      margin-top: 18px;
+    }
+    
+    .btn {
+      height: 44px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .container {
+      min-width: 320px;
+      padding: 0 6px;
+    }
+    
+    .main-header {
+      height: 42px;
+      padding: 0 10px;
+    }
+    
+    .header-title {
+      font-size: 16px;
+    }
+    
+    .close-btn {
+      right: 10px;
+      width: 20px;
+      height: 20px;
+    }
+    
+    .close-icon {
+      width: 11px;
+      height: 11px;
+    }
+    
+    .progress-bar {
+      top: 42px;
+    }
+    
+    .main-content {
+      margin-top: 66px;
+      padding: 14px 0;
+    }
+    
+    .car-info-section {
+      padding: 18px 14px;
+      margin-bottom: 12px;
+    }
+    
+    .car-name {
+      font-size: 22px;
+    }
+    
+    .car-desc {
+      font-size: 14px;
+    }
+    
+    .car-model {
+      font-size: 15px;
+    }
+    
+    .car-img {
+      width: 160px;
+    }
+    
+    .section-title {
+      font-size: 15px;
+      margin-bottom: 12px;
+    }
+    
+    .price-section {
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .price-label {
+      font-size: 14px;
+    }
+    
+    .price-value {
+      font-size: 14px;
+    }
+    
+    .price-value.total {
+      font-size: 15px;
+    }
+    
+    .service-section {
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    
+    .service-item {
+      padding: 5px 12px;
+      font-size: 12px;
+    }
+    
+    .request-section {
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    
+    .checkbox-item {
+      gap: 8px;
+    }
+    
+    .checkmark {
+      width: 16px;
+      height: 16px;
+    }
+    
+    .checkbox-text {
+      font-size: 14px;
+    }
+    
+    .content-title {
+      font-size: 14px;
+    }
+    
+    .content-textarea {
+      min-height: 70px;
+      padding: 12px;
+      font-size: 12px;
+    }
+    
+    .button-group {
+      gap: 8px;
+      margin-top: 16px;
+    }
+    
+    .btn {
+      height: 42px;
+      font-size: 14px;
+    }
+  }
 
 /* 상단 고정 헤더 */
 .main-header {
