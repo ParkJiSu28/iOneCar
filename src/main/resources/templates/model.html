@@ -29,7 +29,7 @@
       <h2 class="section-title">모델 선택</h2>
       <div class="model-list">
         <!-- A-Class -->
-        <div class="model-item selected" data-model="A-Class">
+        <div class="model-item" data-model="A-Class">
           <span class="manufacturer">벤츠</span>
           <span class="model-name">A-Class</span>
           <span class="price-range">4,810 ~ 8,770 만원</span>
@@ -101,6 +101,17 @@
           this.classList.add('selected');
           // 선택된 모델명 저장
           selectedModel = this.getAttribute('data-model');
+          
+          // 다음 버튼 활성화 (애니메이션과 함께)
+          if (nextButton) {
+            nextButton.classList.add('active');
+            nextButton.disabled = false;
+            nextButton.style.backgroundColor = '#2684ff';
+            nextButton.style.cursor = 'pointer';
+            console.log('Next button activated!'); // 디버깅용
+          } else {
+            console.error('Next button not found!'); // 디버깅용
+          }
         });
       });
 

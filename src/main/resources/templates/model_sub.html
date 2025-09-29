@@ -8,15 +8,6 @@
 </head>
 <body>
   <div class="container">
-    <!-- 상단바 -->
-    <div class="status-bar">
-      <span class="time">9:41</span>
-      <div class="status-icons">
-        <span class="icon signal"></span>
-        <span class="icon wifi"></span>
-        <span class="icon battery"></span>
-      </div>
-    </div>
     
     <!-- 헤더 -->
     <div class="header">
@@ -126,11 +117,6 @@
       dropdownItem.addEventListener('click', function() {
         console.log('Dropdown item clicked!'); // 디버깅용
         
-        // 모든 드롭다운 아이템에서 selected 클래스 제거
-        document.querySelectorAll('.dropdown-item').forEach(item => {
-          item.classList.remove('selected');
-        });
-        
         // 클릭된 아이템에 selected 클래스 추가
         this.classList.add('selected');
         
@@ -139,9 +125,21 @@
         selectedItemName = this.querySelector('.item-name').textContent;
         selectedPrice = this.getAttribute('data-price');
         
-        // 다음 버튼 활성화
-        nextBtn.classList.add('active');
-        nextBtn.disabled = false;
+        // 다음 버튼 활성화 (애니메이션과 함께)
+        if (nextBtn) {
+          nextBtn.classList.add('active');
+          nextBtn.disabled = false;
+          nextBtn.style.backgroundColor = '#2684ff';
+          nextBtn.style.cursor = 'pointer';
+          console.log('Next button activated!'); // 디버깅용
+        } else {
+          console.error('Next button not found!'); // 디버깅용
+        }
+        
+        // 드롭다운 메뉴는 열린 상태로 유지 (선택된 항목이 사라지지 않도록)
+        // dropdownMenu.classList.remove('show');
+        // comboButton.querySelector('.combo-arrow').textContent = '▼';
+        // isDropdownOpen = false;
         
         console.log('Selected values:', {
           comboText: selectedComboText,

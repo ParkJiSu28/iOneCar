@@ -16,9 +16,9 @@ body {
 }
 
 .container {
-  width: 100%;
-  max-width: 375px;
-  min-width: 320px;
+  width: 90%;
+  /*max-width: 375px;*/
+  /*min-width: 320px;*/
   min-height: 100vh;
   background: #f6f7fb;
   margin: 0 auto;
@@ -28,6 +28,140 @@ body {
   align-items: center;
   position: relative;
   padding-bottom: 80px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .container {
+    /*max-width: 100%;*/
+    min-width: 320px;
+  }
+  
+  .status-bar {
+    padding: 0 10px;
+  }
+  
+  header {
+    padding: 0 15px;
+  }
+  
+  .logo {
+    font-size: 20px;
+  }
+  
+  .bell {
+    font-size: 22px;
+  }
+  
+  .promo-banner {
+    padding: 14px 16px;
+    margin-bottom: 16px;
+  }
+  
+  .promo-text1 {
+    font-size: 9px;
+  }
+  
+  .promo-text2 {
+    font-size: 14px;
+  }
+  
+  .promo-img img {
+    width: 44px;
+    height: 44px;
+  }
+  
+  .payment-card {
+    padding: 20px 18px 14px 18px;
+    margin-bottom: 16px;
+  }
+  
+  .payment-amount {
+    font-size: 28px;
+  }
+  
+  .payment-amount .unit {
+    font-size: 16px;
+  }
+  
+  .recent-list {
+    padding: 16px 16px 8px 16px;
+    margin-bottom: 16px;
+  }
+  
+  .recent-title {
+    font-size: 15px;
+  }
+  
+  .recent-amount {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    min-width: 320px;
+  }
+  
+  .status-bar {
+    padding: 0 8px;
+  }
+  
+  header {
+    padding: 0 12px;
+  }
+  
+  .logo {
+    font-size: 18px;
+  }
+  
+  .bell {
+    font-size: 20px;
+  }
+  
+  .promo-banner {
+    padding: 12px 14px;
+    margin-bottom: 14px;
+  }
+  
+  .promo-text1 {
+    font-size: 8px;
+  }
+  
+  .promo-text2 {
+    font-size: 13px;
+  }
+  
+  .promo-img img {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .payment-card {
+    padding: 18px 16px 12px 16px;
+    margin-bottom: 14px;
+  }
+  
+  .payment-amount {
+    font-size: 26px;
+  }
+  
+  .payment-amount .unit {
+    font-size: 15px;
+  }
+  
+  .recent-list {
+    padding: 14px 14px 6px 14px;
+    margin-bottom: 14px;
+  }
+  
+  .recent-title {
+    font-size: 14px;
+  }
+  
+  .recent-amount {
+    font-size: 14px;
+  }
 }
 
 .status-bar {
@@ -71,7 +205,7 @@ header {
   justify-content: space-between;
   margin-top: 8px;
   margin-bottom: 16px;
-  padding: 0 20px;
+  /*padding: 0 20px;*/
   box-sizing: border-box;
 }
 
@@ -260,7 +394,7 @@ header {
   bottom: 0;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 375px;
+  /*max-width: 375px;*/
   background: #fff;
   border-top: 1px solid #e5e5e5;
   display: flex;

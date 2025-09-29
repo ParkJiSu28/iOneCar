@@ -2,21 +2,144 @@ body {
     margin: 0;
     background: #fff;
     font-family: 'Pretendard', sans-serif;
-}
-
-/* 모바일 컨테이너 */
-.container {
+    min-height: 100vh;
+  }
+  
+  /* 모바일 컨테이너 */
+  .container {
     position: relative;
     width: 100%;
     max-width: 375px;
-    height: 100vh;
-    max-height: 812px;
+    min-width: 320px;
+    min-height: 100vh;
     margin: 0 auto;
     background: #fff;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-}
+  }
+
+  /* 반응형 디자인 */
+  @media (max-width: 480px) {
+    .container {
+      max-width: 100%;
+      min-width: 320px;
+    }
+    
+    .main-header {
+      height: 44px;
+      padding: 0 12px;
+    }
+    
+    .app-title {
+      font-size: 15px;
+    }
+    
+    .page-title {
+      font-size: 15px;
+    }
+    
+    .close-btn {
+      width: 22px;
+      height: 22px;
+    }
+    
+    .close-icon {
+      width: 12px;
+      height: 12px;
+    }
+    
+    .main-content {
+      padding: 32px 16px;
+    }
+    
+    .icon-circle {
+      width: 72px;
+      height: 72px;
+    }
+    
+    .checkmark {
+      width: 36px;
+      height: 36px;
+    }
+    
+    .main-title {
+      font-size: 22px;
+    }
+    
+    .description {
+      font-size: 15px;
+    }
+    
+    .bottom-buttons {
+      padding: 16px;
+    }
+    
+    .btn {
+      height: 44px;
+      font-size: 15px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .container {
+      min-width: 320px;
+    }
+    
+    .main-header {
+      height: 42px;
+      padding: 0 10px;
+    }
+    
+    .app-title {
+      font-size: 14px;
+    }
+    
+    .page-title {
+      font-size: 14px;
+    }
+    
+    .close-btn {
+      width: 20px;
+      height: 20px;
+    }
+    
+    .close-icon {
+      width: 11px;
+      height: 11px;
+    }
+    
+    .main-content {
+      padding: 28px 14px;
+    }
+    
+    .icon-circle {
+      width: 68px;
+      height: 68px;
+    }
+    
+    .checkmark {
+      width: 34px;
+      height: 34px;
+    }
+    
+    .main-title {
+      font-size: 20px;
+    }
+    
+    .description {
+      font-size: 14px;
+    }
+    
+    .bottom-buttons {
+      padding: 14px;
+    }
+    
+    .btn {
+      height: 42px;
+      font-size: 14px;
+    }
+  }
 
 /* 상단 헤더 */
 .main-header {
