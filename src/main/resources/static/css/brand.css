@@ -141,12 +141,30 @@ body {
     background-color: #E1E3EA;
     margin: 0 20px;
     position: relative;
+    border-radius: 2px;
   }
   
   .progress-bar .progress {
-    width: 25%;
+    width: 14.28%;
     height: 100%;
     background-color: #3A7BFF;
+    border-radius: 2px;
+    transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+  
+  .progress-bar .progress::after {
+    content: "🚗";
+    position: absolute;
+    right: -12px;
+    top: -8px;
+    font-size: 16px;
+    animation: carMove 2s ease-in-out infinite;
+  }
+  
+  @keyframes carMove {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(2px); }
   }
   
   .container {
