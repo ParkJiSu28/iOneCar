@@ -262,15 +262,35 @@ body {
 
 /* Progress Bar */
 .progress-bar {
-  width: 100%;
+  width: calc(100% - 40px);
   height: 4px;
   background-color: #e0e0e0;
+  position: relative;
+  border-radius: 2px;
+  margin: 0 20px;
 }
 
 .progress-fill {
   height: 100%;
   background-color: #0C5BEF;
-  transition: width 0.3s ease;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 2px;
+  position: relative;
+  width: 28.56%;
+}
+
+.progress-fill::after {
+  content: "🚗";
+  position: absolute;
+  right: -12px;
+  top: -8px;
+  font-size: 16px;
+  animation: carMove 2s ease-in-out infinite;
+}
+
+@keyframes carMove {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(2px); }
 }
 
 /* Model Selection Section */

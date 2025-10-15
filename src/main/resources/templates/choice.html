@@ -83,5 +83,26 @@
     </a>
   </nav>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // 사용자 타입 스위치 버튼 기능
+      var typeButtons = document.querySelectorAll('.type-btn');
+      typeButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          // 모든 버튼에서 selected 클래스 제거
+          typeButtons.forEach(function(btn) {
+            btn.classList.remove('selected');
+          });
+          // 클릭한 버튼에 selected 클래스 추가
+          this.classList.add('selected');
+          
+          // 사용자 타입에 따른 추가 로직 (필요시)
+          var userType = this.textContent.trim();
+          console.log('선택된 사용자 타입:', userType);
+        });
+      });
+    });
+  </script>
 </body>
 </html>
